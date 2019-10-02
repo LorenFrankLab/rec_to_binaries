@@ -1,0 +1,14 @@
+name: rec_to_binaries
+channels:
+- conda-forge
+dependencies:
+- jupyter
+- jupyterlab
+- pandas
+- numpy
+- "python >= 3.6"
+- nb_conda
+- setuptools
+- pytest
+- pytest-cov
+- coveralls

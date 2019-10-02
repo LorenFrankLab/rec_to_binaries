@@ -121,3 +121,14 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Test Data Files
+*.dat
+*.mda
+*.rec
+*.trackgeometry
+*.h264
+*.videoPositionTracking
+*.videoTimeStamps
+*.cameraHWSync
+*.stateScriptLog
