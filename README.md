@@ -11,7 +11,7 @@ The binaries are separated out into:
 + spikes (for trodes spike sorting)
 + time
 
-# Installation
+### Installation
 1. Download SpikeGadgets and install (https://bitbucket.org/mkarlsso/trodes/downloads/)
 2. Add SpikeGadgets to path (assuming the SpikeGadgets is in the default location)
 ```bash
@@ -22,7 +22,9 @@ export PATH="$HOME/SpikeGadgets/:$PATH"
 ```bash
 conda install -c franklab rec_to_binaries
 ```
-5. Convert rec to binaries
+
+
+### Usage
 ```python
 import logging
 from rec_to_binaries import extract_trodes_rec_file
