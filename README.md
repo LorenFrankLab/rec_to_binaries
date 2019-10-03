@@ -20,7 +20,7 @@ export PATH="$HOME/SpikeGadgets/:$PATH"
 3. Download and install miniconda (https://docs.conda.io/en/latest/miniconda.html) if conda isn't installed.
 4. Install `rec_to_binaries` package into a conda environment
 ```bash
-conda install -c edeno rec_to_binaries
+conda install -c franklab rec_to_binaries
 ```
 5. Convert rec to binaries
 ```python
