@@ -12,7 +12,7 @@ setup(
     description=('Covert SpikeGadgets rec files to binaries'),
     author='Eric Denovellis, Daniel Liu',
     author_email='Eric.Denovellis@ucsf.edu',
-    url='https://github.com/edeno/rec_to_binaries',
+    url='https://github.com/LorenFrankLab/rec_to_binaries',
     packages=find_packages(),
     install_requires=INSTALL_REQUIRES,
     python_requires='>3.6',
