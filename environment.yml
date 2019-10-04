@@ -4,8 +4,10 @@ channels:
 dependencies:
 - jupyter
 - jupyterlab
+- matplotlib
 - pandas
 - numpy
+- mountainlab_pytools
 - "python >= 3.6"
 - nb_conda
 - setuptools
