@@ -5,6 +5,17 @@ import numpy as np
 
 
 def readTrodesExtractedDataFile(filename):
+    '''
+
+    Parameters
+    ----------
+    filename : str
+
+    Returns
+    -------
+    data_file : dict
+
+    '''
     with open(filename, 'rb') as f:
         # Check if first line is start of settings block
         if f.readline().decode('ascii').strip() != '<Start settings>':
