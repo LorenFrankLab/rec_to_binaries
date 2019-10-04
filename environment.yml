@@ -7,10 +7,12 @@ dependencies:
 - matplotlib
 - pandas
 - numpy
-- mountainlab_pytools
 - "python >= 3.6"
 - nb_conda
 - setuptools
 - pytest
 - pytest-cov
 - coveralls
+- pip
+- pip:
+  - mountainlab-pytools
