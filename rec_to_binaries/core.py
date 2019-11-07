@@ -76,6 +76,8 @@ def extract_trodes_rec_file(data_dir, animal,
 
     extractor = td.ExtractRawTrodesData(animal_info)
     raw_epochs_unionset = animal_info.get_raw_epochs_unionset()
+    if len(raw_epochs_unionset) == 0:
+        logger.warning('No epochs found!')
     raw_dates = animal_info.get_raw_dates()
 
     if extract_analog:
