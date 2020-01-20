@@ -2,7 +2,7 @@
 
 from setuptools import find_packages, setup
 
-INSTALL_REQUIRES = ['numpy', 'pandas', 'mountainlab-pytools']
+INSTALL_REQUIRES = ['numpy', 'pandas']
 TESTS_REQUIRE = ['pytest >= 2.7.1']
 
 setup(
