@@ -22,7 +22,7 @@ def extract_trodes_rec_file(data_dir, animal,
                             dio_export_args=_DEFAULT_DIO_EXPORT_ARGS,
                             spikes_export_args=_DEFAULT_SPIKE_EXPORT_ARGS,
                             time_export_args=_DEFAULT_TIME_EXPORT_ARGS,
-                            make_HDF5=False, extract_analog=False,
+                            make_HDF5=False, extract_analog=True,
                             extract_spikes=True, overwrite=False,
                             stop_error=False, use_folder_date=False,
                             parallel_instances=1, use_day_config=True):
