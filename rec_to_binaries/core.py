@@ -15,17 +15,28 @@ _DEFAULT_TIME_EXPORT_ARGS = ()
 logger = getLogger(__name__)
 
 
-def extract_trodes_rec_file(data_dir, animal,
+def extract_trodes_rec_file(data_dir,
+                            animal,
                             lfp_export_args=_DEFAULT_LFP_EXPORT_ARGS,
                             mda_export_args=_DEFAULT_MDA_EXPORT_ARGS,
                             analog_export_args=_DEFAULT_ANALOG_EXPORT_ARGS,
                             dio_export_args=_DEFAULT_DIO_EXPORT_ARGS,
                             spikes_export_args=_DEFAULT_SPIKE_EXPORT_ARGS,
                             time_export_args=_DEFAULT_TIME_EXPORT_ARGS,
-                            make_HDF5=False, extract_analog=True,
-                            extract_spikes=True, overwrite=False,
-                            stop_error=False, use_folder_date=False,
-                            parallel_instances=1, use_day_config=True):
+                            make_HDF5=False,
+                            extract_analog=True,
+                            extract_spikes=True,
+                            extract_lfps=True,
+                            extract_dio=True,
+                            extract_time=True,
+                            extract_mda=True,
+                            make_mountain_dir=False,
+                            make_pos_dir=True,
+                            overwrite=False,
+                            stop_error=False,
+                            use_folder_date=False,
+                            parallel_instances=1,
+                            use_day_config=True):
     """Extracting Trodes rec files.
 
     Following the Frank Lab directory structure for raw ephys data, will
@@ -61,6 +72,12 @@ def extract_trodes_rec_file(data_dir, animal,
         If true, extracts the analog data (accelerometer, gyroscope,
         magnetometor).
     extract_spikes : bool, optional
+    extract_lfps : bool, optional
+    extract_dio : bool, optional
+    extract_time : bool, optional
+    extract_mda : bool, optional
+    make_mountain_dir : bool, optional
+    make_pos_dir : bool, optional
     overwrite : bool, optional
         If true, will overwrite existing files.
     stop_error : bool, optional
@@ -89,26 +106,33 @@ def extract_trodes_rec_file(data_dir, animal,
             parallel_instances=parallel_instances,
             use_day_config=use_day_config)
 
-    logger.info('Extracting DIO...')
-    extractor.extract_dio(
-        raw_dates, raw_epochs_unionset, export_args=dio_export_args,
-        overwrite=overwrite, stop_error=stop_error,
-        use_folder_date=use_folder_date, parallel_instances=parallel_instances,
-        use_day_config=use_day_config)
+    if extract_dio:
+        logger.info('Extracting DIO...')
+        extractor.extract_dio(
+            raw_dates, raw_epochs_unionset, export_args=dio_export_args,
+            overwrite=overwrite, stop_error=stop_error,
+            use_folder_date=use_folder_date,
+            parallel_instances=parallel_instances,
+            use_day_config=use_day_config)
 
-    logger.info('Extracting LFP...')
-    extractor.extract_lfp(
-        raw_dates, raw_epochs_unionset, export_args=lfp_export_args,
-        overwrite=overwrite, stop_error=stop_error,
-        use_folder_date=use_folder_date, parallel_instances=parallel_instances,
-        use_day_config=use_day_config)
+    if extract_lfps:
+        logger.info('Extracting LFP...')
+        extractor.extract_lfp(
+            raw_dates, raw_epochs_unionset, export_args=lfp_export_args,
+            overwrite=overwrite, stop_error=stop_error,
+            use_folder_date=use_folder_date,
+            parallel_instances=parallel_instances,
+            use_day_config=use_day_config)
 
-    logger.info('Extracting mda...')
-    extractor.extract_mda(
-        raw_dates, raw_epochs_unionset, export_args=mda_export_args,
-        overwrite=overwrite, stop_error=stop_error,
-        use_folder_date=use_folder_date, parallel_instances=parallel_instances,
-        use_day_config=use_day_config)
+    if extract_mda:
+        logger.info('Extracting mda...')
+        extractor.extract_mda(
+            raw_dates, raw_epochs_unionset, export_args=mda_export_args,
+            overwrite=overwrite, stop_error=stop_error,
+            use_folder_date=use_folder_date,
+            parallel_instances=parallel_instances,
+            use_day_config=use_day_config)
+
     if extract_spikes:
         logger.info('Extracting spikes...')
         extractor.extract_spikes(
@@ -118,22 +142,26 @@ def extract_trodes_rec_file(data_dir, animal,
             parallel_instances=parallel_instances,
             use_day_config=use_day_config)
 
-    logger.info('Extracting time...')
-    extractor.extract_time(
-        raw_dates, raw_epochs_unionset, export_args=time_export_args,
-        overwrite=overwrite, stop_error=stop_error,
-        use_folder_date=use_folder_date, parallel_instances=parallel_instances,
-        use_day_config=use_day_config)
+    if extract_time:
+        logger.info('Extracting time...')
+        extractor.extract_time(
+            raw_dates, raw_epochs_unionset, export_args=time_export_args,
+            overwrite=overwrite, stop_error=stop_error,
+            use_folder_date=use_folder_date,
+            parallel_instances=parallel_instances,
+            use_day_config=use_day_config)
 
-    logger.info('Making mountain directory...')
-    extractor.prepare_mountain_dir(
-        raw_dates, raw_epochs_unionset, use_folder_date=use_folder_date,
-        stop_error=stop_error)
+    if make_mountain_dir:
+        logger.info('Making mountain directory...')
+        extractor.prepare_mountain_dir(
+            raw_dates, raw_epochs_unionset, use_folder_date=use_folder_date,
+            stop_error=stop_error)
 
-    logger.info('Making position directory...')
-    extractor.prepare_pos_dir(
-        raw_dates, raw_epochs_unionset, overwrite=overwrite,
-        use_folder_date=use_folder_date, stop_error=stop_error)
+    if make_pos_dir:
+        logger.info('Making position directory...')
+        extractor.prepare_pos_dir(
+            raw_dates, raw_epochs_unionset, overwrite=overwrite,
+            use_folder_date=use_folder_date, stop_error=stop_error)
 
     if make_HDF5:
         # Reload animal_info to get directory structures created during

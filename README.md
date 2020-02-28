@@ -38,7 +38,13 @@ animal = 'lotus'
 extract_trodes_rec_file(data_dir, animal, parallel_instances=4)
 
 ```
-
+### Common Issues
++ Problem: `rec_to_binaries` is not finding my files.
+  Solution: Data is not in the correct file structure. See below for the expected format.
++ Problem: `rec_to_binaries` can't find a function.
+  Solution: Make sure you have Trodes installed and on your path.
++ Problem: `rec_to_binaries` won't import.
+  Solution: If you used conda then make sure the environment you installed `rec_to_binaries` in is activated.
 
 ### Example file structure (in folder `test_data/`)
 
