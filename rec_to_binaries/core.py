@@ -6,7 +6,7 @@ _DEFAULT_LFP_EXPORT_ARGS = ('-highpass', '0', '-lowpass', '400',
                             '-interp', '0', '-userefs', '0',
                             '-outputrate', '1500')
 _DEFAULT_MDA_EXPORT_ARGS = ('-usespikefilters', '0',
-                            '-interp', '500', '-userefs', '1')
+                            '-interp', '500', '-userefs', '0')
 _DEFAULT_ANALOG_EXPORT_ARGS = ()
 _DEFAULT_DIO_EXPORT_ARGS = ()
 _DEFAULT_SPIKE_EXPORT_ARGS = ()
