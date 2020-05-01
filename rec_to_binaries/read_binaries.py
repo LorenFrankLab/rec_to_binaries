@@ -68,3 +68,23 @@ def parse_dtype(fieldstr):
             typearr.append((str(fieldname), fieldtype, repeats))
 
     return np.dtype(typearr)
+
+
+def write_trodes_extracted_datafile(filename, data_file):
+    """Takes the dictionary created by `readTrodesExtractedDataFile` and writes
+    it to a new binary file.
+
+    Parameters
+    ----------
+    data_file : dict
+    filename : str
+
+    """
+    with open(filename, 'wb') as file:
+        file.write('<Start settings>\n'.encode())
+        for key, value in data_file.items():
+            if key != 'data':
+                line = f'{key}: {value}\n'.encode()
+                file.write(line)
+        file.write('<End settings>\n'.encode())
+        file.write(data_file['data'].tobytes())
