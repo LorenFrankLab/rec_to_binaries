@@ -5,7 +5,7 @@ import numpy as np
 
 
 def readTrodesExtractedDataFile(filename):
-    '''
+    '''Read extracted trodes binary.
 
     Parameters
     ----------
