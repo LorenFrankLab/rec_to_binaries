@@ -351,6 +351,11 @@ class TrodesAnimalInfo:
                 ['date', 'epoch', 'label_ext', 'pos_label'],
                 TrodesPosExtractedFileNameParser))
 
+    def __repr__(self):
+        return ("TrodesAnimalInfo("
+                f"anim_name={self.__dict__['anim_name']}, "
+                f"base_dir={self.__dict__['base_dir']})")
+
     @staticmethod
     def _get_extracted_datatype_paths_df(directory_entries_df, parser_datatype_fields, sort_on_fields,
                                          ExtractedFileParser):
