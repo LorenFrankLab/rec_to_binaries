@@ -38,7 +38,7 @@ def _insert_new_data(data_file, df):
     return new_data_file
 
 
-def adjust_timestamps(filename):
+def fix_timestamp_lag(filename):
     data_file = readTrodesExtractedDataFile(filename)
 
     new_data = (
