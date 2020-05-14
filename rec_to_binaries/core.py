@@ -33,9 +33,9 @@ def extract_trodes_rec_file(data_dir,
                             extract_dio=True,
                             extract_time=True,
                             extract_mda=True,
+                            adjust_timestamps_for_mcu_lag=False,
                             make_mountain_dir=False,
                             make_pos_dir=True,
-                            adjust_timestamps=False,
                             overwrite=False,
                             stop_error=False,
                             use_folder_date=False,
@@ -80,6 +80,7 @@ def extract_trodes_rec_file(data_dir,
     extract_dio : bool, optional
     extract_time : bool, optional
     extract_mda : bool, optional
+    adjust_timestamps_for_mcu_lag : bool, optional
     make_mountain_dir : bool, optional
     make_pos_dir : bool, optional
     overwrite : bool, optional
@@ -155,7 +156,7 @@ def extract_trodes_rec_file(data_dir,
             parallel_instances=parallel_instances,
             use_day_config=use_day_config)
 
-    if adjust_timestamps:
+    if adjust_timestamps_for_mcu_lag:
         preprocessing_dir = animal_info.get_preprocessing_dir()
         filenames = glob.glob(os.path.join(
             preprocessing_dir, '**', '*.continuoustime.dat'), recursive=True)
