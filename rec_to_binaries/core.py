@@ -81,6 +81,8 @@ def extract_trodes_rec_file(data_dir,
     extract_time : bool, optional
     extract_mda : bool, optional
     adjust_timestamps_for_mcu_lag : bool, optional
+        If True, fixes the correspondence between trodestime
+        and system (wall) time due to MCU lag
     make_mountain_dir : bool, optional
     make_pos_dir : bool, optional
     overwrite : bool, optional
