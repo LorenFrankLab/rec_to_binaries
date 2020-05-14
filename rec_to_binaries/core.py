@@ -1,6 +1,9 @@
+import glob
+import os
 from logging import getLogger
 
 import rec_to_binaries.trodes_data as td
+from adjust_timestamps import fix_timestamp_lag
 
 _DEFAULT_LFP_EXPORT_ARGS = ('-highpass', '0', '-lowpass', '400',
                             '-interp', '0', '-userefs', '0',
@@ -32,6 +35,7 @@ def extract_trodes_rec_file(data_dir,
                             extract_mda=True,
                             make_mountain_dir=False,
                             make_pos_dir=True,
+                            adjust_timestamps=False,
                             overwrite=False,
                             stop_error=False,
                             use_folder_date=False,
@@ -150,6 +154,13 @@ def extract_trodes_rec_file(data_dir,
             use_folder_date=use_folder_date,
             parallel_instances=parallel_instances,
             use_day_config=use_day_config)
+
+    if adjust_timestamps:
+        preprocessing_dir = animal_info.get_preprocessing_dir()
+        filenames = glob.glob(os.path.join(
+            preprocessing_dir, '**', '*.continuoustime.dat'), recursive=True)
+        for file in filenames:
+            fix_timestamp_lag(file)
 
     if make_mountain_dir:
         logger.info('Making mountain directory...')
