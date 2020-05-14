@@ -6,14 +6,41 @@ from rec_to_binaries.read_binaries import (readTrodesExtractedDataFile,
                                            write_trodes_extracted_datafile)
 
 
-def _label_time_chunks(time_index):
-    time_index = np.asarray(time_index)
-    is_gap = np.diff(time_index) > 1
+def _label_time_chunks(trodestime):
+    """Labels each consecutive chunk of time with an integer.
+
+    Parameters
+    ----------
+    trodestime : numpy.ndarray, shape (n_time,)
+
+    Returns
+    -------
+    time_label : numpy.ndarray, shape (n_time,)
+        Labels each consecutive chunk of time with an integer.
+
+    """
+    trodestime = np.asarray(trodestime)
+    is_gap = np.diff(trodestime) > 1
     is_gap = np.insert(is_gap, 0, False)
     return np.cumsum(is_gap)
 
 
 def _regress_timestamps(trodestime, systime):
+    """Regress the timestamps onto the trodes index
+
+    Parameters
+    ----------
+    trodestime : array_like, uint32
+        Trodes time index
+    systime : array_like, int64
+        Unix time
+
+    Returns
+    -------
+    adjusted_systime : array_like, int64
+        Unix time
+
+    """
     NANOSECONDS_TO_SECONDS = 1E9
 
     # Convert
@@ -28,7 +55,22 @@ def _regress_timestamps(trodestime, systime):
 
 
 def _insert_new_data(data_file, df):
+    """
+    Replaces the `data` in the extracted data file with a new one.
 
+    Parameters
+    ----------
+    data_file : dict
+        Original data file as read in by `readTrodesExtractedDataFile`
+    df : pandas.DataFrame
+        New data
+
+    Returns
+    -------
+    new_data_file : dict
+        Updated data file
+
+    """
     new_data_file = data_file.copy()
     new_data_file['data'] = np.asarray(df.to_records(index=False))
     new_data_file['Fields'] = ''.join(
@@ -39,6 +81,23 @@ def _insert_new_data(data_file, df):
 
 
 def fix_timestamp_lag(filename):
+    """
+    Fix the correspondence between trodestime
+    and system (wall) time.
+
+
+    There is some jitter in the arrival times of packets from the MCU (as
+    reflected in the sysclock records in the .rec file. If we assume that
+    the Trodes clock is actually regular, and that any episodes of lag are
+    fairly sporadic, we can recover the correspondence between trodestime
+    and system (wall) time.
+
+    Parameters
+    ----------
+    filename : str
+        Path to .continuoustime.dat file
+
+    """
     data_file = readTrodesExtractedDataFile(filename)
 
     new_data = (
