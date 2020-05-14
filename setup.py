@@ -2,7 +2,7 @@
 
 from setuptools import find_packages, setup
 
-INSTALL_REQUIRES = ['numpy', 'pandas']
+INSTALL_REQUIRES = ['numpy', 'pandas', 'scipy']
 TESTS_REQUIRE = ['pytest >= 2.7.1']
 
 setup(
