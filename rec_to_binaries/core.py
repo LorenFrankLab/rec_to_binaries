@@ -3,7 +3,7 @@ import os
 from logging import getLogger
 
 import rec_to_binaries.trodes_data as td
-from adjust_timestamps import fix_timestamp_lag
+from rec_to_binaries.adjust_timestamps import fix_timestamp_lag
 
 _DEFAULT_LFP_EXPORT_ARGS = ('-highpass', '0', '-lowpass', '400',
                             '-interp', '0', '-userefs', '0',
