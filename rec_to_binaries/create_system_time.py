@@ -1,4 +1,4 @@
-from read_binaries import readTrodesExtractedDataFile, write_trodes_extracted_datafile
+from rec_to_binaries.read_binaries import readTrodesExtractedDataFile, write_trodes_extracted_datafile
 
 import numpy as np
 
@@ -50,7 +50,7 @@ def create_and_add_system_timepoints(cont_time):
 	else:
 		nanosec_per_sample = int((1/int(cont_time['Clockrate']))* (NANOSECONDS_TO_SECONDS))
 
-	sys_time_intervals = np.zeros(np.shape(cont_time['data'])).astype('int64')
+	sys_time_intervals = np.zeros(np.shape(cont_time['data']), dtype='int64')
 
 	if 'timestamp_at_creation' in cont_time:
 		interval = (cont_time['data'][0][0] - int(cont_time['timestamp_at_creation'])) * nanosec_per_sample
@@ -65,9 +65,9 @@ def create_and_add_system_timepoints(cont_time):
 	else:
 		sys_time_intervals[0] = (interval + (int(cont_time['System_time_at_creation']) * (MILLISECONDS_TO_NANOSECONDS))).astype(int)
 
-	trodes_times = np.zeros(np.shape(cont_time['data'])).astype('int64') + cont_time['data'].astype(int)
+	trodes_times = np.zeros(np.shape(cont_time['data']), dtype='int64') + cont_time['data'].astype(int)
 
-    trodes_intervals = np.subtract(trodes_times[1:], trodes_times[0:-1])
+    trodes_intervals = trodes_times[1:] - trodes_times[:-1]
     
     sys_time_intervals[1:] = sys_time_intervals[1:] + (trodes_intervals * nanosec_per_sample)
     
@@ -79,9 +79,7 @@ def create_and_add_system_timepoints(cont_time):
 
 
 def package_sys_time_with_trodes_time(sys_time, cont_time):
-	
 	"""Packages the system_time created by create_and_add_system_timepoints with 
-
 
     Parameters
     ----------
@@ -102,9 +100,7 @@ def package_sys_time_with_trodes_time(sys_time, cont_time):
 
 	data_type = np.dtype([('trodestime', np.uint32), ('systime', np.int64)])
 
-	data_holder = [0] * np.size(sys_time)
-
-	packaged_data = np.array(data_holder, dtype=data_type)
+	packaged_data = np.zeros((len(sys_time),), dtype=data_type)
 
 	packaged_data['trodestime'] = cont_time['data']
 
