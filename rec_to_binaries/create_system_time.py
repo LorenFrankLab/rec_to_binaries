@@ -71,9 +71,9 @@ def create_and_add_system_timepoints(cont_time):
         sys_time_intervals[1:] + trodes_intervals * nanosec_per_sample)
 
     order_of_magnitude = int(np.log10(nanosec_per_sample))
-    if ((10**(order_of_magnitude)) % nanosec_per_sample) != 0:
+    if ((10**(order_of_magnitude + 1)) % nanosec_per_sample) != 0:
         interval_for_rounding_fix = int(
-            (10**(order_of_magnitude)) / nanosec_per_sample)
+            (10**(order_of_magnitude + 1)) / nanosec_per_sample)
         sys_time_intervals[
             interval_for_rounding_fix - 1::interval_for_rounding_fix] += 1
 
