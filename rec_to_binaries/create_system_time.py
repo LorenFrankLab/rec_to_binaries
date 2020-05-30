@@ -1,3 +1,8 @@
+"""
+Create the systime variable for older datasets that don't have it in the continuoustimefile.
+The systime consists of unix timestaps for a given sample.
+"""
+
 import numpy as np
 from rec_to_binaries.read_binaries import (readTrodesExtractedDataFile,
                                            write_trodes_extracted_datafile)
