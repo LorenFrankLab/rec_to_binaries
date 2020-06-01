@@ -1,3 +1,11 @@
+"""
+There is some jitter in the arrival times of packets from the MCU (as
+reflected in the sysclock records in the .rec file. If we assume that
+the Trodes clock is actually regular, and that any episodes of lag are
+fairly sporadic, we can recover the correspondence between trodestime
+and system (wall) time.
+"""
+
 import numpy as np
 import pandas as pd
 from scipy.stats import linregress
