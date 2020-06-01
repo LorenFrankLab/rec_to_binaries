@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from rec_to_binaries.read_binaries import (readTrodesExtractedDataFile,
                                            write_trodes_extracted_datafile)
 
@@ -42,39 +43,20 @@ def create_and_add_system_timepoints(cont_time):
     millisecond
 
     """
-
     NANOSECONDS_TO_SECONDS = 1e9
+
     clockrate = int(cont_time['clockrate'])
-    nanosec_per_sample = int(NANOSECONDS_TO_SECONDS / clockrate)
-    timestamp_at_creation = int(cont_time['timestamp_at_creation'])
-    interval = (cont_time['data'][0][0] -
-                timestamp_at_creation) * nanosec_per_sample
+    n_time = cont_time['data'].shape[0]
+    start = int(cont_time['system_time_at_creation'])
+    end = start + int((n_time - 1) * NANOSECONDS_TO_SECONDS / clockrate)
 
-    MILLISECONDS_TO_NANOSECONDS = 1e6
+    systime = pd.date_range(
+        start=start,
+        end=end,
+        periods=n_time,
+    ).astype(np.int64).to_numpy()
 
-    sys_time_intervals = np.zeros(cont_time['data'].shape, dtype='int64')
-    system_time_at_creation = int(cont_time['system_time_at_creation'])
-
-    sys_time_intervals[0] = (
-        interval + system_time_at_creation * MILLISECONDS_TO_NANOSECONDS
-    ).astype(int)
-
-    trodes_times = cont_time['data'].astype(int)
-    trodes_intervals = np.diff(trodes_times)
-
-    sys_time_intervals[1:] = (
-        sys_time_intervals[1:] + trodes_intervals * nanosec_per_sample)
-
-    order_of_magnitude = int(np.log10(nanosec_per_sample))
-    if ((10**(order_of_magnitude)) % nanosec_per_sample) != 0:
-        interval_for_rounding_fix = int(
-            (10**(order_of_magnitude)) / nanosec_per_sample)
-        sys_time_intervals[
-            interval_for_rounding_fix - 1::interval_for_rounding_fix] += 1
-
-    sys_time = np.cumsum(sys_time_intervals, dtype=np.int64)
-
-    return package_sys_time_with_trodes_time(sys_time, cont_time)
+    return package_sys_time_with_trodes_time(systime, cont_time)
 
 
 def package_sys_time_with_trodes_time(sys_time, cont_time):
