@@ -27,7 +27,7 @@ def readTrodesExtractedDataFile(filename):
             # filling in fields dict
             if line != '<End settings>':
                 settings_name, setting = line.split(': ')
-                fieldsText[settings_name] = setting
+                fieldsText[settings_name.lower()] = setting
             # End of settings block, signal end of fields
             else:
                 break
