@@ -8,10 +8,10 @@ and system (wall) time.
 
 import numpy as np
 import pandas as pd
-from scipy.stats import linregress
-
+from rec_to_binaries.create_system_time import infer_systime
 from rec_to_binaries.read_binaries import (readTrodesExtractedDataFile,
                                            write_trodes_extracted_datafile)
+from scipy.stats import linregress
 
 
 def _label_time_chunks(trodestime):
@@ -81,14 +81,14 @@ def _insert_new_data(data_file, df):
     """
     new_data_file = data_file.copy()
     new_data_file['data'] = np.asarray(df.to_records(index=False))
-    new_data_file['Fields'] = ''.join(
+    new_data_file['fields'] = ''.join(
         [f'<{name} {dtype}>'
          for name, (dtype, _) in new_data_file['data'].dtype.fields.items()])
 
     return new_data_file
 
 
-def fix_timestamp_lag(filename):
+def fix_timestamp_lag(continuoustime_filename):
     """
     Fix the correspondence between trodestime
     and system (wall) time.
@@ -102,17 +102,23 @@ def fix_timestamp_lag(filename):
 
     Parameters
     ----------
-    filename : str
+    continuoustime_filename : str
         Path to .continuoustime.dat file
 
     """
-    data_file = readTrodesExtractedDataFile(filename)
+    data_file = readTrodesExtractedDataFile(continuoustime_filename)
 
-    new_data = (
-        pd.DataFrame(data_file['data'])
-        .assign(time_chunk_label=lambda df: _label_time_chunks(df.trodestime))
-        .assign(adjusted_systime=lambda df: _regress_timestamps(df.trodestime,
+    if len(data_file['data'].dtype) < 2:
+        # logging.warn
+        new_data = infer_systime(data_file)
+    else:
+        new_data = (
+            pd.DataFrame(data_file['data'])
+            .assign(
+                time_chunk_label=lambda df: _label_time_chunks(df.trodestime))
+            .assign(
+                adjusted_systime=lambda df: _regress_timestamps(df.trodestime,
                                                                 df.systime)))
 
     new_data_file = _insert_new_data(data_file, new_data)
-    write_trodes_extracted_datafile(filename, new_data_file)
+    write_trodes_extracted_datafile(continuoustime_filename, new_data_file)
