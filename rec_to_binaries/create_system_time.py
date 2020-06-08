@@ -45,7 +45,8 @@ def create_systime(clockrate, data, system_time_at_creation):
 
     clockrate = int(clockrate)
     n_time = data.shape[0]
-    system_time_at_creation = int(system_time_at_creation)
+    system_time_at_creation = pd.to_datetime(
+        int(system_time_at_creation), unit='ms').value
     end = (system_time_at_creation +
            int((n_time - 1) * NANOSECONDS_TO_SECONDS / clockrate))
 
