@@ -108,7 +108,7 @@ def fix_timestamp_lag(continuoustime_filename):
     """
     data_file = readTrodesExtractedDataFile(continuoustime_filename)
 
-    if len(data_file['data'].dtype) < 2:
+    if 'systime' not in data_file['data'].dtype.names:
         # logging.warn
         new_data = infer_systime(data_file)
     else:
