@@ -11,7 +11,6 @@ import warnings
 
 import numpy as np
 import pandas as pd
-
 from rec_to_binaries.binary_utils import (TrodesDIOBinaryLoader,
                                           TrodesLFPBinaryLoader,
                                           TrodesPosBinaryLoader,

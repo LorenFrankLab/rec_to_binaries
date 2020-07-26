@@ -9,7 +9,7 @@ _DEFAULT_LFP_EXPORT_ARGS = ('-highpass', '0', '-lowpass', '400',
                             '-interp', '0', '-userefs', '0',
                             '-outputrate', '1500')
 _DEFAULT_MDA_EXPORT_ARGS = ('-usespikefilters', '0',
-                            '-interp', '500', '-userefs', '0')
+                            '-interp', '1', '-userefs', '0')
 _DEFAULT_ANALOG_EXPORT_ARGS = ()
 _DEFAULT_DIO_EXPORT_ARGS = ()
 _DEFAULT_SPIKE_EXPORT_ARGS = ()
@@ -100,6 +100,7 @@ def extract_trodes_rec_file(data_dir,
 
     extractor = td.ExtractRawTrodesData(animal_info)
     raw_epochs_unionset = animal_info.get_raw_epochs_unionset()
+
     if len(raw_epochs_unionset) == 0:
         logger.warning('No epochs found!')
     raw_dates = animal_info.get_raw_dates()
