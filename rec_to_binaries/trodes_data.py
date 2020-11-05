@@ -214,7 +214,7 @@ class TrodesPosExtractedFileNameParser(TrodesRawFileNameParser):
 class TrodesAnimalInfo:
 
     def __init__(self, base_dir, anim_name, RawFileParser=TrodesRawFileNameParser,
-                       out_dir=None):
+                       out_dir=None, dates=None):
         self.RawFileNameParser = RawFileParser
         self.base_dir = base_dir
         self.anim_name = anim_name
@@ -239,6 +239,10 @@ class TrodesAnimalInfo:
 
         # Loads and caches all raw data files that exist
         for date, day_path in raw_day_paths.items():
+            if dates is not None:
+                # if dates given, only work on these selected dates
+                if date not in dates:
+                    continue
             self.raw_rec_files[date] = {}
             day_rec_filenames = self._get_rec_paths(
                 day_path, self.RawFileNameParser)
