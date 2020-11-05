@@ -213,10 +213,17 @@ class TrodesPosExtractedFileNameParser(TrodesRawFileNameParser):
 
 class TrodesAnimalInfo:
 
-    def __init__(self, base_dir, anim_name, RawFileParser=TrodesRawFileNameParser):
+    def __init__(self, base_dir, anim_name, RawFileParser=TrodesRawFileNameParser,
+                       out_dir=None):
         self.RawFileNameParser = RawFileParser
         self.base_dir = base_dir
         self.anim_name = anim_name
+
+        # optionally choose a different output path to save preprocessed data
+        if out_dir is not None:
+            self.out_dir = out_dir
+        else:
+            self.out_dir = base_dir # default (legacy behavior)
 
         raw_path = self._get_raw_dir(base_dir, anim_name)
 
@@ -504,7 +511,7 @@ class TrodesAnimalInfo:
         return self._get_raw_dir(self.base_dir, self.anim_name)
 
     def get_preprocessing_dir(self):
-        return self._get_preprocessing_dir(self.base_dir, self.anim_name)
+        return self._get_preprocessing_dir(self.out_dir, self.anim_name)
 
     def get_analysis_dir(self):
         return self._get_analysis_dir(self.base_dir, self.anim_name)

@@ -20,6 +20,7 @@ logger = getLogger(__name__)
 
 def extract_trodes_rec_file(data_dir,
                             animal,
+                            out_dir=None,
                             lfp_export_args=_DEFAULT_LFP_EXPORT_ARGS,
                             mda_export_args=_DEFAULT_MDA_EXPORT_ARGS,
                             analog_export_args=_DEFAULT_ANALOG_EXPORT_ARGS,
@@ -56,6 +57,9 @@ def extract_trodes_rec_file(data_dir,
     data_dir : str
     animal : str
         Name of animal
+    out_dir : str, optional (default is None)
+        Path to save preprocessed data (defaults to data_dir if None);
+        subfolders [out_dir]/[animal]/[date]/preprocessing will be created.
     lfp_export_args : tuple, optional
         Parameters for SpikeGadgets `exportLFP` function
     mda_export_args : tuple, optional
@@ -96,7 +100,7 @@ def extract_trodes_rec_file(data_dir,
         (i.e. `<date>.trodesconf`)
 
     """
-    animal_info = td.TrodesAnimalInfo(data_dir, animal)
+    animal_info = td.TrodesAnimalInfo(data_dir, animal, out_dir=out_dir)
 
     extractor = td.ExtractRawTrodesData(animal_info)
     raw_epochs_unionset = animal_info.get_raw_epochs_unionset()
@@ -181,7 +185,7 @@ def extract_trodes_rec_file(data_dir,
     if make_HDF5:
         # Reload animal_info to get directory structures created during
         # extraction
-        animal_info = td.TrodesAnimalInfo(data_dir, animal)
+        animal_info = td.TrodesAnimalInfo(data_dir, animal, out_dir=out_dir)
 
         importer = td.TrodesPreprocessingToAnalysis(animal_info)
 
