@@ -188,7 +188,7 @@ def extract_trodes_rec_file(data_dir,
     if make_HDF5:
         # Reload animal_info to get directory structures created during
         # extraction
-        animal_info = td.TrodesAnimalInfo(data_dir, animal, out_dir=out_dir)
+        animal_info = td.TrodesAnimalInfo(data_dir, animal, out_dir=out_dir, dates=dates)
 
         importer = td.TrodesPreprocessingToAnalysis(animal_info)
 
