@@ -103,7 +103,8 @@ def extract_trodes_rec_file(data_dir,
         (i.e. `<date>.trodesconf`)
 
     """
-    animal_info = td.TrodesAnimalInfo(data_dir, animal, out_dir=out_dir, dates=dates)
+    animal_info = td.TrodesAnimalInfo(
+        data_dir, animal, out_dir=out_dir, dates=dates)
 
     extractor = td.ExtractRawTrodesData(animal_info)
     raw_epochs_unionset = animal_info.get_raw_epochs_unionset()
@@ -188,7 +189,8 @@ def extract_trodes_rec_file(data_dir,
     if make_HDF5:
         # Reload animal_info to get directory structures created during
         # extraction
-        animal_info = td.TrodesAnimalInfo(data_dir, animal, out_dir=out_dir, dates=dates)
+        animal_info = td.TrodesAnimalInfo(
+            data_dir, animal, out_dir=out_dir, dates=dates)
 
         importer = td.TrodesPreprocessingToAnalysis(animal_info)
 

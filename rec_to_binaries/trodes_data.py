@@ -214,7 +214,7 @@ class TrodesPosExtractedFileNameParser(TrodesRawFileNameParser):
 class TrodesAnimalInfo:
 
     def __init__(self, base_dir, anim_name, RawFileParser=TrodesRawFileNameParser,
-                       out_dir=None, dates=None):
+                 out_dir=None, dates=None):
         self.RawFileNameParser = RawFileParser
         self.base_dir = base_dir
         self.anim_name = anim_name
@@ -223,7 +223,7 @@ class TrodesAnimalInfo:
         if out_dir is not None:
             self.out_dir = out_dir
         else:
-            self.out_dir = base_dir # default (legacy behavior)
+            self.out_dir = base_dir  # default (legacy behavior)
 
         raw_path = self._get_raw_dir(base_dir, anim_name)
 
