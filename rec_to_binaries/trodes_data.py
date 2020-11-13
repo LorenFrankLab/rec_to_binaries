@@ -518,7 +518,7 @@ class TrodesAnimalInfo:
         return self._get_preprocessing_dir(self.out_dir, self.anim_name)
 
     def get_analysis_dir(self):
-        return self._get_analysis_dir(self.base_dir, self.anim_name)
+        return self._get_analysis_dir(self.out_dir, self.anim_name)
 
     def get_preprocessing_date_dir(self, date, stop_error=True):
         path = os.path.join(self.get_preprocessing_dir(), date)
