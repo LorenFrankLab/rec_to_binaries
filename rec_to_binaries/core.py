@@ -200,6 +200,26 @@ def convert_binaries_to_hdf5(data_dir, animal, out_dir=None, dates=None,
                              convert_spike=True):
     animal_info = td.TrodesAnimalInfo(
         data_dir, animal, out_dir=out_dir, dates=dates)
+    """Converting preprocessed binaries into HDF5 files.
+    
+    Assume that preprocessing has already been completed using (for example) 
+    extract_trodes_rec_file.
+
+    Parameters
+    ----------
+    data_dir : str
+    animal : str
+        Name of animal
+    out_dir : str, optional (default is None)
+        Path to save preprocessed data (defaults to data_dir if None);
+        subfolders [out_dir]/[animal]/[date]/preprocessing will be created.
+    dates : list, optional (default is None)
+        Only process select dates (defaults to all available dates if None)
+    convert_spikes : bool, optional
+    convert_lfps : bool, optional
+    convert_dio : bool, optional
+    convert_mda : bool, optional
+    """
 
     importer = td.TrodesPreprocessingToAnalysis(animal_info)
 
