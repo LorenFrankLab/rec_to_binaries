@@ -190,10 +190,12 @@ def extract_trodes_rec_file(data_dir,
         logger.info('Converting binaries into HDF5 files...')
         # Reload animal_info to get directory structures created during
         # extraction
-        convert_binaries_to_hdf5(data_dir, animal, out_dir=out_dir, dates=dates)
+        convert_binaries_to_hdf5(data_dir, animal, out_dir=out_dir, dates=dates,
+                                 parallel_instances=parallel_instances)
         
 
 def convert_binaries_to_hdf5(data_dir, animal, out_dir=None, dates=None,
+                             parallel_instances=1,
                              convert_dio=True,
                              convert_lfp=True,
                              convert_pos=True,
@@ -215,6 +217,8 @@ def convert_binaries_to_hdf5(data_dir, animal, out_dir=None, dates=None,
         subfolders [out_dir]/[animal]/[date]/preprocessing will be created.
     dates : list, optional (default is None)
         Only process select dates (defaults to all available dates if None)
+    parallel_instances : int, optional
+        Number of parallel jobs to run.
     convert_spikes : bool, optional
     convert_lfps : bool, optional
     convert_dio : bool, optional
