@@ -194,21 +194,25 @@ def extract_trodes_rec_file(data_dir,
         
 
 def convert_binaries_to_hdf5(data_dir, animal, out_dir=None, dates=None,
+                             convert_dio=True,
+                             convert_lfp=True,
+                             convert_pos=True,
+                             convert_spike=True):
     animal_info = td.TrodesAnimalInfo(
         data_dir, animal, out_dir=out_dir, dates=dates)
 
     importer = td.TrodesPreprocessingToAnalysis(animal_info)
 
     # Convert binaries into hdf5 files
-    for date in animal_info.preproc_dio_paths['date'].unique():
+    for convert_dio and date in animal_info.preproc_dio_paths['date'].unique():
         importer.convert_dio_day(date)
 
-    for date in animal_info.preproc_LFP_paths['date'].unique():
+    for convert_lfp and date in animal_info.preproc_LFP_paths['date'].unique():
         importer.convert_lfp_day(date)
 
-    for date in animal_info.preproc_pos_paths['date'].unique():
+    for convert_pos and date in animal_info.preproc_pos_paths['date'].unique():
         importer.convert_pos_day(date)
 
-    for date in animal_info.preproc_spike_paths['date'].unique():
+    for convert_spike and date in animal_info.preproc_spike_paths['date'].unique():
         importer.convert_spike_day(
             date, parallel_instances=parallel_instances)
