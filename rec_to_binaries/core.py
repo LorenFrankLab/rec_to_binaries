@@ -187,23 +187,28 @@ def extract_trodes_rec_file(data_dir,
             use_folder_date=use_folder_date, stop_error=stop_error)
 
     if make_HDF5:
+        logger.info('Converting binaries into HDF5 files...')
         # Reload animal_info to get directory structures created during
         # extraction
-        animal_info = td.TrodesAnimalInfo(
-            data_dir, animal, out_dir=out_dir, dates=dates)
+        convert_binaries_to_hdf5(data_dir, animal, out_dir=out_dir, dates=dates)
+        
 
-        importer = td.TrodesPreprocessingToAnalysis(animal_info)
+def convert_binaries_to_hdf5(data_dir, animal, out_dir=None, dates=None,
+    animal_info = td.TrodesAnimalInfo(
+        data_dir, animal, out_dir=out_dir, dates=dates)
 
-        # Convert binaries into hdf5 files
-        for date in animal_info.preproc_dio_paths['date'].unique():
-            importer.convert_dio_day(date)
+    importer = td.TrodesPreprocessingToAnalysis(animal_info)
 
-        for date in animal_info.preproc_LFP_paths['date'].unique():
-            importer.convert_lfp_day(date)
+    # Convert binaries into hdf5 files
+    for date in animal_info.preproc_dio_paths['date'].unique():
+        importer.convert_dio_day(date)
 
-        for date in animal_info.preproc_pos_paths['date'].unique():
-            importer.convert_pos_day(date)
+    for date in animal_info.preproc_LFP_paths['date'].unique():
+        importer.convert_lfp_day(date)
 
-        for date in animal_info.preproc_spike_paths['date'].unique():
-            importer.convert_spike_day(
-                date, parallel_instances=parallel_instances)
+    for date in animal_info.preproc_pos_paths['date'].unique():
+        importer.convert_pos_day(date)
+
+    for date in animal_info.preproc_spike_paths['date'].unique():
+        importer.convert_spike_day(
+            date, parallel_instances=parallel_instances)
