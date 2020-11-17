@@ -187,23 +187,64 @@ def extract_trodes_rec_file(data_dir,
             use_folder_date=use_folder_date, stop_error=stop_error)
 
     if make_HDF5:
+        logger.info('Converting binaries into HDF5 files...')
         # Reload animal_info to get directory structures created during
         # extraction
-        animal_info = td.TrodesAnimalInfo(
-            data_dir, animal, out_dir=out_dir, dates=dates)
+        convert_binaries_to_hdf5(data_dir, animal, out_dir=out_dir, dates=dates,
+                                 parallel_instances=parallel_instances)
+        
 
-        importer = td.TrodesPreprocessingToAnalysis(animal_info)
+def convert_binaries_to_hdf5(data_dir, animal, out_dir=None, dates=None,
+                             parallel_instances=1,
+                             convert_dio=True,
+                             convert_lfp=True,
+                             convert_pos=True,
+                             convert_spike=True):
+    animal_info = td.TrodesAnimalInfo(
+        data_dir, animal, out_dir=out_dir, dates=dates)
+    """Converting preprocessed binaries into HDF5 files.
+    
+    Assume that preprocessing has already been completed using (for example) 
+    extract_trodes_rec_file.
 
-        # Convert binaries into hdf5 files
+    Parameters
+    ----------
+    data_dir : str
+    animal : str
+        Name of animal
+    out_dir : str, optional (default is None)
+        Path to save preprocessed data (defaults to data_dir if None);
+        subfolders [out_dir]/[animal]/[date]/preprocessing will be created.
+    dates : list, optional (default is None)
+        Only process select dates (defaults to all available dates if None)
+    parallel_instances : int, optional
+        Number of parallel jobs to run.
+    convert_spikes : bool, optional
+    convert_lfps : bool, optional
+    convert_dio : bool, optional
+    convert_mda : bool, optional
+    """
+
+    importer = td.TrodesPreprocessingToAnalysis(animal_info)
+
+    # Convert binaries into hdf5 files
+    if convert_dio:
         for date in animal_info.preproc_dio_paths['date'].unique():
+            logger.info(f'converting dio for {date} ...')
             importer.convert_dio_day(date)
 
+    if convert_lfp:
         for date in animal_info.preproc_LFP_paths['date'].unique():
+            logger.info(f'converting LFP for {date} ...')
             importer.convert_lfp_day(date)
 
+    if convert_pos:
         for date in animal_info.preproc_pos_paths['date'].unique():
+            logger.info(f'converting pos for {date} ...')
             importer.convert_pos_day(date)
 
+    if convert_spike:
         for date in animal_info.preproc_spike_paths['date'].unique():
+            logger.info(f'converting spike for {date} ...')
             importer.convert_spike_day(
                 date, parallel_instances=parallel_instances)
