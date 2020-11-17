@@ -230,21 +230,21 @@ def convert_binaries_to_hdf5(data_dir, animal, out_dir=None, dates=None,
     # Convert binaries into hdf5 files
     if convert_dio:
         for date in animal_info.preproc_dio_paths['date'].unique():
-            print('converting dio for {} ...'.format(date))
+            logger.info(f'converting dio for {date} ...')
             importer.convert_dio_day(date)
 
     if convert_lfp:
         for date in animal_info.preproc_LFP_paths['date'].unique():
-            print('converting LFP for {} ...'.format(date))
+            logger.info(f'converting LFP for {date} ...')
             importer.convert_lfp_day(date)
 
     if convert_pos:
         for date in animal_info.preproc_pos_paths['date'].unique():
-            print('converting pos for {} ...'.format(date))
+            logger.info(f'converting pos for {date} ...')
             importer.convert_pos_day(date)
 
     if convert_spike:
         for date in animal_info.preproc_spike_paths['date'].unique():
-            print('converting spike for {} ...'.format(date))
+            logger.info(f'converting spike for {date} ...')
             importer.convert_spike_day(
                 date, parallel_instances=parallel_instances)
