@@ -190,9 +190,10 @@ def extract_trodes_rec_file(data_dir,
         logger.info('Converting binaries into HDF5 files...')
         # Reload animal_info to get directory structures created during
         # extraction
-        convert_binaries_to_hdf5(data_dir, animal, out_dir=out_dir, dates=dates,
+        convert_binaries_to_hdf5(data_dir, animal, out_dir=out_dir,
+                                 dates=dates,
                                  parallel_instances=parallel_instances)
-        
+
 
 def convert_binaries_to_hdf5(data_dir, animal, out_dir=None, dates=None,
                              parallel_instances=1,
@@ -203,8 +204,8 @@ def convert_binaries_to_hdf5(data_dir, animal, out_dir=None, dates=None,
     animal_info = td.TrodesAnimalInfo(
         data_dir, animal, out_dir=out_dir, dates=dates)
     """Converting preprocessed binaries into HDF5 files.
-    
-    Assume that preprocessing has already been completed using (for example) 
+
+    Assume that preprocessing has already been completed using (for example)
     extract_trodes_rec_file.
 
     Parameters
