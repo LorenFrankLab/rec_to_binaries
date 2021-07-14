@@ -8,6 +8,7 @@ import subprocess
 import sys
 import time
 import warnings
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -246,6 +247,7 @@ class TrodesAnimalInfo:
             self.raw_rec_files[date] = {}
             day_rec_filenames = self._get_rec_paths(
                 day_path, self.RawFileNameParser)
+            self.trodes_version = self._get_trodes_version(day_path)
             for rec_filename_parsed, rec_path in day_rec_filenames:
                 if rec_filename_parsed.date != date:
                     warnings.warn(('For rec file ({}) the date field does not match '
@@ -639,6 +641,12 @@ class TrodesAnimalInfo:
         return anim_rec_paths
 
     @staticmethod
+    def _get_trodes_version(path):
+        rec_files = Path(path).glob('**/*.rec')
+        return np.unique(np.asarray([get_trodes_version(rec_file)[0]
+                                     for rec_file in rec_files]))[0]
+
+    @staticmethod
     def _get_video_tracking_paths(path, RawFileNameParser=TrodesRawFileNameParser):
         anim_pos_paths = []
 
@@ -1004,37 +1012,92 @@ class ExtractRawTrodesData:
         Returns:
 
         """
+        trodes_version = self.trodes_anim_info.trodes_version
+        if trodes_version < 2:
+            export_cmd = 'exportLFP'
+        else:
+            export_cmd = 'trodesexport -lfp'
 
-        self._extract_rec_generic(export_cmd='exportLFP', export_dir_ext='LFP', dates=dates, epochs=epochs,
+        self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='LFP',
+                                  dates=dates, epochs=epochs,
                                   export_args=export_args, **kwargs)
 
     def extract_mda(self, dates, epochs,
                     export_args=('-usespikefilters', '0',
                                  '-interp', '500', '-userefs', '1'),
                     **kwargs):
-        self._extract_rec_generic(export_cmd='exportmda', export_dir_ext='mda', dates=dates, epochs=epochs,
+
+        trodes_version = self.trodes_anim_info.trodes_version
+        if trodes_version < 2:
+            export_cmd = 'exportmda'
+        else:
+            export_cmd = 'trodesexport -mountainsort'
+
+        self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='mda',
+                                  dates=dates, epochs=epochs,
                                   export_args=export_args, **kwargs)
 
     def extract_analog(self, dates, epochs, export_args=(), **kwargs):
-        self._extract_rec_generic(export_cmd='exportanalog', export_dir_ext='analog', dates=dates, epochs=epochs,
+
+        trodes_version = self.trodes_anim_info.trodes_version
+        if trodes_version < 2:
+            export_cmd = 'exportanalog'
+        else:
+            export_cmd = 'trodesexport -analogio'
+
+        self._extract_rec_generic(export_cmd=export_cmd,
+                                  export_dir_ext='analog', dates=dates,
+                                  epochs=epochs,
                                   export_args=export_args, **kwargs)
 
     def extract_dio(self, dates, epochs, export_args=(), **kwargs):
-        self._extract_rec_generic(export_cmd='exportdio', export_dir_ext='DIO', dates=dates, epochs=epochs,
+        trodes_version = self.trodes_anim_info.trodes_version
+        if trodes_version < 2:
+            export_cmd = 'exportdio'
+        else:
+            export_cmd = 'trodesexport -dio'
+
+        self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='DIO',
+                                  dates=dates, epochs=epochs,
                                   export_args=export_args, **kwargs)
 
     def extract_phy(self, dates, epochs,
                     export_args=('-usespikefilters', '0', '-interp', '1'),
                     **kwargs):
-        self._extract_rec_generic(export_cmd='exportphy', export_dir_ext='phy', dates=dates, epochs=epochs,
+
+        trodes_version = self.trodes_anim_info.trodes_version
+        if trodes_version < 2:
+            export_cmd = 'exportphy'
+        else:
+            export_cmd = 'trodesexport -spikeband'
+
+        self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='phy',
+                                  dates=dates, epochs=epochs,
                                   export_args=export_args, **kwargs)
 
     def extract_spikes(self, dates, epochs, export_args=(), **kwargs):
-        self._extract_rec_generic(export_cmd='exportspikes', export_dir_ext='spikes', dates=dates, epochs=epochs,
+
+        trodes_version = self.trodes_anim_info.trodes_version
+        if trodes_version < 2:
+            export_cmd = 'exportspikes'
+        else:
+            export_cmd = 'trodesexport -spikes'
+
+        self._extract_rec_generic(export_cmd=export_cmd,
+                                  export_dir_ext='spikes',
+                                  dates=dates, epochs=epochs,
                                   export_args=export_args, **kwargs)
 
     def extract_time(self, dates, epochs, export_args=(), **kwargs):
-        self._extract_rec_generic(export_cmd='exporttime', export_dir_ext='time', dates=dates, epochs=epochs,
+
+        trodes_version = self.trodes_anim_info.trodes_version
+        if trodes_version < 2:
+            export_cmd = 'exporttime'
+        else:
+            export_cmd = 'trodesexport -raw'
+
+        self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='time',
+                                  dates=dates, epochs=epochs,
                                   export_args=export_args, **kwargs)
 
     def prepare_trodescomments(self, dates, epochs, overwrite=False, use_folder_date=False, stop_error=False):
@@ -1415,3 +1478,18 @@ class ExtractRawTrodesData:
                             print('(ID: {}) '.format(cmd_key) + line, end='')
 
         return terminated_processes
+
+
+def get_trodes_version(rec_file_name):
+    with open(rec_file_name, mode='rb') as file:
+        line = file.readline()
+
+        while line:
+            line = file.readline().decode()
+            if line.startswith(' <GlobalConfiguration'):
+                break
+    version = (line
+               .partition('trodesVersion="')[-1]
+               .partition('" ')[0]
+               .split('.'))
+    return int(version[0]), int(version[1]), int(version[2])
