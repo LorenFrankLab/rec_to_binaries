@@ -1490,6 +1490,6 @@ def get_trodes_version(rec_file_name):
                 break
     version = (line
                .partition('trodesVersion="')[-1]
-               .partition('" ')[0]
+               .partition('"')[0]
                .split('.'))
     return int(version[0]), int(version[1]), int(version[2])
