@@ -171,11 +171,11 @@ class TrodesDIOExtractedFileNameParser(TrodesRawFileNameParser):
         else:
             self.export_logfile = False
 
-            label_match = re.match(
-                '^dio_([A-Za-z]*)(\d*)\.{0,1}(.*)$', self.label_ext)
+            labels = self.label_ext.split('_')
 
-            if label_match is not None and self.ext == 'dat':
-                label_match_groups = label_match.groups()
+            if labels[0] == 'dio' and self.ext == 'dat':
+                label_match_groups = re.match(
+                    '([A-Za-z]*)(\d*)\.{0,1}(.*)$', labels[-1]).groups()
                 # string in/out
                 self.direction = label_match_groups[0][1:].lower()
                 # Din/Dout channel
