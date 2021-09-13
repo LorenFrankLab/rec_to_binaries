@@ -558,7 +558,7 @@ class TrodesAnimalInfo:
                                                                            entry_name_parser.ext,
                                                                            date_path_entry.path])),
                                                                  ignore_index=True)
-                    except TrodesDataFormatError as err:
+                    except TrodesDataFormatError:
                         warnings.warn(('Invalid folder name in preprocessing folder date ({}) folder ({}), ignoring.'.
                                        format(date, date_path_entry.name)))
         # sort and reindex paths
@@ -1031,7 +1031,7 @@ class ExtractRawTrodesData:
         if trodes_version < 2:
             export_cmd = 'exportmda'
         else:
-            export_cmd = 'trodesexport -mountainsort'
+            export_cmd = ['trodesexport', '-mountainsort']
 
         self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='mda',
                                   dates=dates, epochs=epochs,
@@ -1043,7 +1043,7 @@ class ExtractRawTrodesData:
         if trodes_version < 2:
             export_cmd = 'exportanalog'
         else:
-            export_cmd = 'trodesexport -analogio'
+            export_cmd = ['trodesexport', '-analogio']
 
         self._extract_rec_generic(export_cmd=export_cmd,
                                   export_dir_ext='analog', dates=dates,
@@ -1055,7 +1055,7 @@ class ExtractRawTrodesData:
         if trodes_version < 2:
             export_cmd = 'exportdio'
         else:
-            export_cmd = 'trodesexport -dio'
+            export_cmd = ['trodesexport', '-dio']
 
         self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='DIO',
                                   dates=dates, epochs=epochs,
@@ -1069,7 +1069,7 @@ class ExtractRawTrodesData:
         if trodes_version < 2:
             export_cmd = 'exportphy'
         else:
-            export_cmd = 'trodesexport -spikeband'
+            export_cmd = ['trodesexport', '-spikeband']
 
         self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='phy',
                                   dates=dates, epochs=epochs,
@@ -1081,7 +1081,7 @@ class ExtractRawTrodesData:
         if trodes_version < 2:
             export_cmd = 'exportspikes'
         else:
-            export_cmd = 'trodesexport -spikes'
+            export_cmd = ['trodesexport', '-spikes']
 
         self._extract_rec_generic(export_cmd=export_cmd,
                                   export_dir_ext='spikes',
@@ -1094,7 +1094,7 @@ class ExtractRawTrodesData:
         if trodes_version < 2:
             export_cmd = 'exporttime'
         else:
-            export_cmd = 'trodesexport -raw'
+            export_cmd = ['trodesexport', '-raw']
 
         self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='time',
                                   dates=dates, epochs=epochs,
@@ -1160,7 +1160,6 @@ class ExtractRawTrodesData:
                                                 format(dir_date, epoch, self.trodes_anim_info.anim_name))
 
                 file_parser = epoch_raw_file[0]
-                file_path = epoch_raw_file[1]
 
                 # create position dir
                 if use_folder_date:
@@ -1393,12 +1392,16 @@ class ExtractRawTrodesData:
                     else:
                         external_config_filename = None
 
-                    if external_config_filename is None:
-                        export_call = [export_cmd, '-rec', file_path, '-outputdirectory', out_date_dir,
-                                       '-output', out_base_filename]
+                    if isinstance(export_cmd, str):
+                        export_call = [export_cmd]
                     else:
-                        export_call = [export_cmd, '-rec', file_path, '-outputdirectory', out_date_dir,
-                                       '-output', out_base_filename, '-reconfig', external_config_filename]
+                        export_call = export_cmd
+
+                    export_call += ['-rec', file_path,
+                                    '-outputdirectory', out_date_dir,
+                                    '-output', out_base_filename]
+                    if external_config_filename is not None:
+                        export_call += ['-reconfig', external_config_filename]
 
                     export_call.extend(export_args)
 
