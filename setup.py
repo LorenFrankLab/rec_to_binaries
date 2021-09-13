@@ -7,7 +7,7 @@ TESTS_REQUIRE = ['pytest >= 2.7.1']
 
 setup(
     name='rec_to_binaries',
-    version='0.6.3',
+    version='0.6.4',
     license='MIT',
     description=('Covert SpikeGadgets rec files to binaries'),
     author='Eric Denovellis, Daniel Liu',
