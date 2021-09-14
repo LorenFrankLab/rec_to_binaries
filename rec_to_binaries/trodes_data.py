@@ -1394,6 +1394,7 @@ class ExtractRawTrodesData:
 
                     if isinstance(export_cmd, str):
                         export_call = [export_cmd]
+                        export_cmd = [export_cmd]
                     else:
                         export_call = export_cmd
 
@@ -1406,14 +1407,21 @@ class ExtractRawTrodesData:
                     export_call.extend(export_args)
 
                     # if pool slots are full, wait for one subprocess to terminate
-                    just_terminated = self._wait_subprocess_pool(subprocess_pool=subprocess_pool,
-                                                                 wait_pool_size=parallel_instances - 1)
+                    just_terminated = self._wait_subprocess_pool(
+                        subprocess_pool=subprocess_pool,
+                        wait_pool_size=parallel_instances - 1)
                     terminated_processes.update(just_terminated)
 
                     # create log file for each run of the export command
+                    if len(export_cmd) > 1:
+                        cmd_type = export_cmd[1].replace('-', '')
+                    else:
+                        cmd_type = export_cmd[0]
+
                     out_cmd_log_filename = os.path.join(
                         out_epoch_dir, out_base_filename + '.' +
-                        ''.join(export_cmd) + '.log')
+                        cmd_type + '.log')
+
                     out_cmd_log_file = open(out_cmd_log_filename, 'w')
                     # prepend the call command and argument to the log file
                     out_cmd_log_file.write(' '.join(export_call))
@@ -1425,11 +1433,12 @@ class ExtractRawTrodesData:
                                  out_base_date, file_parser.epochlist_str))
                     print('(ID: {}) Full command: {}'.format(
                         next_cmd_id, export_call))
-                    #subprocess_pool[next_cmd_id] = subprocess.Popen(export_call)
-                    subprocess_pool[next_cmd_id] = (subprocess.Popen(export_call,
-                                                                     stdout=out_cmd_log_file,
-                                                                     stderr=out_cmd_log_file),
-                                                    out_cmd_log_filename)
+
+                    subprocess_pool[next_cmd_id] = (
+                        subprocess.Popen(export_call,
+                                         stdout=out_cmd_log_file,
+                                         stderr=out_cmd_log_file),
+                        out_cmd_log_filename)
                     next_cmd_id += 1
 
             except TrodesDataFormatError as err:
