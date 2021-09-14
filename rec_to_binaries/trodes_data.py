@@ -1412,7 +1412,8 @@ class ExtractRawTrodesData:
 
                     # create log file for each run of the export command
                     out_cmd_log_filename = os.path.join(
-                        out_epoch_dir, out_base_filename + '.' + export_cmd + '.log')
+                        out_epoch_dir, out_base_filename + '.' +
+                        ''.join(export_cmd) + '.log')
                     out_cmd_log_file = open(out_cmd_log_filename, 'w')
                     # prepend the call command and argument to the log file
                     out_cmd_log_file.write(' '.join(export_call))
