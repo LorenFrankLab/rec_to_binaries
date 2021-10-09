@@ -1,3 +1,4 @@
+import copy
 import functools
 import itertools
 import multiprocessing
@@ -1324,6 +1325,14 @@ class ExtractRawTrodesData:
 
         next_cmd_id = 0
 
+        if isinstance(export_cmd, str):
+            export_cmd = [export_cmd]
+        # create log file for each run of the export command
+        if len(export_cmd) > 1:
+            cmd_type = export_cmd[1].replace('-', '')
+        else:
+            cmd_type = export_cmd[0]
+
         file_paths_parsed = set()
         for dir_date, epoch in itertools.product(dates, epochs):
             try:
@@ -1392,12 +1401,7 @@ class ExtractRawTrodesData:
                     else:
                         external_config_filename = None
 
-                    if isinstance(export_cmd, str):
-                        export_call = [export_cmd]
-                        export_cmd = [export_cmd]
-                    else:
-                        export_call = export_cmd
-
+                    export_call = copy.deepcopy(export_cmd)
                     export_call += ['-rec', file_path,
                                     '-outputdirectory', out_date_dir,
                                     '-output', out_base_filename]
@@ -1411,12 +1415,6 @@ class ExtractRawTrodesData:
                         subprocess_pool=subprocess_pool,
                         wait_pool_size=parallel_instances - 1)
                     terminated_processes.update(just_terminated)
-
-                    # create log file for each run of the export command
-                    if len(export_cmd) > 1:
-                        cmd_type = export_cmd[1].replace('-', '')
-                    else:
-                        cmd_type = export_cmd[0]
 
                     out_cmd_log_filename = os.path.join(
                         out_epoch_dir, out_base_filename + '.' +
