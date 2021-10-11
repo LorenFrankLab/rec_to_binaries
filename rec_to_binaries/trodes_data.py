@@ -1017,7 +1017,7 @@ class ExtractRawTrodesData:
         if trodes_version < 2:
             export_cmd = 'exportLFP'
         else:
-            export_cmd = ['trodesexport', ' -lfp', 'sortingmode', '1']
+            export_cmd = ['trodesexport', ' -lfp', '-sortingmode', '1']
 
         self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='LFP',
                                   dates=dates, epochs=epochs,
