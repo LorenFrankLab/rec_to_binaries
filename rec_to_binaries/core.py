@@ -5,17 +5,39 @@ from logging import getLogger
 import rec_to_binaries.trodes_data as td
 from rec_to_binaries.adjust_timestamps import fix_timestamp_lag
 
-_DEFAULT_LFP_EXPORT_ARGS = ('-highpass', '0', '-lowpass', '400',
-                            '-interp', '0', '-userefs', '0',
-                            '-outputrate', '1500')
-_DEFAULT_MDA_EXPORT_ARGS = ('-usespikefilters', '0',
-                            '-interp', '1', '-userefs', '0')
-_DEFAULT_ANALOG_EXPORT_ARGS = ()
-_DEFAULT_DIO_EXPORT_ARGS = ()
-_DEFAULT_SPIKE_EXPORT_ARGS = ()
-_DEFAULT_TIME_EXPORT_ARGS = ()
-
+TRODES_VERSION = td.get_trodes_version_from_path()
+print(f'Trodes version: {".".join(map(str, TRODES_VERSION))}')
 logger = getLogger(__name__)
+
+if TRODES_VERSION[0] < 2.0:
+    _DEFAULT_LFP_EXPORT_ARGS = ('-highpass', '0',
+                                '-lowpass', '400',
+                                '-interp', '0',
+                                '-userefs', '0',
+                                '-outputrate', '1500')
+    _DEFAULT_MDA_EXPORT_ARGS = ('-usespikefilters', '0',
+                                '-interp', '1',
+                                '-userefs', '0')
+    _DEFAULT_ANALOG_EXPORT_ARGS = ()
+    _DEFAULT_DIO_EXPORT_ARGS = ()
+    _DEFAULT_SPIKE_EXPORT_ARGS = ()
+    _DEFAULT_TIME_EXPORT_ARGS = ()
+else:
+    _DEFAULT_LFP_EXPORT_ARGS = ('-highpass', '0',
+                                '-lowpass', '400',
+                                '-interp', '0',
+                                '-userefs', '0',
+                                '-outputrate', '1500'
+                                '-sortingmode', '0')
+    _DEFAULT_MDA_EXPORT_ARGS = ('-usespikefilters', '0',
+                                '-interp', '1',
+                                '-usespikerefs', '0')
+    _DEFAULT_ANALOG_EXPORT_ARGS = ()
+    _DEFAULT_DIO_EXPORT_ARGS = ()
+    _DEFAULT_SPIKE_EXPORT_ARGS = ()
+    _DEFAULT_TIME_EXPORT_ARGS = ()
+
+
 
 
 def extract_trodes_rec_file(data_dir,
@@ -104,7 +126,7 @@ def extract_trodes_rec_file(data_dir,
 
     """
     animal_info = td.TrodesAnimalInfo(
-        data_dir, animal, out_dir=out_dir, dates=dates)
+        data_dir, animal, out_dir=out_dir, dates=dates, trodes_version=TRODES_VERSION[0])
 
     extractor = td.ExtractRawTrodesData(animal_info)
     raw_epochs_unionset = animal_info.get_raw_epochs_unionset()

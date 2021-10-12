@@ -216,7 +216,7 @@ class TrodesPosExtractedFileNameParser(TrodesRawFileNameParser):
 class TrodesAnimalInfo:
 
     def __init__(self, base_dir, anim_name, RawFileParser=TrodesRawFileNameParser,
-                 out_dir=None, dates=None):
+                 out_dir=None, dates=None, trodes_version=None):
         self.RawFileNameParser = RawFileParser
         self.base_dir = base_dir
         self.anim_name = anim_name
@@ -248,7 +248,10 @@ class TrodesAnimalInfo:
             self.raw_rec_files[date] = {}
             day_rec_filenames = self._get_rec_paths(
                 day_path, self.RawFileNameParser)
-            self.trodes_version = self._get_trodes_version(day_path)
+            if trodes_version is None:
+                self.trodes_version = self._get_trodes_version(day_path)
+            else:
+                self.trodes_version = trodes_version
             for rec_filename_parsed, rec_path in day_rec_filenames:
                 if rec_filename_parsed.date != date:
                     warnings.warn(('For rec file ({}) the date field does not match '
@@ -409,9 +412,11 @@ class TrodesAnimalInfo:
                                        .append(pd.DataFrame(directory_path_fields,
                                                             columns=partial_extracted_columns),
                                                ignore_index=True))
-        datatype_paths_df = (directory_entries_df.drop('directory', 1).merge(right=partial_extracted_paths,
-                                                                             left_index=True,
-                                                                             right_on='dir_index')
+        datatype_paths_df = (directory_entries_df
+                             .drop(labels='directory', axis=1)
+                             .merge(right=partial_extracted_paths,
+                                    left_index=True,
+                                    right_on='dir_index')
                              .sort_values(sort_on_fields)
                              .reset_index(drop=True))
 
