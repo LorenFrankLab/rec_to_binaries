@@ -5,49 +5,19 @@ from logging import getLogger
 import rec_to_binaries.trodes_data as td
 from rec_to_binaries.adjust_timestamps import fix_timestamp_lag
 
-TRODES_VERSION = td.get_trodes_version_from_path()
-print(f'Trodes version: {".".join(map(str, TRODES_VERSION))}')
 logger = getLogger(__name__)
-
-if TRODES_VERSION[0] < 2.0:
-    _DEFAULT_LFP_EXPORT_ARGS = ('-highpass', '0',
-                                '-lowpass', '400',
-                                '-interp', '0',
-                                '-userefs', '0',
-                                '-outputrate', '1500')
-    _DEFAULT_MDA_EXPORT_ARGS = ('-usespikefilters', '0',
-                                '-interp', '1',
-                                '-userefs', '0')
-    _DEFAULT_ANALOG_EXPORT_ARGS = ()
-    _DEFAULT_DIO_EXPORT_ARGS = ()
-    _DEFAULT_SPIKE_EXPORT_ARGS = ()
-    _DEFAULT_TIME_EXPORT_ARGS = ()
-else:
-    _DEFAULT_LFP_EXPORT_ARGS = ('-highpass', '0',
-                                '-lowpass', '400',
-                                '-interp', '0',
-                                '-userefs', '0',
-                                '-outputrate', '1500'
-                                '-sortingmode', '0')
-    _DEFAULT_MDA_EXPORT_ARGS = ('-usespikefilters', '0',
-                                '-interp', '1',
-                                '-usespikerefs', '0')
-    _DEFAULT_ANALOG_EXPORT_ARGS = ()
-    _DEFAULT_DIO_EXPORT_ARGS = ()
-    _DEFAULT_SPIKE_EXPORT_ARGS = ()
-    _DEFAULT_TIME_EXPORT_ARGS = ()
 
 
 def extract_trodes_rec_file(data_dir,
                             animal,
                             out_dir=None,
                             dates=None,
-                            lfp_export_args=_DEFAULT_LFP_EXPORT_ARGS,
-                            mda_export_args=_DEFAULT_MDA_EXPORT_ARGS,
-                            analog_export_args=_DEFAULT_ANALOG_EXPORT_ARGS,
-                            dio_export_args=_DEFAULT_DIO_EXPORT_ARGS,
-                            spikes_export_args=_DEFAULT_SPIKE_EXPORT_ARGS,
-                            time_export_args=_DEFAULT_TIME_EXPORT_ARGS,
+                            lfp_export_args=None,
+                            mda_export_args=None,
+                            analog_export_args=None,
+                            dio_export_args=None,
+                            spikes_export_args=None,
+                            time_export_args=None,
                             make_HDF5=False,
                             extract_analog=True,
                             extract_spikes=True,
@@ -62,7 +32,8 @@ def extract_trodes_rec_file(data_dir,
                             stop_error=False,
                             use_folder_date=False,
                             parallel_instances=1,
-                            use_day_config=True):
+                            use_day_config=True,
+                            trodes_version=None):
     """Extracting Trodes rec files.
 
     Following the Frank Lab directory structure for raw ephys data, will
@@ -121,10 +92,22 @@ def extract_trodes_rec_file(data_dir,
     use_day_config : bool, optional
         Use external configuration file in date folder
         (i.e. `<date>.trodesconf`)
+    trodes_version : tuple, len 3
+        Tuple of length 3 defining the version number. If None, will be
+        automatically determined from the trodes version on the path.
 
     """
+
+    if trodes_version is None:
+        trodes_version = td.get_trodes_version_from_path()
+    logger.info(f'Trodes version: {".".join(map(str, trodes_version))}')
+
     animal_info = td.TrodesAnimalInfo(
-        data_dir, animal, out_dir=out_dir, dates=dates, trodes_version=TRODES_VERSION[0])
+        data_dir,
+        animal,
+        out_dir=out_dir,
+        dates=dates,
+        trodes_version=trodes_version[0])
 
     extractor = td.ExtractRawTrodesData(animal_info)
     raw_epochs_unionset = animal_info.get_raw_epochs_unionset()
@@ -135,6 +118,9 @@ def extract_trodes_rec_file(data_dir,
 
     if extract_analog:
         logger.info('Extracting analog data...')
+        if analog_export_args is None:
+            analog_export_args = ()
+
         extractor.extract_analog(
             raw_dates, raw_epochs_unionset, export_args=analog_export_args,
             overwrite=overwrite, stop_error=stop_error,
@@ -144,6 +130,9 @@ def extract_trodes_rec_file(data_dir,
 
     if extract_dio:
         logger.info('Extracting DIO...')
+        if dio_export_args is None:
+            dio_export_args = ()
+
         extractor.extract_dio(
             raw_dates, raw_epochs_unionset, export_args=dio_export_args,
             overwrite=overwrite, stop_error=stop_error,
@@ -153,6 +142,20 @@ def extract_trodes_rec_file(data_dir,
 
     if extract_lfps:
         logger.info('Extracting LFP...')
+        if lfp_export_args is None:
+            if trodes_version[0] < 2.0:
+                lfp_export_args = ('-highpass', '0',
+                                   '-lowpass', '400',
+                                   '-interp', '0',
+                                   '-userefs', '0',
+                                   '-outputrate', '1500')
+            else:
+                lfp_export_args = ('-highpass', '0',
+                                   '-lowpass', '400',
+                                   '-interp', '0',
+                                   '-userefs', '0',
+                                   '-outputrate', '1500'
+                                   '-sortingmode', '0')
         extractor.extract_lfp(
             raw_dates, raw_epochs_unionset, export_args=lfp_export_args,
             overwrite=overwrite, stop_error=stop_error,
@@ -162,6 +165,15 @@ def extract_trodes_rec_file(data_dir,
 
     if extract_mda:
         logger.info('Extracting mda...')
+        if mda_export_args is None:
+            if trodes_version[0] < 2.0:
+                mda_export_args = ('-usespikefilters', '0',
+                                   '-interp', '1',
+                                   '-userefs', '0')
+            else:
+                mda_export_args = ('-usespikefilters', '0',
+                                   '-interp', '1',
+                                   '-usespikerefs', '0')
         extractor.extract_mda(
             raw_dates, raw_epochs_unionset, export_args=mda_export_args,
             overwrite=overwrite, stop_error=stop_error,
@@ -171,6 +183,8 @@ def extract_trodes_rec_file(data_dir,
 
     if extract_spikes:
         logger.info('Extracting spikes...')
+        if spikes_export_args is None:
+            spikes_export_args = ()
         extractor.extract_spikes(
             raw_dates, raw_epochs_unionset, export_args=spikes_export_args,
             overwrite=overwrite, stop_error=stop_error,
@@ -180,6 +194,8 @@ def extract_trodes_rec_file(data_dir,
 
     if extract_time:
         logger.info('Extracting time...')
+        if time_export_args is None:
+            time_export_args = ()
         extractor.extract_time(
             raw_dates, raw_epochs_unionset, export_args=time_export_args,
             overwrite=overwrite, stop_error=stop_error,
