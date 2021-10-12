@@ -1098,11 +1098,7 @@ class ExtractRawTrodesData:
 
     def extract_time(self, dates, epochs, export_args=(), **kwargs):
 
-        trodes_version = self.trodes_anim_info.trodes_version
-        if trodes_version < 2:
-            export_cmd = 'exporttime'
-        else:
-            export_cmd = ['trodesexport', '-raw']
+        export_cmd = ['exporttime']
 
         self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='time',
                                   dates=dates, epochs=epochs,
