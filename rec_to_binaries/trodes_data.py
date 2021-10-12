@@ -1017,7 +1017,7 @@ class ExtractRawTrodesData:
         if trodes_version < 2:
             export_cmd = 'exportLFP'
         else:
-            export_cmd = 'trodesexport -lfp'
+            export_cmd = ['trodesexport', '-lfp']
 
         self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='LFP',
                                   dates=dates, epochs=epochs,
@@ -1402,13 +1402,17 @@ class ExtractRawTrodesData:
                         external_config_filename = None
 
                     export_call = copy.deepcopy(export_cmd)
+                    
+                    # add switch specific parameters 
+                    export_call.extend(export_args)
+
                     export_call += ['-rec', file_path,
                                     '-outputdirectory', out_date_dir,
                                     '-output', out_base_filename]
                     if external_config_filename is not None:
                         export_call += ['-reconfig', external_config_filename]
 
-                    export_call.extend(export_args)
+                    
 
                     # if pool slots are full, wait for one subprocess to terminate
                     just_terminated = self._wait_subprocess_pool(
