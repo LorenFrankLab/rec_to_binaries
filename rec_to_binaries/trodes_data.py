@@ -1405,9 +1405,6 @@ class ExtractRawTrodesData:
                     
                     # add switch specific parameters 
                     export_call.extend(export_args)
-                    
-                    # add sorting mode
-                    export_call += ['-sortingmode', '0']
 
                     export_call += ['-rec', file_path,
                                     '-outputdirectory', out_date_dir,
