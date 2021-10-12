@@ -38,8 +38,6 @@ else:
     _DEFAULT_TIME_EXPORT_ARGS = ()
 
 
-
-
 def extract_trodes_rec_file(data_dir,
                             animal,
                             out_dir=None,
