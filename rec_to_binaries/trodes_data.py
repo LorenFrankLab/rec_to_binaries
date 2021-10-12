@@ -1022,7 +1022,7 @@ class ExtractRawTrodesData:
         """
         trodes_version = self.trodes_anim_info.trodes_version
         if trodes_version < 2:
-            export_cmd = 'exportLFP'
+            export_cmd = ['exportLFP']
         else:
             export_cmd = ['trodesexport', '-lfp']
 
@@ -1037,7 +1037,7 @@ class ExtractRawTrodesData:
 
         trodes_version = self.trodes_anim_info.trodes_version
         if trodes_version < 2:
-            export_cmd = 'exportmda'
+            export_cmd = ['exportmda']
         else:
             export_cmd = ['trodesexport', '-mountainsort']
 
@@ -1049,7 +1049,7 @@ class ExtractRawTrodesData:
 
         trodes_version = self.trodes_anim_info.trodes_version
         if trodes_version < 2:
-            export_cmd = 'exportanalog'
+            export_cmd = ['exportanalog']
         else:
             export_cmd = ['trodesexport', '-analogio']
 
@@ -1075,7 +1075,7 @@ class ExtractRawTrodesData:
 
         trodes_version = self.trodes_anim_info.trodes_version
         if trodes_version < 2:
-            export_cmd = 'exportphy'
+            export_cmd = ['exportphy']
         else:
             export_cmd = ['trodesexport', '-spikeband']
 
@@ -1087,7 +1087,7 @@ class ExtractRawTrodesData:
 
         trodes_version = self.trodes_anim_info.trodes_version
         if trodes_version < 2:
-            export_cmd = 'exportspikes'
+            export_cmd = ['exportspikes']
         else:
             export_cmd = ['trodesexport', '-spikes']
 
@@ -1332,8 +1332,6 @@ class ExtractRawTrodesData:
 
         next_cmd_id = 0
 
-        if isinstance(export_cmd, str):
-            export_cmd = [export_cmd]
         # create log file for each run of the export command
         if len(export_cmd) > 1:
             cmd_type = export_cmd[1].replace('-', '')
