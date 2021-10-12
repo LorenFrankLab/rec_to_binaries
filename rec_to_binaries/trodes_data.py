@@ -1508,3 +1508,17 @@ def get_trodes_version(rec_file_name):
                .partition('"')[0]
                .split('.'))
     return int(version[0]), int(version[1]), int(version[2])
+
+
+def get_trodes_version_from_path():
+    try:
+        result = str(subprocess.run(['exportmda', '-v'], capture_output=True)
+                     .stdout)
+    except FileNotFoundError:
+        result = str(subprocess.run(['trodesexport', '-v'], capture_output=True)
+                     .stdout)
+    version = (result
+               .split('\\n')[0]
+               .split(' ')[-1]
+               .split('.'))
+    return int(version[0]), int(version[1]), int(version[2])
