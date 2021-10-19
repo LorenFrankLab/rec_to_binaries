@@ -1035,7 +1035,11 @@ class ExtractRawTrodesData:
                                  '-interp', '500', '-userefs', '1'),
                     **kwargs):
 
-        export_cmd = ['exportmda']
+        trodes_version = self.trodes_anim_info.trodes_version
+        if trodes_version < 2:
+            export_cmd = ['exportmda']
+        else:
+            export_cmd = ['trodesexport', '-mountainsort']
 
         self._extract_rec_generic(export_cmd=export_cmd, export_dir_ext='mda',
                                   dates=dates, epochs=epochs,
