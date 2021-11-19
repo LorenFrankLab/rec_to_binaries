@@ -259,7 +259,7 @@ class TrodesAnimalInfo:
                     logger.warn(('For rec file ({}) the date field does not match '
                                  'the folder date ({}). This should be fixed or could have'
                                  'unintended parsing consequences.').
-                                format(rec_filename_parsed.filename, date), TrodesDataFormatWarning)
+                                format(rec_filename_parsed.filename, date))
                 self.raw_rec_files[date][rec_filename_parsed.epochtuple] = (
                     rec_filename_parsed, rec_path)
 
@@ -620,10 +620,10 @@ class TrodesAnimalInfo:
                     except ValueError:
                         logger.warn(('animal path ({}) contains a data directory ({}) '
                                      'that does not conform to date format %Y%m%d.').
-                                    format(anim_path, anim_dir_entry.name), TrodesDataFormatWarning)
+                                    format(anim_path, anim_dir_entry.name))
         except FileNotFoundError:
             logger.warn(('anim path ({}) does not exist.'.format(
-                anim_path)), TrodesDataFormatWarning)
+                anim_path)))
         return anim_day_paths
 
     @staticmethod
@@ -644,7 +644,7 @@ class TrodesAnimalInfo:
                     except TrodesDataFormatError:
                         logger.warn(('Invalid trodes rec filename ({}), '
                                      'cannot be parsed, skipping.').
-                                    format(dir_entry.path), TrodesDataFormatWarning)
+                                    format(dir_entry.path))
 
         return anim_rec_paths
 
@@ -671,7 +671,7 @@ class TrodesAnimalInfo:
                     except TrodesDataFormatError:
                         logger.warn(('Invalid trodes videoPositionTracking filename ({}), '
                                      'cannot be parsed, skipping.').
-                                    format(dir_entry.path), TrodesDataFormatWarning)
+                                    format(dir_entry.path))
 
         return anim_pos_paths
 
@@ -692,7 +692,7 @@ class TrodesAnimalInfo:
                     except TrodesDataFormatError:
                         logger.warn(('Invalid trodes h264 filename ({}), '
                                      'cannot be parsed, skipping.').
-                                    format(dir_entry.path), TrodesDataFormatWarning)
+                                    format(dir_entry.path))
 
         return anim_h264_paths
 
@@ -713,7 +713,7 @@ class TrodesAnimalInfo:
                     except TrodesDataFormatError:
                         logger.warn(('Invalid trodes videoTimeStamps filename ({}), '
                                      'cannot be parsed, skipping.').
-                                    format(dir_entry.path), TrodesDataFormatWarning)
+                                    format(dir_entry.path))
 
         return anim_video_times_paths
 
@@ -734,7 +734,7 @@ class TrodesAnimalInfo:
                     except TrodesDataFormatError:
                         logger.warn(('Invalid trodes videoTimeStamps.cameraHWFrameCount filename ({}), '
                                      'cannot be parsed, skipping.').
-                                    format(dir_entry.path), TrodesDataFormatWarning)
+                                    format(dir_entry.path))
 
         return anim_video_hwframecount_paths
 
@@ -755,7 +755,7 @@ class TrodesAnimalInfo:
                     except TrodesDataFormatError:
                         logger.warn(('Invalid trodes .trodesComments filename ({}), '
                                      'cannot be parsed, skipping.').
-                                    format(dir_entry.path), TrodesDataFormatWarning)
+                                    format(dir_entry.path))
 
         return trodes_comment_paths
 
@@ -1147,8 +1147,7 @@ class ExtractRawTrodesData:
                     # exception should be converted to a warning
                     logger.warn(repr(err) + ' (thrown from {}:{})'
                                 .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                        sys.exc_info()[2].tb_lineno),
-                                TrodesDataFormatWarning)
+                                        sys.exc_info()[2].tb_lineno))
 
     def prepare_mountain_dir(self, dates, epochs, use_folder_date=False, stop_error=False):
 
@@ -1190,8 +1189,7 @@ class ExtractRawTrodesData:
                     # exception should be converted to a warning
                     logger.warn(repr(err) + ' (thrown from {}:{})'
                                 .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                        sys.exc_info()[2].tb_lineno),
-                                TrodesDataFormatWarning)
+                                        sys.exc_info()[2].tb_lineno))
 
     def prepare_pos_dir(self, dates, epochs, overwrite=False, use_folder_date=False, stop_error=False):
         for dir_date, epoch in itertools.product(dates, epochs):
@@ -1244,8 +1242,7 @@ class ExtractRawTrodesData:
                         # this file does not exist
                         logger.warn(repr(err) + ' (thrown from {}:{})'
                                     .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                            sys.exc_info()[2].tb_lineno),
-                                    TrodesDataFormatWarning)
+                                            sys.exc_info()[2].tb_lineno))
 
                     try:
                         (raw_postime_filename_parser, raw_postime_path) = \
@@ -1267,8 +1264,7 @@ class ExtractRawTrodesData:
                         # this file does not exist
                         logger.warn(repr(err) + ' (thrown from {}:{})'
                                     .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                            sys.exc_info()[2].tb_lineno),
-                                    TrodesDataFormatWarning)
+                                            sys.exc_info()[2].tb_lineno))
 
                     try:
                         (raw_poshwframecount_filename_parser, raw_poshwframecount_path) = \
@@ -1291,8 +1287,7 @@ class ExtractRawTrodesData:
                         # this file does not exist
                         logger.warn(repr(err) + ' (thrown from {}:{})'
                                     .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                            sys.exc_info()[2].tb_lineno),
-                                    TrodesDataFormatWarning)
+                                            sys.exc_info()[2].tb_lineno))
 
             except TrodesDataFormatError as err:
                 if stop_error:
@@ -1302,8 +1297,7 @@ class ExtractRawTrodesData:
                     # exception should be converted to a warning
                     logger.warn(repr(err) + ' (thrown from {}:{})'
                                 .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                        sys.exc_info()[2].tb_lineno),
-                                TrodesDataFormatWarning)
+                                        sys.exc_info()[2].tb_lineno))
 
     def _extract_rec_generic(self, export_cmd, export_dir_ext,
                              dates, epochs, export_args=(), overwrite=False, stop_error=False,
@@ -1450,8 +1444,7 @@ class ExtractRawTrodesData:
                     # exception should be converted to a warning
                     logger.warn(repr(err) + ' (thrown from {}:{})'
                                 .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                        sys.exc_info()[2].tb_lineno),
-                                TrodesDataFormatWarning)
+                                        sys.exc_info()[2].tb_lineno))
 
         # wait for all commands to finish
         just_terminated = self._wait_subprocess_pool(
