@@ -12,6 +12,10 @@ from rec_to_binaries.create_system_time import infer_systime
 from rec_to_binaries.read_binaries import (readTrodesExtractedDataFile,
                                            write_trodes_extracted_datafile)
 from scipy.stats import linregress
+from logging import getLogger
+
+
+logger = getLogger(__name__)
 
 
 def _label_time_chunks(trodestime):
@@ -109,7 +113,8 @@ def fix_timestamp_lag(continuoustime_filename):
     data_file = readTrodesExtractedDataFile(continuoustime_filename)
 
     if 'systime' not in data_file['data'].dtype.names:
-        # logging.warn
+        logger.warn("No `systime`. Inferring from `system_time_at_creation` timestamp"
+                    " as a function of the `clockrate` and `trodestime`")
         new_data = infer_systime(data_file)
     else:
         new_data = (
