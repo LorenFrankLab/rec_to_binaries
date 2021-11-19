@@ -6,14 +6,14 @@ fairly sporadic, we can recover the correspondence between trodestime
 and system (wall) time.
 """
 
+from logging import getLogger
+
 import numpy as np
 import pandas as pd
 from rec_to_binaries.create_system_time import infer_systime
 from rec_to_binaries.read_binaries import (readTrodesExtractedDataFile,
                                            write_trodes_extracted_datafile)
 from scipy.stats import linregress
-from logging import getLogger
-
 
 logger = getLogger(__name__)
 
