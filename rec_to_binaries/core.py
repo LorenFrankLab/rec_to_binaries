@@ -173,7 +173,8 @@ def extract_trodes_rec_file(data_dir,
             else:
                 mda_export_args = ('-usespikefilters', '0',
                                    '-interp', '1',
-                                   '-usespikerefs', '0')
+                                   '-usespikerefs', '0',
+                                   '-sortingmode', '1')
         extractor.extract_mda(
             raw_dates, raw_epochs_unionset, export_args=mda_export_args,
             overwrite=overwrite, stop_error=stop_error,
