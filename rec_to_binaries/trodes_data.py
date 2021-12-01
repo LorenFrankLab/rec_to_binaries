@@ -1511,6 +1511,6 @@ def get_trodes_version_from_path():
                      .stdout)
     version = (result
                .split('\\n')[0]
-               .split(' ')[-1]
+               .split(' ')[2]
                .split('.'))
     return int(version[0]), int(version[1]), int(version[2])
