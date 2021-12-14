@@ -1061,7 +1061,7 @@ class ExtractRawTrodesData:
     def extract_dio(self, dates, epochs, export_args=(), **kwargs):
         trodes_version = self.trodes_anim_info.trodes_version
         if trodes_version < 2:
-            export_cmd = 'exportdio'
+            export_cmd = ['exportdio']
         else:
             export_cmd = ['trodesexport', '-dio']
 
