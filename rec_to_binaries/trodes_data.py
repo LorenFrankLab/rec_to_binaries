@@ -260,8 +260,12 @@ class TrodesAnimalInfo:
                                  'the folder date ({}). This should be fixed or could have'
                                  'unintended parsing consequences.').
                                 format(rec_filename_parsed.filename, date))
-                self.raw_rec_files[date][rec_filename_parsed.epochtuple] = (
-                    rec_filename_parsed, rec_path)
+                try:
+                    self.raw_rec_files[date][rec_filename_parsed.epochtuple].append(
+                        (rec_filename_parsed, rec_path))
+                except KeyError:
+                    self.raw_rec_files[date][rec_filename_parsed.epochtuple] = [
+                        (rec_filename_parsed, rec_path)]
 
             self.raw_pos_files[date] = {}
             day_pos_filenames = self._get_video_tracking_paths(
@@ -628,23 +632,15 @@ class TrodesAnimalInfo:
 
     @staticmethod
     def _get_rec_paths(path, RawFileNameParser=TrodesRawFileNameParser):
-        dir_entries = os.scandir(path)
         anim_rec_paths = []
 
-        for dir_entry in dir_entries:
-            if dir_entry.is_file():
-                # look only at rec files, ignore others
-                if re.match('^.*\.rec$', dir_entry.name):
-                    # check to see if filename format is good
-                    try:
-                        trodes_filename_parsed = RawFileNameParser(
-                            dir_entry.name)
-                        anim_rec_paths.append(
-                            (trodes_filename_parsed, dir_entry.path))
-                    except TrodesDataFormatError:
-                        logger.warn(('Invalid trodes rec filename ({}), '
-                                     'cannot be parsed, skipping.').
-                                    format(dir_entry.path))
+        for path in Path(path).glob('**/*.rec'):
+            try:
+                anim_rec_paths.append(
+                    (TrodesRawFileNameParser(path.name), str(path)))
+            except TrodesDataFormatError:
+                logger.warn(f'Invalid trodes rec filename ({str(path.parent)}),'
+                            ' cannot be parsed, skipping.')
 
         return anim_rec_paths
 
@@ -678,21 +674,13 @@ class TrodesAnimalInfo:
     @staticmethod
     def _get_h264_paths(path, RawFileNameParser=TrodesRawFileNameParser):
         anim_h264_paths = []
-
-        dir_entries = os.scandir(path)
-
-        for dir_entry in dir_entries:
-            if dir_entry.is_file():
-                if re.match('^.*\.h264$', dir_entry.name):
-                    try:
-                        trodes_filename_parsed = RawFileNameParser(
-                            dir_entry.name)
-                        anim_h264_paths.append(
-                            (trodes_filename_parsed, dir_entry.path))
-                    except TrodesDataFormatError:
-                        logger.warn(('Invalid trodes h264 filename ({}), '
-                                     'cannot be parsed, skipping.').
-                                    format(dir_entry.path))
+        for path in Path(path).glob('**/*.h264'):
+            try:
+                anim_h264_paths.append(
+                    (TrodesRawFileNameParser(path.name), str(path)))
+            except TrodesDataFormatError:
+                logger.warn(f'Invalid trodes h264 filename ({str(path.parent)}), '
+                            'cannot be parsed, skipping.')
 
         return anim_h264_paths
 
@@ -1123,11 +1111,12 @@ class ExtractRawTrodesData:
                 else:
                     out_base_date = file_parser.date
 
-                out_base_path = self._assemble_export_base_name(date=out_base_date,
-                                                                anim_name=file_parser.name_str,
-                                                                epochlist=file_parser.epochlist_str,
-                                                                label=file_parser.label,
-                                                                label_ext=file_parser.label_ext) + '.' + file_parser.ext
+                out_base_path = self._assemble_export_base_name(
+                    date=out_base_date,
+                    anim_name=file_parser.name_str,
+                    epochlist=file_parser.epochlist_str,
+                    label=file_parser.label,
+                    label_ext=file_parser.label_ext) + '.' + file_parser.ext
 
                 online_comment_path = os.path.join(out_date_dir, out_base_path)
 
@@ -1341,15 +1330,16 @@ class ExtractRawTrodesData:
                     raise TrodesDataFormatError('Rec: Date {} and epoch {} does not exist for animal {}.'.
                                                 format(dir_date, epoch, self.trodes_anim_info.anim_name))
 
-                file_parser = epoch_raw_file[0]
-                file_path = epoch_raw_file[1]
+                # sort files
+                epoch_raw_file = sorted(epoch_raw_file, key=lambda x: x[1])
+                epoch_raw_file.insert(0, epoch_raw_file.pop())
 
-                if file_path in file_paths_parsed:
-                    # skip this file because we already tried to parse it
-                    pass
-                else:
+                file_parser = epoch_raw_file[0][0]
+                file_paths = [file[1] for file in epoch_raw_file]
+
+                if file_paths[0] not in file_paths_parsed:
                     # immediately add path to parsed list to make sure we don't try to parse it again
-                    file_paths_parsed.add(file_path)
+                    file_paths_parsed.add(file_paths[0])
 
                     if file_parser.date != dir_date:
                         if use_folder_date:
@@ -1367,21 +1357,23 @@ class ExtractRawTrodesData:
                         out_base_date = dir_date
                     else:
                         out_base_date = file_parser.date
-                    out_base_filename = self._assemble_export_base_name(date=out_base_date,
-                                                                        anim_name=file_parser.name_str,
-                                                                        epochlist=file_parser.epochlist_str,
-                                                                        label=file_parser.label,
-                                                                        label_ext=file_parser.label_ext)
+                    out_base_filename = self._assemble_export_base_name(
+                        date=out_base_date,
+                        anim_name=file_parser.name_str,
+                        epochlist=file_parser.epochlist_str,
+                        label=file_parser.label,
+                        label_ext=file_parser.label_ext)
 
                     out_epoch_dir = os.path.join(
-                        out_date_dir, out_base_filename + '.' + export_dir_ext)
+                        out_date_dir, f"{out_base_filename}.{export_dir_ext}")
                     if os.path.exists(out_epoch_dir):
                         if overwrite:
                             shutil.rmtree(out_epoch_dir)
                         else:
-                            raise TrodesDataFormatError(('skipping rec file {} for extracting, '
-                                                         'folder {} already exists and overwrite=False.').
-                                                        format(file_parser.filename, out_epoch_dir))
+                            raise TrodesDataFormatError(
+                                ('skipping rec file {} for extracting, '
+                                 'folder {} already exists and overwrite=False.').
+                                format(file_parser.filename, out_epoch_dir))
 
                     os.makedirs(out_epoch_dir)
 
@@ -1401,8 +1393,9 @@ class ExtractRawTrodesData:
                     # add switch specific parameters
                     export_call.extend(export_args)
 
-                    export_call += ['-rec', file_path,
-                                    '-outputdirectory', out_date_dir,
+                    for file in file_paths:
+                        export_call += ['-rec', file]
+                    export_call += ['-outputdirectory', out_date_dir,
                                     '-output', out_base_filename]
                     if external_config_filename is not None:
                         export_call += ['-reconfig', external_config_filename]
