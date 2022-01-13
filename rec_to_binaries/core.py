@@ -205,6 +205,11 @@ def extract_trodes_rec_file(data_dir,
             use_day_config=use_day_config)
 
     if adjust_timestamps_for_mcu_lag:
+        ''''There is some jitter in the arrival times of packets from the MCU (as
+            reflected in the sysclock records in the .rec file. If we assume that
+            the Trodes clock is actually regular, and that any episodes of lag are
+            fairly sporadic, we can recover the correspondence between trodestime
+            and system (wall) time.'''
         preprocessing_dir = animal_info.get_preprocessing_dir()
         filenames = glob.glob(os.path.join(
             preprocessing_dir, '**', '*.continuoustime.dat'), recursive=True)
