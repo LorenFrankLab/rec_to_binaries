@@ -10,10 +10,10 @@ from logging import getLogger
 
 import numpy as np
 import pandas as pd
+from scipy.stats import linregress
 from rec_to_binaries.create_system_time import infer_systime
 from rec_to_binaries.read_binaries import (readTrodesExtractedDataFile,
                                            write_trodes_extracted_datafile)
-from scipy.stats import linregress
 
 logger = getLogger(__name__)
 
@@ -53,20 +53,20 @@ def _regress_timestamps(trodestime, systime):
         Unix time
 
     """
-    NANOSECONDS_TO_SECONDS = 1E9
+    nanoseconds_to_seconds = 1E9
 
     # Convert
     systime_seconds = np.asarray(systime).astype(
-        np.float64) / NANOSECONDS_TO_SECONDS
+        np.float64) / nanoseconds_to_seconds
     trodestime_index = np.asarray(trodestime).astype(np.float64)
 
-    slope, intercept, r_value, p_value, std_err = linregress(
+    slope, intercept = linregress(
         trodestime_index, systime_seconds)
     adjusted_timestamps = intercept + slope * trodestime_index
-    return (adjusted_timestamps * NANOSECONDS_TO_SECONDS).astype(np.int64)
+    return (adjusted_timestamps * nanoseconds_to_seconds).astype(np.int64)
 
 
-def _insert_new_data(data_file, df):
+def _insert_new_data(data_file, data_frame):
     """
     Replaces the `data` in the extracted data file with a new one.
 
@@ -74,7 +74,7 @@ def _insert_new_data(data_file, df):
     ----------
     data_file : dict
         Original data file as read in by `readTrodesExtractedDataFile`
-    df : pandas.DataFrame
+    data_frame : pandas.DataFrame
         New data
 
     Returns
@@ -84,7 +84,7 @@ def _insert_new_data(data_file, df):
 
     """
     new_data_file = data_file.copy()
-    new_data_file['data'] = np.asarray(df.to_records(index=False))
+    new_data_file['data'] = np.asarray(data_frame.to_records(index=False))
     new_data_file['fields'] = ''.join(
         [f'<{name} {dtype}>'
          for name, (dtype, _) in new_data_file['data'].dtype.fields.items()])
@@ -113,7 +113,7 @@ def fix_timestamp_lag(continuoustime_filename):
     data_file = readTrodesExtractedDataFile(continuoustime_filename)
 
     if 'systime' not in data_file['data'].dtype.names:
-        logger.warn("No `systime`. Inferring from `system_time_at_creation` timestamp"
+        logger.warning("No `systime`. Inferring from `system_time_at_creation` timestamp"
                     " as a function of the `clockrate` and `trodestime`")
         new_data = infer_systime(data_file)
     else:

@@ -1,0 +1,44 @@
+#options - https://github.com/Qiskit/openqasm/blob/master/.pylintrc
+#          https://pylint.pycqa.org/en/latest/technical_reference/features.html
+
+
+[MESSAGES CONTROL]
+disable=
+    missing-docstring,
+    too-few-public-methods,
+    too-many-instance-attributes,
+    line-too-long,
+    too-many-arguments,
+    logging-fstring-interpolation,
+    consider-using-f-string, # consider removing in the future
+    import-error, # consider removing after finding a better solution
+
+
+[TYPECHECK]
+ignored-modules = numpy, pandas, scipy.stats
+
+
+[BASIC]
+# Good variable names which should always be accepted, separated by a comma
+good-names=_, id
+
+# Bad variable names which should always be refused, separated by a comma
+bad-names=foo,bar,baz,toto,tutu,tata
+
+# Regular expression matching correct attribute names
+attr-rgx=[A-Za-z_][A-Za-z0-9_]{0,30}$
+
+# Naming hint for attribute names
+attr-name-hint=[A-Za-z_][A-Za-z0-9_]{0,30}$
+
+# Regular expression matching correct argument names
+argument-rgx=[A-Za-z_][A-Za-z0-9_]{0,30}$
+
+# Naming hint for argument names
+argument-name-hint=[A-Za-z_][A-Za-z0-9_]{0,30}$
+
+# Regular expression matching correct variable names
+variable-rgx=[A-Za-z_][A-Za-z0-9_]{0,30}$
+
+# Naming hint for variable names
+variable-name-hint=[A-Za-z_][A-Za-z0-9_]{0,30}$
