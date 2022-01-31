@@ -155,7 +155,7 @@ def extract_trodes_rec_file(data_dir,
                                    '-interp', '0',
                                    '-uselfprefs', '0',
                                    '-outputrate', '1500'
-                                   '-sortingmode', '0')
+                                   '-sortingmode', '1')
         extractor.extract_lfp(
             raw_dates, raw_epochs_unionset, export_args=lfp_export_args,
             overwrite=overwrite, stop_error=stop_error,
