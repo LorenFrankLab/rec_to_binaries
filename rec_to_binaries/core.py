@@ -150,12 +150,12 @@ def extract_trodes_rec_file(data_dir,
                                    '-userefs', '0',
                                    '-outputrate', '1500')
             else:
-                lfp_export_args = ('-highpass', '0',
-                                   '-lowpass', '400',
+                lfp_export_args = ('-lfphighpass', '0',
+                                   '-lfplowpass', '400',
                                    '-interp', '0',
                                    '-uselfprefs', '0',
-                                   '-outputrate', '1500'
-                                   '-sortingmode', '1')
+                                   'sortingmode', '1',
+                                   '-outputrate', '1500')
         extractor.extract_lfp(
             raw_dates, raw_epochs_unionset, export_args=lfp_export_args,
             overwrite=overwrite, stop_error=stop_error,
