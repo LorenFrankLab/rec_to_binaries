@@ -153,7 +153,7 @@ def extract_trodes_rec_file(data_dir,
                 lfp_export_args = ('-highpass', '0',
                                    '-lowpass', '400',
                                    '-interp', '0',
-                                   '-userefs', '0',
+                                   '-uselfprefs', '0',
                                    '-outputrate', '1500'
                                    '-sortingmode', '0')
         extractor.extract_lfp(
@@ -173,6 +173,7 @@ def extract_trodes_rec_file(data_dir,
             else:
                 mda_export_args = ('-usespikefilters', '0',
                                    '-interp', '1',
+                                   '-userawrefs', '0',
                                    '-usespikerefs', '0',
                                    '-sortingmode', '1')
         extractor.extract_mda(
