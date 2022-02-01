@@ -1,0 +1,19 @@
+<Start settings>
+a:1
+data:2
+Original_file:test_Original_file
+nTrode_ID:1
+num_channels:10
+Clock rate:3
+Voltage_scaling:v
+Time_offset:4
+Threshold:5
+Spike_invert:t
+Reference:6
+ReferenceNTrode:7
+ReferenceChannel:8
+Filter:t
+lowPassFilter:y
+highPassFilter:n
+Fields:test_field
+<End settings>

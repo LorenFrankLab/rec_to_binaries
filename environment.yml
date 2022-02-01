@@ -1,11 +1,12 @@
 name: rec_to_binaries
 channels:
 - conda-forge
+- franklab
 dependencies:
 - jupyter
 - jupyterlab
 - matplotlib
-- pandas
+- "pandas = 0.24.0"
 - numpy
 - scipy
 - "python >= 3.6"
@@ -14,6 +15,7 @@ dependencies:
 - pytest
 - pytest-cov
 - coveralls
+- rec_to_binaries
 - pip
 - pip:
   - mountainlab-pytools
