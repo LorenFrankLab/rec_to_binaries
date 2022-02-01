@@ -1,3 +1,4 @@
+# pylint: disable=too-many-lines
 import copy
 import functools
 import itertools
@@ -37,7 +38,7 @@ class TrodesAnimalInfoError(RuntimeError):
 class TrodesRawFileNameParser:
 
     trodes_filename_re = re.compile(
-        '^(\d*)_([a-zA-Z0-9]*)_(\d*)_{0,1}(\w*)\.{0,1}(.*)\.([a-zA-Z0-9]*)$')
+        '^(\d*)_([a-zA-Z0-9]*)_(\d*)_{0,1}(\w*)\.{0,1}(.*)\.([a-zA-Z0-9]*)$') # pylint: disable=anomalous-backslash-in-string
 
     def __init__(self, filename_str):
         self.filename = filename_str
@@ -51,26 +52,23 @@ class TrodesRawFileNameParser:
                     self.date)
 
             except ValueError:
-                raise TrodesDataFormatError('Filename ({}) date field is not a true date.'.
-                                            format(filename_str))
+                raise TrodesDataFormatError(f'Filename ({filename_str}) date field is not a true date.') from None
 
             self.name_str = filename_groups[1]
             self.epochlist_str = filename_groups[2]
-            epochlist = re.findall('\d\d', self.epochlist_str)
+            epochlist = re.findall('\d\d', self.epochlist_str) # pylint: disable=anomalous-backslash-in-string
             if len(epochlist) == 0:
-                raise TrodesDataFormatError(('Filename ({}) does not match basic trodes file format, epoch list '
-                                             'could not be parsed.').format(filename_str))
-            self.epochtuple = tuple([int(epoch_str)
-                                     for epoch_str in epochlist])
+                raise TrodesDataFormatError((f'Filename ({filename_str}) does not match basic trodes file format, epoch list '
+                                             'could not be parsed.'))
+            self.epochtuple = tuple([int(epoch_str) for epoch_str in epochlist]) # pylint: disable=consider-using-generator
             self.label = filename_groups[3]
             self.label_ext = filename_groups[4]
             self.ext = filename_groups[5]
 
             self.filename_no_ext = re.match(
-                '^(.*)\.(.*)$', self.filename).groups()[0]
+                '^(.*)\.(.*)$', self.filename).groups()[0] # pylint: disable=anomalous-backslash-in-string
         else:
-            raise TrodesDataFormatError('Filename ({}) does not match basic trodes file format.'.
-                                        format(filename_str))
+            raise TrodesDataFormatError(f'Filename ({filename_str}) does not match basic trodes file format.')
 
     @staticmethod
     def expand_date_str(date_str):
@@ -87,15 +85,14 @@ class TrodesSpikeExtractedFileNameParser(TrodesRawFileNameParser):
             self.time_label = None
         else:
             self.export_logfile = False
-            label_match = re.match('^.*_nt(\d*)\.{0,1}(.*)$', self.label_ext)
+            label_match = re.match('^.*_nt(\d*)\.{0,1}(.*)$', self.label_ext) # pylint: disable=anomalous-backslash-in-string
 
             if label_match is not None and self.ext == 'dat':
                 label_match_group = label_match.groups()
                 self.ntrode = int(label_match_group[0])
                 self.time_label = label_match_group[1]
             else:
-                raise TrodesDataFormatError('Filename ({}) does not match ({}) format.'.
-                                            format(filename_str, self.__class__.__name__))
+                raise TrodesDataFormatError('Filename ({filename_str}) does not match ({self.__class__.__name__}) format.')
 
 
 class TrodesLFPExtractedFileNameParser(TrodesRawFileNameParser):
@@ -112,7 +109,7 @@ class TrodesLFPExtractedFileNameParser(TrodesRawFileNameParser):
         else:
             self.export_logfile = False
             timestamp_label_match = re.match(
-                '^timestamps\.{0,1}(.*)$', self.label_ext)
+                '^timestamps\.{0,1}(.*)$', self.label_ext) # pylint: disable=anomalous-backslash-in-string
             if timestamp_label_match is not None and self.ext == 'dat':
                 self.timestamp_file = True
                 self.time_label = timestamp_label_match.groups()[0]
@@ -121,15 +118,14 @@ class TrodesLFPExtractedFileNameParser(TrodesRawFileNameParser):
             else:
                 self.timestamp_file = False
                 self.time_label = None
-                label_match = re.match('^.*_nt(\d*)ch(\d*)$', self.label_ext)
+                label_match = re.match('^.*_nt(\d*)ch(\d*)$', self.label_ext) # pylint: disable=anomalous-backslash-in-string
 
                 if label_match is not None and self.ext == 'dat':
                     label_match_groups = label_match.groups()
                     self.ntrode = int(label_match_groups[0])
                     self.channel = int(label_match_groups[1])
                 else:
-                    raise TrodesDataFormatError('Filename ({}) does not match ({}) format.'.
-                                                format(filename_str, self.__class__.__name__))
+                    raise TrodesDataFormatError(f'Filename ({filename_str}) does not match ({self.__class__.__name__}) format.')
 
 
 class TrodesMdaExtractedFileNameParser(TrodesRawFileNameParser):
@@ -144,7 +140,7 @@ class TrodesMdaExtractedFileNameParser(TrodesRawFileNameParser):
         else:
             self.export_logfile = False
             timestamp_label_match = re.match(
-                '^timestamps\.{0,1}(.*)$', self.label_ext)
+                '^timestamps\.{0,1}(.*)$', self.label_ext) # pylint: disable=anomalous-backslash-in-string
             if timestamp_label_match is not None and self.ext == 'mda':
                 self.timestamp_file = True
                 self.time_label = timestamp_label_match.groups()[0]
@@ -152,14 +148,13 @@ class TrodesMdaExtractedFileNameParser(TrodesRawFileNameParser):
             else:
                 self.timestamp_file = False
                 self.time_label = None
-                label_match = re.match('^nt(\d*)$', self.label_ext)
+                label_match = re.match('^nt(\d*)$', self.label_ext) # pylint: disable=anomalous-backslash-in-string
 
                 if label_match is not None and self.ext == 'mda':
                     label_match_groups = label_match.groups()
                     self.ntrode = int(label_match_groups[0])
                 else:
-                    raise TrodesDataFormatError('Filename ({}) does not match ({}) format.'.
-                                                format(filename_str, self.__class__.__name__))
+                    raise TrodesDataFormatError(f'Filename ({filename_str}) does not match ({self.__class__.__name__}) format.')
 
 
 class TrodesDIOExtractedFileNameParser(TrodesRawFileNameParser):
@@ -178,7 +173,7 @@ class TrodesDIOExtractedFileNameParser(TrodesRawFileNameParser):
 
             if labels[0] == 'dio' and self.ext == 'dat':
                 label_match_groups = re.match(
-                    '([A-Za-z]*)(\d*)\.{0,1}(.*)$', labels[-1]).groups()
+                    '([A-Za-z]*)(\d*)\.{0,1}(.*)$', labels[-1]).groups() # pylint: disable=anomalous-backslash-in-string
                 # string in/out
                 self.direction = label_match_groups[0][1:].lower()
                 # Din/Dout channel
@@ -186,19 +181,18 @@ class TrodesDIOExtractedFileNameParser(TrodesRawFileNameParser):
                 self.time_label = label_match_groups[2]
 
             else:
-                raise TrodesDataFormatError('Filename ({}) does not match ({}) format.'.
-                                            format(filename_str, self.__class__.__name__))
+                raise TrodesDataFormatError(f'Filename ({filename_str}) does not match ({self.__class__.__name__}) format.')
 
 
 class TrodesPosExtractedFileNameParser(TrodesRawFileNameParser):
     def __init__(self, filename_str):
         super().__init__(filename_str)
-        label_ext_match = re.match('^(\d*)\.?(.*)$', self.label_ext)
+        label_ext_match = re.match('^(\d*)\.?(.*)$', self.label_ext) # pylint: disable=anomalous-backslash-in-string
         self.label_ext1 = label_ext_match.groups()[0]
         self.label_ext2 = label_ext_match.groups()[1]
 
         timestamp_label_match = re.match(
-            '^pos_timestamps\.{0,1}(.*)$', self.label_ext2)
+            '^pos_timestamps\.{0,1}(.*)$', self.label_ext2) # pylint: disable=anomalous-backslash-in-string
         if timestamp_label_match is not None and self.ext == 'dat':
             self.timestamp_file = True
             self.time_label = timestamp_label_match.groups()[0]
@@ -211,15 +205,14 @@ class TrodesPosExtractedFileNameParser(TrodesRawFileNameParser):
                 self.pos_label = label_match.groups()[0]
             else:
 
-                raise TrodesDataFormatError('Filename ({}) does not match ({}) format.'.
-                                            format(filename_str, self.__class__.__name__))
-
+                raise TrodesDataFormatError(f'Filename ({filename_str}) does not match ({self.__class__.__name__}) format.')
 
 class TrodesAnimalInfo:
 
     def __init__(self, base_dir, anim_name, RawFileParser=TrodesRawFileNameParser,
                  out_dir=None, dates=None, trodes_version=None):
-        self.RawFileNameParser = RawFileParser
+        # pylint: disable=too-many-locals, too-many-branches, too-many-statements
+        self.Raw_file_name_parser = RawFileParser
         self.base_dir = base_dir
         self.anim_name = anim_name
 
@@ -249,17 +242,16 @@ class TrodesAnimalInfo:
                     continue
             self.raw_rec_files[date] = {}
             day_rec_filenames = self._get_rec_paths(
-                day_path, self.RawFileNameParser)
+                day_path, self.Raw_file_name_parser)
             if trodes_version is None:
                 self.trodes_version = self._get_trodes_version(day_path)
             else:
                 self.trodes_version = trodes_version
             for rec_filename_parsed, rec_path in day_rec_filenames:
                 if rec_filename_parsed.date != date:
-                    logger.warn(('For rec file ({}) the date field does not match '
-                                 'the folder date ({}). This should be fixed or could have'
-                                 'unintended parsing consequences.').
-                                format(rec_filename_parsed.filename, date))
+                    logger.warning((f'For rec file ({rec_filename_parsed.filename}) the date field does not match '
+                                 f'the folder date ({date}). This should be fixed or could have'
+                                 'unintended parsing consequences.'))
                 try:
                     self.raw_rec_files[date][rec_filename_parsed.epochtuple].append(
                         (rec_filename_parsed, rec_path))
@@ -269,7 +261,7 @@ class TrodesAnimalInfo:
 
             self.raw_pos_files[date] = {}
             day_pos_filenames = self._get_video_tracking_paths(
-                day_path, self.RawFileNameParser)
+                day_path, self.Raw_file_name_parser)
             for pos_filename_parsed, pos_path in day_pos_filenames:
                 raw_pos_file_date_epoch = self.raw_pos_files[date].setdefault(
                     pos_filename_parsed.epochtuple, {})
@@ -278,7 +270,7 @@ class TrodesAnimalInfo:
 
             self.raw_h264_files[date] = {}
             day_h264_filenames = self._get_h264_paths(
-                day_path, self.RawFileNameParser)
+                day_path, self.Raw_file_name_parser)
             for h264_filename_parsed, h264_path in day_h264_filenames:
                 raw_h264_file_date_epoch = self.raw_h264_files[date].setdefault(
                     h264_filename_parsed.epochtuple, {})
@@ -287,7 +279,7 @@ class TrodesAnimalInfo:
 
             self.raw_postime_files[date] = {}
             day_postime_filenames = self._get_video_timestamp_paths(
-                day_path, self.RawFileNameParser)
+                day_path, self.Raw_file_name_parser)
             for postime_filename_parsed, postime_path in day_postime_filenames:
                 raw_postime_file_date_epoch = self.raw_postime_files[date]. \
                     setdefault(postime_filename_parsed.epochtuple, {})
@@ -296,16 +288,16 @@ class TrodesAnimalInfo:
 
             self.raw_poshwframecount_files[date] = {}
             day_poshwframecount_filenames = self._get_video_hwframecount_paths(
-                day_path, self.RawFileNameParser)
+                day_path, self.Raw_file_name_parser)
             for poshwframecount_filename_parsed, poshwframecount_path in day_poshwframecount_filenames:
                 raw_poshwframecount_file_date_epoch = self.raw_poshwframecount_files[date]. \
-                    setdefault(poshwframecount_filename_parsed.epochtuple, {})
+                    setdefault(poshwframecount_filename_parsed.epochtuple, {}) # pylint: disable=invalid-name
                 raw_poshwframecount_file_date_epoch[poshwframecount_filename_parsed.label_ext] = \
                     (poshwframecount_filename_parsed, poshwframecount_path)
 
             self.raw_trodescomments_files[date] = {}
             day_trodescomments_filenames = self._get_trodes_comments_paths(
-                day_path, self.RawFileNameParser)
+                day_path, self.Raw_file_name_parser)
             for trodescomments_filename_parsed, trodescomments_path in day_trodescomments_filenames:
                 self.raw_trodescomments_files[date][trodescomments_filename_parsed.epochtuple] = \
                     (trodescomments_filename_parsed, trodescomments_path)
@@ -379,8 +371,7 @@ class TrodesAnimalInfo:
                 f"base_dir={self.__dict__['base_dir']})")
 
     @staticmethod
-    def _get_extracted_datatype_paths_df(directory_entries_df, parser_datatype_fields, sort_on_fields,
-                                         ExtractedFileParser):
+    def _get_extracted_datatype_paths_df(directory_entries_df, parser_datatype_fields, sort_on_fields, ExtractedFileParser): # pylint: disable=invalid-name
         """
 
         Args:
@@ -450,11 +441,10 @@ class TrodesAnimalInfo:
                 if return_val is None:
                     return_val = epoch_val
                 else:
-                    raise TrodesAnimalInfoError(('date ({}) and epoch ({}) index '
+                    raise TrodesAnimalInfoError((f'date ({date}) and epoch ({epoch}) index '
                                                  'returns more than one possible value. '
                                                  'Likely the file structure for '
-                                                 'is invalid and should be fixed.')
-                                                .format(date, epoch))
+                                                 'is invalid and should be fixed.'))
 
         return return_val
 
@@ -472,8 +462,7 @@ class TrodesAnimalInfo:
             self.raw_h264_files, date, epoch)
         if h264_paths is None:
             raise KeyError(('Raw h264 video file does not exist '
-                            'for animal ({}), date ({}) and epoch ({}).').
-                           format(self.anim_name, date, epoch))
+                            'for animal ({self.anim_name}), date ({date}) and epoch ({epoch}).'))
         return h264_paths
 
     def get_raw_h264_path(self, date, epoch, label_ext):
@@ -484,8 +473,7 @@ class TrodesAnimalInfo:
             self.raw_pos_files, date, epoch)
         if pos_paths is None:
             raise KeyError(('Raw/online position tracking file does not exist '
-                            'for animal ({}), date ({}) and epoch ({}).').
-                           format(self.anim_name, date, epoch))
+                            'for animal ({self.anim_name}), date ({date}) and epoch ({epoch}).'))
 
         return pos_paths
 
@@ -496,8 +484,7 @@ class TrodesAnimalInfo:
         postime_paths = TrodesAnimalInfo._lookup_date_epoch_dict(
             self.raw_postime_files, date, epoch)
         if postime_paths is None:
-            raise KeyError('Online position timestamps file does not exist for animal ({}), date ({}) and epoch ({}).'.
-                           format(self.anim_name, date, epoch))
+            raise KeyError(f'Online position timestamps file does not exist for animal ({self.anim_name}), date ({date}) and epoch ({epoch}).')
 
         return postime_paths
 
@@ -509,8 +496,7 @@ class TrodesAnimalInfo:
             self.raw_poshwframecount_files, date, epoch)
         if poshwframecount_paths is None:
             raise KeyError(('Online position hwFrameCount file does not exist for '
-                            'animal ({}), date ({}) and epoch ({}).').
-                           format(self.anim_name, date, epoch))
+                            f'animal ({self.anim_name}), date ({date}) and epoch ({epoch}).'))
         return poshwframecount_paths
 
     def get_raw_poshwframecount_path(self, date, epoch, label_ext):
@@ -520,9 +506,8 @@ class TrodesAnimalInfo:
         rec_path = TrodesAnimalInfo._lookup_date_epoch_dict(
             self.raw_rec_files, date, epoch)
         if rec_path is None:
-            raise KeyError(('Rec files does not exist for '
-                            'animal ({}), date ({}) and epoch ({}).').
-                           format(self.anim_name, date, epoch))
+            raise KeyError('Rec files does not exist for '
+                            f'animal ({self.anim_name}), date ({date}) and epoch ({epoch}).')
         return rec_path
 
     def get_raw_dir(self):
@@ -538,11 +523,9 @@ class TrodesAnimalInfo:
         path = os.path.join(self.get_preprocessing_dir(), date)
         if not os.path.isdir(path) and stop_error:
             if os.path.exists(path):
-                raise TrodesAnimalInfoError('Animal {}, path ({}) exists but is not a directory.'.format(self.anim_name,
-                                                                                                         path))
-            else:
-                raise TrodesAnimalInfoError('Animal {}, path ({}) does not exist.'.format(self.anim_name,
-                                                                                          path))
+                raise TrodesAnimalInfoError(f'Animal {self.anim_name,}, path ({path}) exists but is not a directory.')
+
+            raise TrodesAnimalInfoError(f'Animal {self.anim_name,}, path ({path}) does not exist.')
 
         return path
 
@@ -571,8 +554,7 @@ class TrodesAnimalInfo:
                                                                            date_path_entry.path])),
                                                                  ignore_index=True)
                     except TrodesDataFormatError:
-                        logger.warn(('Invalid folder name in preprocessing folder date ({}) folder ({}), ignoring.'.
-                                     format(date, date_path_entry.name)))
+                        logger.warning(f'Invalid folder name in preprocessing folder date ({date}) folder ({date_path_entry}), ignoring.')
         # sort and reindex paths
         full_data_paths = full_data_paths.sort_values(
             ['date', 'epoch', 'label_ext', 'datatype']).reset_index(drop=True)
@@ -580,7 +562,7 @@ class TrodesAnimalInfo:
         return full_data_paths
 
     @staticmethod
-    def _get_extracted_file_list(path, ExtractedFileParser=TrodesRawFileNameParser):
+    def _get_extracted_file_list(path, ExtractedFileParser=TrodesRawFileNameParser): # pylint: disable=invalid-name
         dir_entries = os.scandir(path)
         file_list = []
         for dir_entry in dir_entries:
@@ -589,10 +571,7 @@ class TrodesAnimalInfo:
                     filename_parser = ExtractedFileParser(dir_entry.name)
                     file_list.append((filename_parser, dir_entry.path))
                 except TrodesDataFormatError:
-                    logger.warn('File ({}) does not match file parser ({}). Skipping.'.
-                                format(dir_entry.path,
-                                       ExtractedFileParser.__name__),
-                                TrodesDataFormatWarning)
+                    logger.warning(f'File ({dir_entry.path}) does not match file parser ({ExtractedFileParser.__name__}). Skipping.', TrodesDataFormatWarning)
         return file_list
 
     @staticmethod
@@ -622,25 +601,22 @@ class TrodesAnimalInfo:
                         TrodesAnimalInfo._expand_str_date(anim_dir_entry.name)
                         anim_day_paths[anim_dir_entry.name] = anim_dir_entry.path
                     except ValueError:
-                        logger.warn(('animal path ({}) contains a data directory ({}) '
-                                     'that does not conform to date format %Y%m%d.').
-                                    format(anim_path, anim_dir_entry.name))
+                        logger.warning((f'animal path ({anim_path}) contains a data directory ({anim_dir_entry.name}) '
+                                     'that does not conform to date format %Y%m%d.'))
         except FileNotFoundError:
-            logger.warn(('anim path ({}) does not exist.'.format(
-                anim_path)))
+            logger.warning(f'anim path ({anim_path}) does not exist.')
         return anim_day_paths
 
     @staticmethod
-    def _get_rec_paths(path, RawFileNameParser=TrodesRawFileNameParser):
+    def _get_rec_paths(path, RawFileNameParser=TrodesRawFileNameParser): # pylint: disable=invalid-name, unused-argument
         anim_rec_paths = []
 
-        for path in Path(path).glob('**/*.rec'):
+        for path in Path(path).glob('**/*.rec'): # pylint: disable=redefined-argument-from-local
             try:
                 anim_rec_paths.append(
                     (TrodesRawFileNameParser(path.name), str(path)))
             except TrodesDataFormatError:
-                logger.warn(f'Invalid trodes rec filename ({str(path.parent)}),'
-                            ' cannot be parsed, skipping.')
+                logger.warning(f'Invalid trodes rec filename ({str(path.parent)}) cannot be parsed, skipping.')
 
         return anim_rec_paths
 
@@ -651,99 +627,92 @@ class TrodesAnimalInfo:
                                      for rec_file in rec_files]))[0]
 
     @staticmethod
-    def _get_video_tracking_paths(path, RawFileNameParser=TrodesRawFileNameParser):
+    def _get_video_tracking_paths(path, RawFileNameParser=TrodesRawFileNameParser): # pylint: disable=invalid-name
         anim_pos_paths = []
 
         dir_entries = os.scandir(path)
 
         for dir_entry in dir_entries:
             if dir_entry.is_file():
-                if re.match('^.*\.videoPositionTracking$', dir_entry.name):
+                if re.match('^.*\.videoPositionTracking$', dir_entry.name): # pylint: disable=anomalous-backslash-in-string
                     try:
                         trodes_filename_parsed = RawFileNameParser(
                             dir_entry.name)
                         anim_pos_paths.append(
                             (trodes_filename_parsed, dir_entry.path))
                     except TrodesDataFormatError:
-                        logger.warn(('Invalid trodes videoPositionTracking filename ({}), '
-                                     'cannot be parsed, skipping.').
-                                    format(dir_entry.path))
+                        logger.warning(f'Invalid trodes videoPositionTracking filename ({dir_entry.path}) cannot be parsed, skipping.')
 
         return anim_pos_paths
 
     @staticmethod
-    def _get_h264_paths(path, RawFileNameParser=TrodesRawFileNameParser):
+    def _get_h264_paths(path, RawFileNameParser=TrodesRawFileNameParser): # pylint: disable=invalid-name, unused-argument
         anim_h264_paths = []
-        for path in Path(path).glob('**/*.h264'):
+        for path in Path(path).glob('**/*.h264'): # pylint: disable=redefined-argument-from-local
             try:
                 anim_h264_paths.append(
                     (TrodesRawFileNameParser(path.name), str(path)))
             except TrodesDataFormatError:
-                logger.warn(f'Invalid trodes h264 filename ({str(path.parent)}), '
+                logger.warning(f'Invalid trodes h264 filename ({str(path.parent)}), '
                             'cannot be parsed, skipping.')
 
         return anim_h264_paths
 
     @staticmethod
-    def _get_video_timestamp_paths(path, RawFileNameParser=TrodesRawFileNameParser):
+    def _get_video_timestamp_paths(path, RawFileNameParser=TrodesRawFileNameParser): # pylint: disable=invalid-name
         anim_video_times_paths = []
 
         dir_entries = os.scandir(path)
 
         for dir_entry in dir_entries:
             if dir_entry.is_file():
-                if re.match('^.*\.videoTimeStamps$', dir_entry.name):
+                if re.match('^.*\.videoTimeStamps$', dir_entry.name): # pylint: disable=anomalous-backslash-in-string
                     try:
                         trodes_filename_parsed = RawFileNameParser(
                             dir_entry.name)
                         anim_video_times_paths.append(
                             (trodes_filename_parsed, dir_entry.path))
                     except TrodesDataFormatError:
-                        logger.warn(('Invalid trodes videoTimeStamps filename ({}), '
-                                     'cannot be parsed, skipping.').
-                                    format(dir_entry.path))
+                        logger.warning(f'Invalid trodes videoTimeStamps filename ({dir_entry.path}) cannot be parsed, skipping.')
 
         return anim_video_times_paths
 
     @staticmethod
-    def _get_video_hwframecount_paths(path, RawFileNameParser=TrodesRawFileNameParser):
+    def _get_video_hwframecount_paths(path, RawFileNameParser=TrodesRawFileNameParser): # pylint: disable=invalid-name
         anim_video_hwframecount_paths = []
 
         dir_entries = os.scandir(path)
 
         for dir_entry in dir_entries:
             if dir_entry.is_file():
-                if re.match('^.*\.videoTimeStamps\.(?:cameraHWFrameCount$|cameraHWSync)', dir_entry.name):
+                if re.match('^.*\.videoTimeStamps\.(?:cameraHWFrameCount$|cameraHWSync)', dir_entry.name): # pylint: disable=anomalous-backslash-in-string
                     try:
                         trodes_filename_parsed = RawFileNameParser(
                             dir_entry.name)
                         anim_video_hwframecount_paths.append(
                             (trodes_filename_parsed, dir_entry.path))
                     except TrodesDataFormatError:
-                        logger.warn(('Invalid trodes videoTimeStamps.cameraHWFrameCount filename ({}), '
-                                     'cannot be parsed, skipping.').
-                                    format(dir_entry.path))
+                        logger.warning(f'Invalid trodes videoTimeStamps.cameraHWFrameCount filename ({dir_entry.path}), '
+                                     'cannot be parsed, skipping.')
 
         return anim_video_hwframecount_paths
 
     @staticmethod
-    def _get_trodes_comments_paths(path, RawFileNameParser=TrodesRawFileNameParser):
+    def _get_trodes_comments_paths(path, RawFileNameParser=TrodesRawFileNameParser): # pylint: disable=invalid-name
         trodes_comment_paths = []
 
         dir_entries = os.scandir(path)
 
         for dir_entry in dir_entries:
             if dir_entry.is_file():
-                if re.match('^.*\.trodesComments$', dir_entry.name):
+                if re.match('^.*\.trodesComments$', dir_entry.name): # pylint: disable=anomalous-backslash-in-string
                     try:
                         trodes_filename_parsed = RawFileNameParser(
                             dir_entry.name)
                         trodes_comment_paths.append(
                             (trodes_filename_parsed, dir_entry.path))
                     except TrodesDataFormatError:
-                        logger.warn(('Invalid trodes .trodesComments filename ({}), '
-                                     'cannot be parsed, skipping.').
-                                    format(dir_entry.path))
+                        logger.warning(f'Invalid trodes .trodesComments filename ({dir_entry.path}), cannot be parsed, skipping.')
 
         return trodes_comment_paths
 
@@ -770,8 +739,8 @@ class TrodesPreprocessingLFPEpoch:
 
         LFP_paths = anim.preproc_LFP_paths[(anim.preproc_LFP_paths['date'] == date) &
                                            (anim.preproc_LFP_paths['epoch'] == epochtuple)]
-        self.LFP_data_paths = LFP_paths[LFP_paths['timestamp_file'] == False]
-        self.LFP_timestamp_paths = LFP_paths[LFP_paths['timestamp_file'] == True]
+        self.LFP_data_paths = LFP_paths[LFP_paths['timestamp_file'] == False] # pylint: disable=singleton-comparison
+        self.LFP_timestamp_paths = LFP_paths[LFP_paths['timestamp_file'] == True] # pylint: disable=singleton-comparison
 
         self.lfp = pd.DataFrame()
         for path_tup in self.LFP_data_paths.itertuples():
@@ -782,10 +751,10 @@ class TrodesPreprocessingLFPEpoch:
                 self.lfp = pd.concat([self.lfp, pd.DataFrame(lfp_bin.data, columns=single_col)], axis=1,
                                      verify_integrity=True)
             else:
-                logger.warn(('Animal ({}), date ({}), epoch ({}) '
+                logger.warning(f'Animal ({anim.anim_name}), date ({date}), epoch ({epochtuple}) '
                              'has a bad preprocessing path entry, ntrode or '
                              'channel has a nan entry that is not a timestamp '
-                             'file, skipping.').format(anim.anim_name, date, epochtuple))
+                             'file, skipping.')
 
         # get default timestamp
         try:
@@ -793,31 +762,31 @@ class TrodesPreprocessingLFPEpoch:
                 self.LFP_timestamp_paths['time_label'] == '']
             orig_timestamp_path = orig_timestamp_path_entries['path'].values[0]
             if len(orig_timestamp_path_entries) > 1:
-                logger.warn(('Animal ({}), date ({}), epoch ({}) '
+                logger.warning((f'Animal ({anim.anim_name}), date ({date}), epoch ({epochtuple}) '
                              'has multiple original timestamp path entries, '
-                             'using ({}).').format(anim.anim_name, date, epochtuple, orig_timestamp_path))
+                             f'using ({orig_timestamp_path}).'))
             orig_timestamp_bin = TrodesTimestampBinaryLoader(
                 orig_timestamp_path)
             self.orig_timestamps = orig_timestamp_bin.data
         except (IndexError, FileNotFoundError):
             self.orig_timestamps = None
-            raise TrodesDataFormatError(('Animal ({}), date ({}), epoch ({}) '
-                                         'missing default timestamps file.').format(anim.anim_name, date, epochtuple))
+            raise TrodesDataFormatError((f'Animal ({anim.anim_name}), date ({date}), epoch ({epochtuple}) '
+                                         'missing default timestamps file.')) from FileNotFoundError
 
         try:
             adj_timestamp_path_entries = self.LFP_timestamp_paths[
                 self.LFP_timestamp_paths['time_label'] == 'adj']
             adj_timestamp_path = adj_timestamp_path_entries['path'].values[0]
             if len(adj_timestamp_path_entries) > 1:
-                logger.warn(('Animal ({}), date ({}), epoch ({}) '
+                logger.warning(f'Animal ({anim.anim_name}), date ({date}), epoch ({epochtuple}) '
                              'has multiple adjusted timestamp path entries, '
-                             'using ({}).').format(anim.anim_name, date, epochtuple, adj_timestamp_path))
+                             f'using ({adj_timestamp_path})')
             adj_timestamp_bin = TrodesTimestampBinaryLoader(adj_timestamp_path)
             self.adj_timestamps = adj_timestamp_bin.data
         except (IndexError, FileNotFoundError):
             self.adj_timestamps = None
-            logger.warn(('Animal ({}), date ({}), epoch ({}) '
-                         'missing adjusted timestamps file.').format(anim.anim_name, date, epochtuple),
+            logger.warning((f'Animal ({anim.anim_name}), date ({date}), epoch ({epochtuple}) '
+                         'missing adjusted timestamps file.'),
                         TrodesDataFormatWarning)
 
         # always use original timestamp
@@ -843,16 +812,16 @@ class TrodesPreprocessingSpikeEpoch:
                 path_list.append(path_tup.path)
                 ntrode_list.append(path_tup.ntrode)
             else:
-                logger.warn(('Animal ({}), date ({}), epoch ({}) '
+                logger.warning(f'Animal ({anim.anim_name}), date ({date}), epoch ({epochtuple}) '
                              'has a bad preprocessing path entry, ntrode '
                              'has a nan entry that is not a timestamp '
-                             'file, skipping.').format(anim.anim_name, date, epochtuple))
+                             'file, skipping.')
 
-        p = multiprocessing.Pool(parallel_instances)
-        spikes_loaded = p.map(TrodesSpikeBinaryLoader, path_list, chunksize=1)
+        parallel_pool = multiprocessing.Pool(parallel_instances) # pylint: disable=consider-using-with
+        spikes_loaded = parallel_pool.map(TrodesSpikeBinaryLoader, path_list, chunksize=1)
         self.spikes = dict(
             zip(ntrode_list, [loader.spikes for loader in spikes_loaded]))
-        p.close()
+        parallel_pool.close()
 
 
 class TrodesPreprocessingPosEpoch:
@@ -869,18 +838,16 @@ class TrodesPreprocessingPosEpoch:
         for path_tup in self.pos_paths.itertuples():
             if path_tup.timestamp_file:
                 if path_tup.time_label in self.timestamps:
-                    logger.warn(('Animal ({}), date ({}), epoch ({}) '
-                                 'has multiple timestamps with same label, using first one.').
-                                format(anim.anim_name, date, epochtuple))
+                    logger.warning(('Animal ({anim.anim_name}), date ({date}), epoch ({epochtuple}) '
+                                 'has multiple timestamps with same label, using first one.'))
                     break
                 timestamp_bin = TrodesTimestampBinaryLoader(path_tup.path)
                 self.timestamps[path_tup.time_label] = timestamp_bin.data
             elif not pd.isnull(path_tup.pos_label):
                 # assume path is for a position file
                 if path_tup.pos_label in self.pos:
-                    logger.warn(('Animal ({}), date ({}), epoch ({}) '
-                                 'has multiple pos data with same label, using first one.').
-                                format(anim.anim_name, date, epochtuple))
+                    logger.warning(f'Animal ({anim.anim_name}), date ({date}), epoch ({epochtuple}) '
+                                 'has multiple pos data with same label, using first one.')
                     break
                 pos_bin = TrodesPosBinaryLoader(path_tup.path)
                 self.pos[path_tup.pos_label] = pos_bin.pos
@@ -903,8 +870,10 @@ class TrodesPreprocessingDIOEpoch:
 
                 dio_bin = TrodesDIOBinaryLoader(path_tup.path)
 
-                dio_bin.dio.columns = pd.MultiIndex.from_tuples([(path_tup.direction, int(path_tup.channel))],
-                                                                names=['direction', 'channel'])
+                dio_bin.dio.columns = pd.MultiIndex.from_tuples(
+                    [(path_tup.direction, int(path_tup.channel))],
+                    names=['direction', 'channel']
+                )
 
                 dio_list.append(dio_bin.dio)
 
@@ -935,7 +904,7 @@ class TrodesPreprocessingToAnalysis:
         for ntrode, spike_ntrode in spike_epoch.spikes.items():
             hdf_store.put('preprocessing/EventWaveform/' + 'e{:02d}'.format(int(epoch[0])) +
                           '/t{:02d}'.format(int(ntrode)) + '/data',
-                          spike_ntrode, expectedrows=len(spike_ntrode))
+                          spike_ntrode, expectedrows=len(spike_ntrode)) # pylint: disable=consider-using-f-string
 
     def convert_pos_day(self, date):
         self._convert_generic_day(
@@ -1092,7 +1061,7 @@ class ExtractRawTrodesData:
                                   dates=dates, epochs=epochs,
                                   export_args=export_args, **kwargs)
 
-    def prepare_trodescomments(self, dates, epochs, overwrite=False, use_folder_date=False, stop_error=False):
+    def prepare_trodescomments(self, dates, epochs, overwrite=False, use_folder_date=False, stop_error=False): # pylint: disable=too-many-locals
         for dir_date, epoch in itertools.product(dates, epochs):
             try:
                 out_date_dir = self.trodes_anim_info.get_preprocessing_date_dir(
@@ -1101,7 +1070,7 @@ class ExtractRawTrodesData:
                     epoch_comment_file = self.trodes_anim_info.get_raw_trodescomments_path(
                         dir_date, epoch)
                 except KeyError as err:
-                    raise TrodesDataFormatError(repr(err))
+                    raise TrodesDataFormatError(repr(err)) from err
 
                 file_parser = epoch_comment_file[0]
                 file_path = epoch_comment_file[1]
@@ -1132,11 +1101,10 @@ class ExtractRawTrodesData:
                 if stop_error:
                     # exception should keep raised
                     raise
-                else:
-                    # exception should be converted to a warning
-                    logger.warn(repr(err) + ' (thrown from {}:{})'
-                                .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                        sys.exc_info()[2].tb_lineno))
+
+                # exception should be converted to a warning
+                logger.warning(f'{repr(err)} (thrown from {sys.exc_info()[2].tb_frame.f_code.co_filename}:{sys.exc_info()[2].tb_lineno})')
+
 
     def prepare_mountain_dir(self, dates, epochs, use_folder_date=False, stop_error=False):
 
@@ -1149,7 +1117,7 @@ class ExtractRawTrodesData:
                         dir_date, epoch)
                 except KeyError:
                     raise TrodesDataFormatError('Rec: Date {} and epoch {} does not exist for animal {}.'.
-                                                format(dir_date, epoch, self.trodes_anim_info.anim_name))
+                                                format(dir_date, epoch, self.trodes_anim_info.anim_name)) from None
 
                 file_parser = epoch_raw_file[0]
 
@@ -1172,16 +1140,15 @@ class ExtractRawTrodesData:
 
             except TrodesDataFormatError as err:
                 if stop_error:
-                    # exception should keep raised
+                    # exception should be raised
                     raise
-                else:
-                    # exception should be converted to a warning
-                    logger.warn(repr(err) + ' (thrown from {}:{})'
-                                .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                        sys.exc_info()[2].tb_lineno))
 
-    def prepare_pos_dir(self, dates, epochs, overwrite=False, use_folder_date=False, stop_error=False):
-        for dir_date, epoch in itertools.product(dates, epochs):
+                # exception should be converted to a warning
+                logger.warning(f'{repr(err)} thrown from {sys.exc_info()[2].tb_frame.f_code.co_filename}:{sys.exc_info()[2].tb_lineno})')
+
+
+    def prepare_pos_dir(self, dates, epochs, overwrite=False, use_folder_date=False, stop_error=False): # pylint: disable=too-many-locals, too-many-statements, too-many-branches
+        for dir_date, epoch in itertools.product(dates, epochs): # pylint: disable=too-many-nested-blocks
             try:
                 out_date_dir = self.trodes_anim_info.get_preprocessing_date_dir(
                     dir_date, stop_error=False)
@@ -1189,10 +1156,9 @@ class ExtractRawTrodesData:
                     h264_epoch_pathset = self.trodes_anim_info.get_raw_h264_paths(
                         dir_date, epoch)
                 except KeyError:
-                    raise TrodesDataFormatError('h264: Date {} and epoch {} does not exist for animal {}.'.
-                                                format(dir_date, epoch, self.trodes_anim_info.anim_name))
+                    raise TrodesDataFormatError(f'h264: Date {dir_date} and epoch {epoch} does not exist for animal {self.trodes_anim_info.anim_name}') from KeyError
 
-                for label_ext, (h264_name_parser, h264_path) in h264_epoch_pathset.items():
+                for label_ext, (h264_name_parser) in h264_epoch_pathset.items():
                     # create position dir
                     if use_folder_date:
                         out_base_date = dir_date
@@ -1212,7 +1178,7 @@ class ExtractRawTrodesData:
 
                     # trying to move online position files over
                     try:
-                        (raw_pos_filename_parser, raw_pos_path) = \
+                        (_, raw_pos_path) = \
                             self.trodes_anim_info.get_raw_pos_path(date=dir_date,
                                                                    epoch=epoch,
                                                                    label_ext=label_ext)
@@ -1229,12 +1195,10 @@ class ExtractRawTrodesData:
 
                     except KeyError as err:
                         # this file does not exist
-                        logger.warn(repr(err) + ' (thrown from {}:{})'
-                                    .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                            sys.exc_info()[2].tb_lineno))
+                        logger.warning(f'{repr(err)} thrown from {sys.exc_info()[2].tb_frame.f_code.co_filename}:{sys.exc_info()[2].tb_lineno})')
 
                     try:
-                        (raw_postime_filename_parser, raw_postime_path) = \
+                        (_, raw_postime_path) = \
                             self.trodes_anim_info.get_raw_postime_path(date=dir_date,
                                                                        epoch=epoch,
                                                                        label_ext=label_ext)
@@ -1251,12 +1215,10 @@ class ExtractRawTrodesData:
 
                     except KeyError as err:
                         # this file does not exist
-                        logger.warn(repr(err) + ' (thrown from {}:{})'
-                                    .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                            sys.exc_info()[2].tb_lineno))
+                        logger.warning(f'{repr(err)} (thrown from {sys.exc_info()[2].tb_frame.f_code.co_filename}:{sys.exc_info()[2].tb_lineno})')
 
                     try:
-                        (raw_poshwframecount_filename_parser, raw_poshwframecount_path) = \
+                        (_, raw_poshwframecount_path) = \
                             self.trodes_anim_info.get_raw_poshwframecount_path(date=dir_date,
                                                                                epoch=epoch,
                                                                                label_ext=label_ext + '.videoTimeStamps')
@@ -1274,23 +1236,20 @@ class ExtractRawTrodesData:
 
                     except KeyError as err:
                         # this file does not exist
-                        logger.warn(repr(err) + ' (thrown from {}:{})'
-                                    .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                            sys.exc_info()[2].tb_lineno))
+                        logger.warning(f'repr(err) (thrown from {sys.exc_info()[2].tb_frame.f_code.co_filename}:{sys.exc_info()[2].tb_lineno})')
 
             except TrodesDataFormatError as err:
                 if stop_error:
                     # exception should keep raised
                     raise
-                else:
-                    # exception should be converted to a warning
-                    logger.warn(repr(err) + ' (thrown from {}:{})'
-                                .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                        sys.exc_info()[2].tb_lineno))
+
+                # exception should be converted to a warning
+                logger.warning(f'repr(err) (thrown from {sys.exc_info()[2].tb_frame.f_code.co_filename}:{sys.exc_info()[2].tb_lineno})')
 
     def _extract_rec_generic(self, export_cmd, export_dir_ext,
                              dates, epochs, export_args=(), overwrite=False, stop_error=False,
                              use_folder_date=False, parallel_instances=1, use_day_config=True):
+        # pylint: disable=too-many-branches, too-many-statements, too-many-locals
         """
         Args:
             export_cmd (str):
@@ -1327,8 +1286,7 @@ class ExtractRawTrodesData:
                     epoch_raw_file = self.trodes_anim_info.get_raw_rec_path(
                         dir_date, epoch)
                 except KeyError:
-                    raise TrodesDataFormatError('Rec: Date {} and epoch {} does not exist for animal {}.'.
-                                                format(dir_date, epoch, self.trodes_anim_info.anim_name))
+                    raise TrodesDataFormatError(f'Rec: Date {dir_date} and epoch {epoch} does not exist for animal {self.trodes_anim_info.anim_name}.') from KeyError
 
                 # sort files
                 epoch_raw_file = sorted(epoch_raw_file, key=lambda x: x[1])
@@ -1343,15 +1301,13 @@ class ExtractRawTrodesData:
 
                     if file_parser.date != dir_date:
                         if use_folder_date:
-                            logger.warn(('For rec file ({}) the date field does not match '
-                                         'the folder date ({}). Forcing file to use folder date').
-                                        format(file_parser.filename, dir_date), TrodesDataFormatWarning)
+                            logger.warning(f'For rec file ({file_parser.filename}) the date field does not match the folder date ({dir_date}). Forcing file to use folder date',
+                                           TrodesDataFormatWarning)
                         else:
-                            logger.warn(('For rec file ({}) the date field does not match '
-                                         'the folder date ({}). This should be fixed or could have '
+                            logger.warning((f'For rec file ({file_parser.filename}) the date field does not match '
+                                         f'the folder date ({dir_date}). This should be fixed or could have '
                                          'unintended parsing consequences. Will proceed by maintaining '
-                                         'folder date and using rec file date in extracted files.').
-                                        format(file_parser.filename, dir_date), TrodesDataFormatWarning)
+                                         'folder date and using rec file date in extracted files.'), TrodesDataFormatWarning)
 
                     if use_folder_date:
                         out_base_date = dir_date
@@ -1410,7 +1366,7 @@ class ExtractRawTrodesData:
                         out_epoch_dir, out_base_filename + '.' +
                         cmd_type + '.log')
 
-                    out_cmd_log_file = open(out_cmd_log_filename, 'w')
+                    out_cmd_log_file = open(out_cmd_log_filename, 'w') # pylint: disable=consider-using-with, unspecified-encoding
                     # prepend the call command and argument to the log file
                     out_cmd_log_file.write(' '.join(export_call))
                     out_cmd_log_file.write('\n')
@@ -1423,31 +1379,30 @@ class ExtractRawTrodesData:
                         next_cmd_id, export_call))
 
                     subprocess_pool[next_cmd_id] = (
-                        subprocess.Popen(export_call,
-                                         stdout=out_cmd_log_file,
-                                         stderr=out_cmd_log_file),
+                        subprocess.Popen( # pylint: disable=consider-using-with
+                            export_call,
+                            stdout=out_cmd_log_file,
+                            stderr=out_cmd_log_file
+                        ),
                         out_cmd_log_filename)
                     next_cmd_id += 1
 
-            except TrodesDataFormatError as err:
+            except TrodesDataFormatError as err: # pylint: disable=unused-variable
                 if stop_error:
                     # exception should keep raised
                     raise
-                else:
-                    # exception should be converted to a warning
-                    logger.warn(repr(err) + ' (thrown from {}:{})'
-                                .format(sys.exc_info()[2].tb_frame.f_code.co_filename,
-                                        sys.exc_info()[2].tb_lineno))
+
+                # exception should be converted to a warning
+                logger.warning(f'repr(err) (thrown from {sys.exc_info()[2].tb_frame.f_code.co_filename}:{sys.exc_info()[2].tb_lineno})')
 
         # wait for all commands to finish
         just_terminated = self._wait_subprocess_pool(
             subprocess_pool, wait_pool_size=0)
         terminated_processes.update(just_terminated)
 
-        for cmd_key, (extract_proc, cmd_log_file) in terminated_processes.items():
+        for _, (extract_proc, __) in terminated_processes.items():
             if extract_proc.poll() != 0:
-                logger.warn('Running export command ({}) failed with return code {}'.
-                            format(extract_proc.args, extract_proc.poll()), TrodesDataFormatWarning)
+                logger.warning(f'Running export command ({extract_proc.args}) failed with return code {extract_proc.poll()}', TrodesDataFormatWarning)
 
     @staticmethod
     def _assemble_export_base_name(date, anim_name, epochlist, label, label_ext):
@@ -1473,8 +1428,8 @@ class ExtractRawTrodesData:
                     print('(ID: {}) Done running {}'.format(
                         cmd_key, extract_proc.args))
                     # print log file
-                    with open(cmd_log_filename, 'r') as f:
-                        for line in f:
+                    with open(cmd_log_filename, 'r') as file_name: # pylint: disable=unspecified-encoding
+                        for line in file_name:
                             print('(ID: {}) '.format(cmd_key) + line, end='')
 
         return terminated_processes
@@ -1497,13 +1452,12 @@ def get_trodes_version(rec_file_name):
 
 def get_trodes_version_from_path():
     try:
-        result = str(subprocess.run(['exportmda', '-v'], capture_output=True)
-                     .stdout)
+        result = str(subprocess.run(['exportmda', '-v'], capture_output=True).stdout) # pylint: disable=subprocess-run-check
     except FileNotFoundError:
-        result = str(subprocess.run(['trodesexport', '-v'], capture_output=True)
-                     .stdout)
-    version = (result
+        result = str(subprocess.run(['trodesexport', '-v'], capture_output=True).stdout) # pylint: disable=subprocess-run-check
+    version = (result # pylint: disable=use-maxsplit-arg
                .split('\\n')[0]
                .split(' ')[2]
                .split('.'))
+
     return int(version[0]), int(version[1]), int(version[2])

@@ -34,6 +34,7 @@ def extract_trodes_rec_file(data_dir,
                             parallel_instances=1,
                             use_day_config=True,
                             trodes_version=None):
+    # pylint: disable=too-many-branches, too-many-locals, too-many-statements
     """Extracting Trodes rec files.
 
     Following the Frank Lab directory structure for raw ephys data, will
@@ -206,11 +207,11 @@ def extract_trodes_rec_file(data_dir,
             use_day_config=use_day_config)
 
     if adjust_timestamps_for_mcu_lag:
-        ''''There is some jitter in the arrival times of packets from the MCU (as
-            reflected in the sysclock records in the .rec file. If we assume that
-            the Trodes clock is actually regular, and that any episodes of lag are
-            fairly sporadic, we can recover the correspondence between trodestime
-            and system (wall) time.'''
+        # There is some jitter in the arrival times of packets from the MCU (as
+        # reflected in the sysclock records in the .rec file. If we assume that
+        # the Trodes clock is actually regular, and that any episodes of lag are
+        # fairly sporadic, we can recover the correspondence between trodestime
+        # and system (wall) time.
         preprocessing_dir = animal_info.get_preprocessing_dir()
         filenames = glob.glob(os.path.join(
             preprocessing_dir, '**', '*.continuoustime.dat'), recursive=True)
@@ -244,9 +245,7 @@ def convert_binaries_to_hdf5(data_dir, animal, out_dir=None, dates=None,
                              convert_lfp=True,
                              convert_pos=True,
                              convert_spike=True):
-    animal_info = td.TrodesAnimalInfo(
-        data_dir, animal, out_dir=out_dir, dates=dates)
-    """Converting preprocessed binaries into HDF5 files.
+    '''Converting preprocessed binaries into HDF5 files.
 
     Assume that preprocessing has already been completed using (for example)
     extract_trodes_rec_file.
@@ -267,7 +266,9 @@ def convert_binaries_to_hdf5(data_dir, animal, out_dir=None, dates=None,
     convert_lfps : bool, optional
     convert_dio : bool, optional
     convert_mda : bool, optional
-    """
+    '''
+    animal_info = td.TrodesAnimalInfo(
+        data_dir, animal, out_dir=out_dir, dates=dates)
 
     importer = td.TrodesPreprocessingToAnalysis(animal_info)
 
