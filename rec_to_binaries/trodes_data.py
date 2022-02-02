@@ -591,8 +591,7 @@ class TrodesAnimalInfo:
                 except TrodesDataFormatError:
                     logger.warning('File ({}) does not match file parser ({}). Skipping.'.
                                    format(dir_entry.path,
-                                          ExtractedFileParser.__name__),
-                                   TrodesDataFormatWarning)
+                                          ExtractedFileParser.__name__))
         return file_list
 
     @staticmethod
