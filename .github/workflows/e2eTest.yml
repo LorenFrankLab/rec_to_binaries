@@ -22,5 +22,15 @@ jobs:
           miniconda-version: "latest"
           activate-environment: rec_to_binaries
           environment-file: environment.yml
-      - run: mkdir -p ~/SpikeGadgets
-      - run: python -m pytest rec_to_binaries/test/e2etests/
+      - name: Install rec-to-binaries
+        shell: bash -l {0}
+        run: |
+          pip install rec_to_binaries
+      - name: Make dependencies editable
+        shell: bash -l {0}
+        run: |
+          pip install -e .
+      - name: Run e2eTests
+        shell: bash -l {0}
+        run: |
+          - run: python -m pytest rec_to_binaries/test/e2etests/
