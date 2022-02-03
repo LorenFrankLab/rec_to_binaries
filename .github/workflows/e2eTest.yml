@@ -33,4 +33,4 @@ jobs:
       - name: Run e2eTests
         shell: bash -l {0}
         run: |
-          - run: python -m pytest rec_to_binaries/test/e2etests/
+          python -m pytest rec_to_binaries/test/e2etests/
