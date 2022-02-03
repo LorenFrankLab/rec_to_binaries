@@ -2,11 +2,11 @@ import os
 import pkg_resources
 
 
-def test_check_spikegadget_is_installed():
-    home_directory = os.path.expanduser('~')
-    spike_gadget_path = f'{home_directory}/SpikeGadgets'
-    spike_gadget_exists = os.path.isdir(spike_gadget_path)
-    assert spike_gadget_exists
+# def test_check_spikegadget_is_installed():
+#     home_directory = os.path.expanduser('~')
+#     spike_gadget_path = f'{home_directory}/SpikeGadgets'
+#     spike_gadget_exists = os.path.isdir(spike_gadget_path)
+#     assert spike_gadget_exists
 
 def test_check_if_rec_to_binaries_is_installed():
     package = pkg_resources.get_distribution('rec_to_binaries')
