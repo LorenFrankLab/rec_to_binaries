@@ -1330,7 +1330,8 @@ class ExtractRawTrodesData:
                                                 format(dir_date, epoch, self.trodes_anim_info.anim_name))
 
                 # sort files
-                epoch_raw_file = sorted(epoch_raw_file, key=lambda x: x[1])
+                epoch_raw_file = sorted(
+                    epoch_raw_file, key=lambda x: find_rec_part_number(x[1]))
                 epoch_raw_file.insert(0, epoch_raw_file.pop())
 
                 file_parser = epoch_raw_file[0][0]
@@ -1506,3 +1507,23 @@ def get_trodes_version_from_path():
                .split(' ')[2]
                .split('.'))
     return int(version[0]), int(version[1]), int(version[2])
+
+
+def find_rec_part_number(file):
+    """If there are multiple files that need to be combined, it will be of the
+    format *.part{int}.rec. This finds the integer or returns zero if there
+    is no part in the filename. This is so the file parts can be sorted.
+
+    Parameters
+    ----------
+    file : str
+
+    Returns
+    -------
+    part_number : int
+
+    """
+    try:
+        return int(file.split('.')[-2].strip('part'))
+    except ValueError:
+        return 0
