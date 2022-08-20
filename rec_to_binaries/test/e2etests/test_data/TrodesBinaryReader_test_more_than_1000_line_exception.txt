@@ -1,0 +1,1426 @@
+<Start settings>
+a: 2 Bad
+a: 2000 Watts
+a: 2300 Jackson Street
+a: A Brand New Day
+a: A Place with No Name
+a: Ain\'t No Sunshine
+a: Al Capone
+a: All Eyez on Me
+a: All I Do
+a: All in Your Name
+a: All the Things You Are
+a: Another Part of Me
+a: Baby Be Mine
+a: Bad
+a: Be a Lion
+a: Beat It
+a: Beautiful Girl
+a: Behind the Mask
+a: Ben
+a: Best of Joy
+a: Billie Jean
+a: Black or White
+a: Blood on the Dance Floor
+a: Blue Gangsta
+a: Break of Dawn
+a: Breaking News
+a: Burn This Disco Out
+a: Butterflies
+a: Call on Me
+a: Can\'t Get Outta the Rain
+a: Can\'t Let Her Get Away
+a: Carousel
+a: Centipede
+a: Cheater
+a: Chicago
+a: Childhood
+a: Cinderella Stay Awhile
+a: Come Together
+a: Cry
+a: D.S.
+a: Dangerous
+a: Dapper-Dan
+a: Dear Michael
+a: Dirty Diana
+a: Do the Bartman
+a: Do You Know Where Your Children Are
+a: Doggin\' Around
+a: Don\'t Be Messin\' \'Round
+a: Don\'t Let a Woman (Make a Fool Out of You)
+a: Don\'t Let It Get You Down
+a: Don\'t Matter to Me
+a: Don\'t Stand Another Chance
+a: Don\'t Stop \'Til You Get Enough
+a: Don\'t Walk Away
+a: Earth Song
+a: Ease on Down the Road
+a: Eaten Alive
+a: Euphoria
+a: Everybody\'s Somebody\'s Fool
+a: Fall Again
+a: Farewell My Summer Love
+a: Fly Away
+a: For All Time
+a: Free
+a: Get It
+a: Get on the Floor
+a: Ghosts
+a: Girl Don\'t Take Your Love from Me
+a: Girl You\'re So Together
+a: Girlfriend
+a: Girls, Girls, Girls, Pt. 2
+a: Give In to Me
+a: Goin\' Back to Alabama
+a: Gone Too Soon
+a: Got the Hots
+a: Got to Be There
+a: Greatest Show on Earth
+a: Happy
+a: Heal the World
+a: Heartbreaker
+a: Heaven Can Wait
+a: Here I Am (Come and Take Me)
+a: Here to Love You
+a: HIStory
+a: Hold My Hand
+a: Hollywood Tonight
+a: Human Nature
+a: I Can\'t Help It
+a: (I Can\'t Make It) Another Day
+a: I Just Can\'t Stop Loving You
+a: (I Like) The Way You Love Me
+a: I Need You
+a: I Wanna Be Where You Are
+a: If\'n I Was God
+a: I\'ll Come Home to You
+a: I\'m in Love Again
+a: I\'m So Blue
+a: In Our Small Way
+a: In the Back
+a: In the Closet
+a: Invincible
+a: Is It Scary
+a: It\'s Not Worth It
+a: It\'s the Falling in Love
+a: Jam
+a: Je Ne Veux Pas La Fin De Nous
+a: Johnny Raven
+a: Just a Little Bit of You
+a: Just Friends
+a: Just Good Friends
+a: Keep the Faith
+a: Keep Your Head Up
+a: Leave Me Alone
+a: Liberian Girl
+a: Little Christmas Tree
+a: Little Susie
+a: Lonely Teardrops
+a: Love Is Here and Now You\'re Gone
+a: Love Never Felt So Good
+a: Love\'s Gone Bad
+a: Loving You
+a: Low
+a: Man in the Mirror
+a: Maria (You Were the Only One)
+a: Melodie
+a: Mind Is the Magic
+a: Minute by Minute
+a: Money
+a: Monkey Business
+a: Monster
+a: Morning Glow
+a: Morphine
+a: Much Too Soon
+a: Muscles
+a: Music and Me
+a: My Girl
+a: Night Time Lover
+a: Off the Wall
+a: On the Line
+a: One Day in Your Life
+a: One More Chance
+a: P.Y.T. (Pretty Young Thing)
+a: Papa Was a Rollin\' Stone
+a: People Make the World Go \'Round
+a: Planet Earth
+a: Price of Fame
+a: Privacy
+a: Remember the Time
+a: Ride with Me
+a: Rock with You
+a: Rockin\' Robin
+a: Save Me
+a: Say Say Say
+a: Scared of the Moon
+a: Scream
+a: She Drives Me Wild
+a: She\'s Out of My Life
+a: Shoo-Be-Doo-Be-Doo-Da-Day
+a: Shout
+a: Slave to the Rhythm
+a: Smile
+a: Smooth Criminal
+a: Somebody\'s Watching Me
+a: Someone in the Dark
+a: Someone Put Your Hand Out
+a: Somethin\' Special
+a: Song Groove (AKA Abortion Papers)
+a: So Why
+a: Speechless
+a: Speed Demon
+a: State of Independence
+a: Stranger in Moscow
+a: Streetwalker
+a: Sunset Driver
+a: Superfly Sister
+a: Tabloid Junkie
+a: Take Me Back
+a: Tell Me I\'m Not Dreamin\' (Too Good to Be True)
+a: That\'s What Love Is Made Of
+a: The Dude
+a: The Girl Is Mine
+a: The Lady in My Life
+a: The Lost Children
+a: The Man
+a: The Way You Make Me Feel
+a: There Must Be More to Life Than This
+a: They Don\'t Care About Us
+a: This Had to Be
+a: This Is It
+a: This Time Around
+a: Threatened
+a: Thriller
+a: To Make My Father Proud
+a: To Satisfy You
+a: Todo Mi Amor Eres Tu
+a: Todo Para Ti
+a: Too Young
+a: Touch the One You Love
+a: Turn on the Action
+a: Twenty-Five Miles
+a: Unbreakable
+a: Up Again
+a: Wanna Be Startin\' Somethin\'
+a: We Are Here to Change the World
+a: We Are the World
+a: We\'re Almost There
+a: We\'ve Got a Good Thing Going
+a: We\'ve Got Forever
+a: We\'ve Had Enough
+a: What Goes Around Comes Around
+a: What More Can I Give
+a: Whatever Happens
+a: Whatzupwitu
+a: When I Come of Age
+a: Who Is It
+a: Who\'s Lookin\' for a Lover
+a: Who\'s Right, Who\'s Wrong
+a: Why
+a: Why You Wanna Trip on Me
+a: Will You Be There
+a: Wings of My Love
+a: With a Child\'s Heart
+a: Workin\' Day and Night
+a: Xscape
+a: Yeah
+a: You Are My Life
+a: You Are Not Alone
+a: You Are There
+a: You Can Cry on My Shoulder
+a: You Can\'t Win
+a: You Rock My World
+a: You\'ve Got a Friend
+a: You\'ve Really Got a Hold on Me
+a: 2-4-6-8
+a: 16 Candles
+a: 2300 Jackson Street
+a: A Change Is Gonna Come
+a: A Fool for You
+a: ABC
+a: Ain\'t Nothing Like the Real Thing
+a: Ain\'t That Peculiar
+a: All I Do Is Think of You
+a: All Night Dancin\'
+a: Alright With Me
+a: Art of Madness
+a: Ask the Lonely
+a: Originating album
+a: Baby, You Don\'t Have to Go
+a: Be Not Always
+a: Big Boy
+a: Blame It on the Boogie
+a: Bless His Soul
+a: Blues Away
+a: Body
+a: Body Language (Do the Love Dance)
+a: The Boogie Man
+a: Born to Love You
+a: Boys and Girls, We Are The Jackson Five
+a: Breezy
+a: Bridge over Troubled Water
+a: Call of the Wild
+a: Can I See You in the Morning
+a: Can You Feel It
+a: Can You Remember
+a: Can\'t Get Ready for Losing You
+a: Chained
+a: Children of the Light
+a: Christmas Won\'t Be the Same This Year
+a: (Come \'Round Here) I\'m the One You Need
+a: Coming Home
+a: Corner of the Sky
+a: Dancing Machine
+a: Darling Dear
+a: Destiny
+a: Different Kind of Lady
+a: Do What You Wanna
+a: Doctor My Eyes
+a: Don\'t Know Why I Love You
+a: Don\'t Let Your Baby Catch You
+a: Don\'t Say Goodbye Again
+a: Don\'t Want to See Tomorrow
+a: Dreamer
+a: E-Ne-Me-Ne-Mi-Ne-Moe (The Choice is Yours to Pull)
+a: Enjoy Yourself
+a: Even Though You\'re Gone
+a: Everybody
+a: Everybody Is a Star
+a: Get It Together
+a: Give It Up
+a: Give Love on Christmas Day
+a: Goin\' Back to Indiana
+a: Goin\' Places
+a: Good Times
+a: 
+a: Hallelujah Day
+a: Have Yourself a Merry Little Christmas
+a: Heartbreak Hotel
+a: Heaven Knows I Love You, Girl
+a: Honey Chile
+a: Honey Love
+a: How Funky Is Your Chicken
+a: Hum Along and Dance
+a: I Ain\'t Gonna Eat My Heart Out Anymore
+a: I Am Love
+a: I Can Only Give You Love
+a: I Can\'t Quit Your Love
+a: I Found a Love
+a: I Found That Girl
+a: I Hear a Symphony
+a: (I Know) I\'m Losing You
+a: I Like You the Way You Are (Don\'t Change Your Love On Me)
+a: I Saw Mommy Kissing Santa Claus
+a: I Wanna Be Where You Are
+a: I Want to Take You Higher
+a: I Want You Back
+a: I Was Made to Love Her
+a: I Will Find a Way
+a: If I Don\'t Love You This Way
+a: If I Have to Move a Mountain
+a: If You\'d Only Believe
+a: I\'ll Be There
+a: I\'ll Bet You
+a: I\'m Glad It Rained
+a: I\'m So Happy
+a: It All Begins and Ends With Love
+a: It\'s Great to Be Here
+a: It\'s Too Late to Change the Time
+a: It\'s Your Thing
+a: Jam Session
+a: Jam Session
+a: Jamie
+a: Jingle Bells
+a: Joyful Jukebox Music
+a: Jump for Joy
+a: Just a Little Misunderstanding
+a: Just Because I Love You
+a: Keep Her
+a: Keep on Dancing
+a: Santa Claus Is Coming to Town
+a: Saturday Night at the Movies
+a: Shake Your Body (Down to the Ground)
+a: She
+a: She\'s a Rhythm Child
+a: She\'s Good
+a: Show You the Way to Go
+a: Skywriter
+a: Some Girls Want Me for Their Lover
+a: Someday at Christmas
+a: Soul Jerk
+a: Stand!
+a: Standing in the Shadows of Love
+a: State of Shock
+a: Stormy Monday
+a: Strength of One Man
+a: Style of Life
+a: Sugar Daddy
+a: Superstition
+a: Teenage Symphony
+a: That\'s What You Get (for Being Polite)
+a: The Christmas Song
+a: The Day Basketball Was Saved
+a: The Eternal Light
+a: The Hurt
+a: The Life of the Party
+a: The Little Drummer Boy
+a: The Love I Saw in You Was Just a Mirage
+a: The Love You Save
+a: The Mirrors of My Mind
+a: The Tracks of My Tears
+a: The Wall
+a: The Young Folks
+a: Things I Do for You
+a: Think Happy
+a: Time Explosion
+a: Time Out for the Burglar
+a: Time Waits for No One
+a: To Know
+a: Torture
+a: Touch
+a: True Love Can Be Beautiful
+a: Wait
+a: Walk Right Now
+a: We Can Change the World
+a: We Can Have Fun
+a: We Don\'t Have To Be Over 21 (to Fall in Love)
+a: We Wish You a Merry Christmas
+a: We\'re Gonna Change Our Style
+a: We\'re Gonna Have a Good Time
+a: We\'re Here to Entertain You
+a: (We\'ve Got) Blue Skies
+a: What You Don\'t Know
+a: Whatever You Got, I Want
+a: When I Look at You
+a: Who\'s Lovin\' You
+a: Window Shopping
+a: Wondering Who
+a: World of Sunshine
+a: A Place in the Sun
+a: After the Storm (The Sun Will Shine)
+a: Ain\'t No Mountain High Enough
+a: Ain\'t Too Proud to Beg
+a: Ave Maria
+a: Baby I Need Your Loving
+a: Back in My Arms Again
+a: Be My Girl
+a: Blowin\' in the Wind
+a: Can I Get a Witness
+a: Children\'s Christmas Song
+a: Christmas Everyday
+a: Come and Get It
+a: Do You Love Me
+a: Fingertips
+a: For Once in My Life
+a: God Rest Ye Merry Gentlemen
+a: Guess Who\'s Making Whoopee With Your Girlfriend
+a: Heaven Help Us All
+a: He\'s My Sunny Boy
+a: How Sweet It Is (To Be Loved by You)
+a: I Can\'t Help Myself (Sugar Pie Honey Bunch)
+a: I Got a Feeling
+a: I Got the Feelin\'
+a: I Heard It Through the Grapevine
+a: I Want You To Come Home For Christmas
+a: (If I Can\'t) Nobody Can
+a: If You Really Love Me
+a: If You Want Heaven
+a: I\'ll Turn To Stone
+a: It\'s Christmas Time
+a: It\'s the Same Old Song
+a: I\'ve Gotta Be Me
+a: Jackson Man
+a: Joy to the World
+a: Keep off the Grass
+a: Kentucky Road
+a: Lavender Blue
+a: (Loneliness Made Me Realize) It\'s You That I Need
+a: Love Call
+a: Love Feels Like Fire
+a: Love Go Away
+a: Loving You Is Sweeter Than Ever
+a: Miss Lucky Day
+a: My Favorite Things
+a: Neither One of Us (Wants to Be the First to Say Goodbye)
+a: No News Is Good News
+a: Nona
+a: Ooh Baby Baby
+a: Power
+a: Purple Snowflakes
+a: Quicksand
+a: Sad Souvenirs
+a: Shake Me, Wake Me (When It\'s Over)
+a: She Say \'Want\'
+a: Signed, Sealed, Delivered I\'m Yours
+a: Silent Night
+a: Silver Bells
+a: Since I Lost My Baby
+a: Since You\'ve Been Gone
+a: Slipped Away
+a: Still In Love With You
+a: Take My Heart
+a: That Girl
+a: That\'s How Love Is
+a: That\'s What Christmas Means to Me
+a: To Sir, with Love
+a: Twinkle, Twinkle Little Me
+a: Uptight (Everything\'s Alright)
+a: What Does It Take (To Win Your Love)
+a: Where Did Our Love Go
+a: Where Do I Stand
+a: White Christmas
+a: Would Ya? Would Ya?
+a: Yester-Me, Yester-You, Yesterday
+a: You Can\'t Hurry Love
+a: You\'re My Everything
+a: You\'re the Only One
+a: 2 Bad
+a: 2000 Watts
+a: 2300 Jackson Street
+a: A Brand New Day
+a: A Place with No Name
+a: Ain\'t No Sunshine
+a: Al Capone
+a: All Eyez on Me
+a: All I Do
+a: All in Your Name
+a: All the Things You Are
+a: Another Part of Me
+a: Baby Be Mine
+a: Bad
+a: Be a Lion
+a: Beat It
+a: Beautiful Girl
+a: Behind the Mask
+a: Ben
+a: Best of Joy
+a: Billie Jean
+a: Black or White
+a: Blood on the Dance Floor
+a: Blue Gangsta
+a: Break of Dawn
+a: Breaking News
+a: Burn This Disco Out
+a: Butterflies
+a: Call on Me
+a: Can\'t Get Outta the Rain
+a: Can\'t Let Her Get Away
+a: Carousel
+a: Centipede
+a: Cheater
+a: Chicago
+a: Childhood
+a: Cinderella Stay Awhile
+a: Come Together
+a: Cry
+a: D.S.
+a: Dangerous
+a: Dapper-Dan
+a: Dear Michael
+a: Dirty Diana
+a: Do the Bartman
+a: Do You Know Where Your Children Are
+a: Doggin\' Around
+a: Don\'t Be Messin\' \'Round
+a: Don\'t Let a Woman (Make a Fool Out of You)
+a: Don\'t Let It Get You Down
+a: Don\'t Matter to Me
+a: Don\'t Stand Another Chance
+a: Don\'t Stop \'Til You Get Enough
+a: Don\'t Walk Away
+a: Earth Song
+a: Ease on Down the Road
+a: Eaten Alive
+a: Euphoria
+a: Everybody\'s Somebody\'s Fool
+a: Fall Again
+a: Farewell My Summer Love
+a: Fly Away
+a: For All Time
+a: Free
+a: Get It
+a: Get on the Floor
+a: Ghosts
+a: Girl Don\'t Take Your Love from Me
+a: Girl You\'re So Together
+a: Girlfriend
+a: Girls, Girls, Girls, Pt. 2
+a: Give In to Me
+a: Goin\' Back to Alabama
+a: Gone Too Soon
+a: Got the Hots
+a: Got to Be There
+a: Greatest Show on Earth
+a: Happy
+a: Heal the World
+a: Heartbreaker
+a: Heaven Can Wait
+a: Here I Am (Come and Take Me)
+a: Here to Love You
+a: HIStory
+a: Hold My Hand
+a: Hollywood Tonight
+a: Human Nature
+a: I Can\'t Help It
+a: (I Can\'t Make It) Another Day
+a: I Just Can\'t Stop Loving You
+a: (I Like) The Way You Love Me
+a: I Need You
+a: I Wanna Be Where You Are
+a: If\'n I Was God
+a: I\'ll Come Home to You
+a: I\'m in Love Again
+a: I\'m So Blue
+a: In Our Small Way
+a: In the Back
+a: In the Closet
+a: Invincible
+a: Is It Scary
+a: It\'s Not Worth It
+a: It\'s the Falling in Love
+a: Jam
+a: Je Ne Veux Pas La Fin De Nous
+a: Johnny Raven
+a: Just a Little Bit of You
+a: Just Friends
+a: Just Good Friends
+a: Keep the Faith
+a: Keep Your Head Up
+a: Leave Me Alone
+a: Liberian Girl
+a: Little Christmas Tree
+a: Little Susie
+a: Lonely Teardrops
+a: Love Is Here and Now You\'re Gone
+a: Love Never Felt So Good
+a: Love\'s Gone Bad
+a: Loving You
+a: Low
+a: Man in the Mirror
+a: Maria (You Were the Only One)
+a: Melodie
+a: Mind Is the Magic
+a: Minute by Minute
+a: Money
+a: Monkey Business
+a: Monster
+a: Morning Glow
+a: Morphine
+a: Much Too Soon
+a: Muscles
+a: Music and Me
+a: My Girl
+a: Night Time Lover
+a: Off the Wall
+a: On the Line
+a: One Day in Your Life
+a: One More Chance
+a: P.Y.T. (Pretty Young Thing)
+a: Papa Was a Rollin\' Stone
+a: People Make the World Go \'Round
+a: Planet Earth
+a: Price of Fame
+a: Privacy
+a: Remember the Time
+a: Ride with Me
+a: Rock with You
+a: Rockin\' Robin
+a: Save Me
+a: Say Say Say
+a: Scared of the Moon
+a: Scream
+a: She Drives Me Wild
+a: She\'s Out of My Life
+a: Shoo-Be-Doo-Be-Doo-Da-Day
+a: Shout
+a: Slave to the Rhythm
+a: Smile
+a: Smooth Criminal
+a: Somebody\'s Watching Me
+a: Someone in the Dark
+a: Someone Put Your Hand Out
+a: Somethin\' Special
+a: Song Groove (AKA Abortion Papers)
+a: So Why
+a: Speechless
+a: Speed Demon
+a: State of Independence
+a: Stranger in Moscow
+a: Streetwalker
+a: Sunset Driver
+a: Superfly Sister
+a: Tabloid Junkie
+a: Take Me Back
+a: Tell Me I\'m Not Dreamin\' (Too Good to Be True)
+a: That\'s What Love Is Made Of
+a: The Dude
+a: The Girl Is Mine
+a: The Lady in My Life
+a: The Lost Children
+a: The Man
+a: The Way You Make Me Feel
+a: There Must Be More to Life Than This
+a: They Don\'t Care About Us
+a: This Had to Be
+a: This Is It
+a: This Time Around
+a: Threatened
+a: Thriller
+a: To Make My Father Proud
+a: To Satisfy You
+a: Todo Mi Amor Eres Tu
+a: Todo Para Ti
+a: Too Young
+a: Touch the One You Love
+a: Turn on the Action
+a: Twenty-Five Miles
+a: Unbreakable
+a: Up Again
+a: Wanna Be Startin\' Somethin\'
+a: We Are Here to Change the World
+a: We Are the World
+a: We\'re Almost There
+a: We\'ve Got a Good Thing Going
+a: We\'ve Got Forever
+a: We\'ve Had Enough
+a: What Goes Around Comes Around
+a: What More Can I Give
+a: Whatever Happens
+a: Whatzupwitu
+a: When I Come of Age
+a: Who Is It
+a: Who\'s Lookin\' for a Lover
+a: Who\'s Right, Who\'s Wrong
+a: Why
+a: Why You Wanna Trip on Me
+a: Will You Be There
+a: Wings of My Love
+a: With a Child\'s Heart
+a: Workin\' Day and Night
+a: Xscape
+a: Yeah
+a: You Are My Life
+a: You Are Not Alone
+a: You Are There
+a: You Can Cry on My Shoulder
+a: You Can\'t Win
+a: You Rock My World
+a: You\'ve Got a Friend
+a: You\'ve Really Got a Hold on Me
+a: 2-4-6-8
+a: 16 Candles
+a: 2300 Jackson Street
+a: A Change Is Gonna Come
+a: A Fool for You
+a: ABC
+a: Ain\'t Nothing Like the Real Thing
+a: Ain\'t That Peculiar
+a: All I Do Is Think of You
+a: All Night Dancin\'
+a: Alright With Me
+a: Art of Madness
+a: Ask the Lonely
+a: Originating album
+a: Baby, You Don\'t Have to Go
+a: Be Not Always
+a: Big Boy
+a: Blame It on the Boogie
+a: Bless His Soul
+a: Blues Away
+a: Body
+a: Body Language (Do the Love Dance)
+a: The Boogie Man
+a: Born to Love You
+a: Boys and Girls, We Are The Jackson Five
+a: Breezy
+a: Bridge over Troubled Water
+a: Call of the Wild
+a: Can I See You in the Morning
+a: Can You Feel It
+a: Can You Remember
+a: Can\'t Get Ready for Losing You
+a: Chained
+a: Children of the Light
+a: Christmas Won\'t Be the Same This Year
+a: (Come \'Round Here) I\'m the One You Need
+a: Coming Home
+a: Corner of the Sky
+a: Dancing Machine
+a: Darling Dear
+a: Destiny
+a: Different Kind of Lady
+a: Do What You Wanna
+a: Doctor My Eyes
+a: Don\'t Know Why I Love You
+a: Don\'t Let Your Baby Catch You
+a: Don\'t Say Goodbye Again
+a: Don\'t Want to See Tomorrow
+a: Dreamer
+a: E-Ne-Me-Ne-Mi-Ne-Moe (The Choice is Yours to Pull)
+a: Enjoy Yourself
+a: Even Though You\'re Gone
+a: Everybody
+a: Everybody Is a Star
+a: Get It Together
+a: Give It Up
+a: Give Love on Christmas Day
+a: Goin\' Back to Indiana
+a: Goin\' Places
+a: Good Times
+a: 
+a: Hallelujah Day
+a: Have Yourself a Merry Little Christmas
+a: Heartbreak Hotel
+a: Heaven Knows I Love You, Girl
+a: Honey Chile
+a: Honey Love
+a: How Funky Is Your Chicken
+a: Hum Along and Dance
+a: I Ain\'t Gonna Eat My Heart Out Anymore
+a: I Am Love
+a: I Can Only Give You Love
+a: I Can\'t Quit Your Love
+a: I Found a Love
+a: I Found That Girl
+a: I Hear a Symphony
+a: (I Know) I\'m Losing You
+a: I Like You the Way You Are (Don\'t Change Your Love On Me)
+a: I Saw Mommy Kissing Santa Claus
+a: I Wanna Be Where You Are
+a: I Want to Take You Higher
+a: I Want You Back
+a: I Was Made to Love Her
+a: I Will Find a Way
+a: If I Don\'t Love You This Way
+a: If I Have to Move a Mountain
+a: If You\'d Only Believe
+a: I\'ll Be There
+a: I\'ll Bet You
+a: I\'m Glad It Rained
+a: I\'m So Happy
+a: It All Begins and Ends With Love
+a: It\'s Great to Be Here
+a: It\'s Too Late to Change the Time
+a: It\'s Your Thing
+a: Jam Session
+a: Jam Session
+a: Jamie
+a: Jingle Bells
+a: Joyful Jukebox Music
+a: Jump for Joy
+a: Just a Little Misunderstanding
+a: Just Because I Love You
+a: Keep Her
+a: Keep on Dancing
+a: Santa Claus Is Coming to Town
+a: Saturday Night at the Movies
+a: Shake Your Body (Down to the Ground)
+a: She
+a: She\'s a Rhythm Child
+a: She\'s Good
+a: Show You the Way to Go
+a: Skywriter
+a: Some Girls Want Me for Their Lover
+a: Someday at Christmas
+a: Soul Jerk
+a: Stand!
+a: Standing in the Shadows of Love
+a: State of Shock
+a: Stormy Monday
+a: Strength of One Man
+a: Style of Life
+a: Sugar Daddy
+a: Superstition
+a: Teenage Symphony
+a: That\'s What You Get (for Being Polite)
+a: The Christmas Song
+a: The Day Basketball Was Saved
+a: The Eternal Light
+a: The Hurt
+a: The Life of the Party
+a: The Little Drummer Boy
+a: The Love I Saw in You Was Just a Mirage
+a: The Love You Save
+a: The Mirrors of My Mind
+a: The Tracks of My Tears
+a: The Wall
+a: The Young Folks
+a: Things I Do for You
+a: Think Happy
+a: Time Explosion
+a: Time Out for the Burglar
+a: Time Waits for No One
+a: To Know
+a: Torture
+a: Touch
+a: True Love Can Be Beautiful
+a: Wait
+a: Walk Right Now
+a: We Can Change the World
+a: We Can Have Fun
+a: We Don\'t Have To Be Over 21 (to Fall in Love)
+a: We Wish You a Merry Christmas
+a: We\'re Gonna Change Our Style
+a: We\'re Gonna Have a Good Time
+a: We\'re Here to Entertain You
+a: (We\'ve Got) Blue Skies
+a: What You Don\'t Know
+a: Whatever You Got, I Want
+a: When I Look at You
+a: Who\'s Lovin\' You
+a: Window Shopping
+a: Wondering Who
+a: World of Sunshine
+a: A Place in the Sun
+a: After the Storm (The Sun Will Shine)
+a: Ain\'t No Mountain High Enough
+a: Ain\'t Too Proud to Beg
+a: Ave Maria
+a: Baby I Need Your Loving
+a: Back in My Arms Again
+a: Be My Girl
+a: Blowin\' in the Wind
+a: Can I Get a Witness
+a: Children\'s Christmas Song
+a: Christmas Everyday
+a: Come and Get It
+a: Do You Love Me
+a: Fingertips
+a: For Once in My Life
+a: God Rest Ye Merry Gentlemen
+a: Guess Who\'s Making Whoopee With Your Girlfriend
+a: Heaven Help Us All
+a: He\'s My Sunny Boy
+a: How Sweet It Is (To Be Loved by You)
+a: I Can\'t Help Myself (Sugar Pie Honey Bunch)
+a: I Got a Feeling
+a: I Got the Feelin\'
+a: I Heard It Through the Grapevine
+a: I Want You To Come Home For Christmas
+a: (If I Can\'t) Nobody Can
+a: If You Really Love Me
+a: If You Want Heaven
+a: I\'ll Turn To Stone
+a: It\'s Christmas Time
+a: It\'s the Same Old Song
+a: I\'ve Gotta Be Me
+a: Jackson Man
+a: Joy to the World
+a: Keep off the Grass
+a: Kentucky Road
+a: Lavender Blue
+a: (Loneliness Made Me Realize) It\'s You That I Need
+a: Love Call
+a: Love Feels Like Fire
+a: Love Go Away
+a: Loving You Is Sweeter Than Ever
+a: Miss Lucky Day
+a: My Favorite Things
+a: Neither One of Us (Wants to Be the First to Say Goodbye)
+a: No News Is Good News
+a: Nona
+a: Ooh Baby Baby
+a: Power
+a: Purple Snowflakes
+a: Quicksand
+a: Sad Souvenirs
+a: Shake Me, Wake Me (When It\'s Over)
+a: She Say \'Want\'
+a: Signed, Sealed, Delivered I\'m Yours
+a: Silent Night
+a: Silver Bells
+a: Since I Lost My Baby
+a: Since You\'ve Been Gone
+a: Slipped Away
+a: Still In Love With You
+a: Take My Heart
+a: That Girl
+a: That\'s How Love Is
+a: That\'s What Christmas Means to Me
+a: To Sir, with Love
+a: Twinkle, Twinkle Little Me
+a: Uptight (Everything\'s Alright)
+a: What Does It Take (To Win Your Love)
+a: Where Did Our Love Go
+a: Where Do I Stand
+a: White Christmas
+a: Would Ya? Would Ya?
+a: Yester-Me, Yester-You, Yesterday
+a: You Can\'t Hurry Love
+a: You\'re My Everything
+a: You\'re the Only One
+a: 2 Bad
+a: 2000 Watts
+a: 2300 Jackson Street
+a: A Brand New Day
+a: A Place with No Name
+a: Ain\'t No Sunshine
+a: Al Capone
+a: All Eyez on Me
+a: All I Do
+a: All in Your Name
+a: All the Things You Are
+a: Another Part of Me
+a: Baby Be Mine
+a: Bad
+a: Be a Lion
+a: Beat It
+a: Beautiful Girl
+a: Behind the Mask
+a: Ben
+a: Best of Joy
+a: Billie Jean
+a: Black or White
+a: Blood on the Dance Floor
+a: Blue Gangsta
+a: Break of Dawn
+a: Breaking News
+a: Burn This Disco Out
+a: Butterflies
+a: Call on Me
+a: Can\'t Get Outta the Rain
+a: Can\'t Let Her Get Away
+a: Carousel
+a: Centipede
+a: Cheater
+a: Chicago
+a: Childhood
+a: Cinderella Stay Awhile
+a: Come Together
+a: Cry
+a: D.S.
+a: Dangerous
+a: Dapper-Dan
+a: Dear Michael
+a: Dirty Diana
+a: Do the Bartman
+a: Do You Know Where Your Children Are
+a: Doggin\' Around
+a: Don\'t Be Messin\' \'Round
+a: Don\'t Let a Woman (Make a Fool Out of You)
+a: Don\'t Let It Get You Down
+a: Don\'t Matter to Me
+a: Don\'t Stand Another Chance
+a: Don\'t Stop \'Til You Get Enough
+a: Don\'t Walk Away
+a: Earth Song
+a: Ease on Down the Road
+a: Eaten Alive
+a: Euphoria
+a: Everybody\'s Somebody\'s Fool
+a: Fall Again
+a: Farewell My Summer Love
+a: Fly Away
+a: For All Time
+a: Free
+a: Get It
+a: Get on the Floor
+a: Ghosts
+a: Girl Don\'t Take Your Love from Me
+a: Girl You\'re So Together
+a: Girlfriend
+a: Girls, Girls, Girls, Pt. 2
+a: Give In to Me
+a: Goin\' Back to Alabama
+a: Gone Too Soon
+a: Got the Hots
+a: Got to Be There
+a: Greatest Show on Earth
+a: Happy
+a: Heal the World
+a: Heartbreaker
+a: Heaven Can Wait
+a: Here I Am (Come and Take Me)
+a: Here to Love You
+a: HIStory
+a: Hold My Hand
+a: Hollywood Tonight
+a: Human Nature
+a: I Can\'t Help It
+a: (I Can\'t Make It) Another Day
+a: I Just Can\'t Stop Loving You
+a: (I Like) The Way You Love Me
+a: I Need You
+a: I Wanna Be Where You Are
+a: If\'n I Was God
+a: I\'ll Come Home to You
+a: I\'m in Love Again
+a: I\'m So Blue
+a: In Our Small Way
+a: In the Back
+a: In the Closet
+a: Invincible
+a: Is It Scary
+a: It\'s Not Worth It
+a: It\'s the Falling in Love
+a: Jam
+a: Je Ne Veux Pas La Fin De Nous
+a: Johnny Raven
+a: Just a Little Bit of You
+a: Just Friends
+a: Just Good Friends
+a: Keep the Faith
+a: Keep Your Head Up
+a: Leave Me Alone
+a: Liberian Girl
+a: Little Christmas Tree
+a: Little Susie
+a: Lonely Teardrops
+a: Love Is Here and Now You\'re Gone
+a: Love Never Felt So Good
+a: Love\'s Gone Bad
+a: Loving You
+a: Low
+a: Man in the Mirror
+a: Maria (You Were the Only One)
+a: Melodie
+a: Mind Is the Magic
+a: Minute by Minute
+a: Money
+a: Monkey Business
+a: Monster
+a: Morning Glow
+a: Morphine
+a: Much Too Soon
+a: Muscles
+a: Music and Me
+a: My Girl
+a: Night Time Lover
+a: Off the Wall
+a: On the Line
+a: One Day in Your Life
+a: One More Chance
+a: P.Y.T. (Pretty Young Thing)
+a: Papa Was a Rollin\' Stone
+a: People Make the World Go \'Round
+a: Planet Earth
+a: Price of Fame
+a: Privacy
+a: Remember the Time
+a: Ride with Me
+a: Rock with You
+a: Rockin\' Robin
+a: Save Me
+a: Say Say Say
+a: Scared of the Moon
+a: Scream
+a: She Drives Me Wild
+a: She\'s Out of My Life
+a: Shoo-Be-Doo-Be-Doo-Da-Day
+a: Shout
+a: Slave to the Rhythm
+a: Smile
+a: Smooth Criminal
+a: Somebody\'s Watching Me
+a: Someone in the Dark
+a: Someone Put Your Hand Out
+a: Somethin\' Special
+a: Song Groove (AKA Abortion Papers)
+a: So Why
+a: Speechless
+a: Speed Demon
+a: State of Independence
+a: Stranger in Moscow
+a: Streetwalker
+a: Sunset Driver
+a: Superfly Sister
+a: Tabloid Junkie
+a: Take Me Back
+a: Tell Me I\'m Not Dreamin\' (Too Good to Be True)
+a: That\'s What Love Is Made Of
+a: The Dude
+a: The Girl Is Mine
+a: The Lady in My Life
+a: The Lost Children
+a: The Man
+a: The Way You Make Me Feel
+a: There Must Be More to Life Than This
+a: They Don\'t Care About Us
+a: This Had to Be
+a: This Is It
+a: This Time Around
+a: Threatened
+a: Thriller
+a: To Make My Father Proud
+a: To Satisfy You
+a: Todo Mi Amor Eres Tu
+a: Todo Para Ti
+a: Too Young
+a: Touch the One You Love
+a: Turn on the Action
+a: Twenty-Five Miles
+a: Unbreakable
+a: Up Again
+a: Wanna Be Startin\' Somethin\'
+a: We Are Here to Change the World
+a: We Are the World
+a: We\'re Almost There
+a: We\'ve Got a Good Thing Going
+a: We\'ve Got Forever
+a: We\'ve Had Enough
+a: What Goes Around Comes Around
+a: What More Can I Give
+a: Whatever Happens
+a: Whatzupwitu
+a: When I Come of Age
+a: Who Is It
+a: Who\'s Lookin\' for a Lover
+a: Who\'s Right, Who\'s Wrong
+a: Why
+a: Why You Wanna Trip on Me
+a: Will You Be There
+a: Wings of My Love
+a: With a Child\'s Heart
+a: Workin\' Day and Night
+a: Xscape
+a: Yeah
+a: You Are My Life
+a: You Are Not Alone
+a: You Are There
+a: You Can Cry on My Shoulder
+a: You Can\'t Win
+a: You Rock My World
+a: You\'ve Got a Friend
+a: You\'ve Really Got a Hold on Me
+a: 2-4-6-8
+a: 16 Candles
+a: 2300 Jackson Street
+a: A Change Is Gonna Come
+a: A Fool for You
+a: ABC
+a: Ain\'t Nothing Like the Real Thing
+a: Ain\'t That Peculiar
+a: All I Do Is Think of You
+a: All Night Dancin\'
+a: Alright With Me
+a: Art of Madness
+a: Ask the Lonely
+a: Originating album
+a: Baby, You Don\'t Have to Go
+a: Be Not Always
+a: Big Boy
+a: Blame It on the Boogie
+a: Bless His Soul
+a: Blues Away
+a: Body
+a: Body Language (Do the Love Dance)
+a: The Boogie Man
+a: Born to Love You
+a: Boys and Girls, We Are The Jackson Five
+a: Breezy
+a: Bridge over Troubled Water
+a: Call of the Wild
+a: Can I See You in the Morning
+a: Can You Feel It
+a: Can You Remember
+a: Can\'t Get Ready for Losing You
+a: Chained
+a: Children of the Light
+a: Christmas Won\'t Be the Same This Year
+a: (Come \'Round Here) I\'m the One You Need
+a: Coming Home
+a: Corner of the Sky
+a: Dancing Machine
+a: Darling Dear
+a: Destiny
+a: Different Kind of Lady
+a: Do What You Wanna
+a: Doctor My Eyes
+a: Don\'t Know Why I Love You
+a: Don\'t Let Your Baby Catch You
+a: Don\'t Say Goodbye Again
+a: Don\'t Want to See Tomorrow
+a: Dreamer
+a: E-Ne-Me-Ne-Mi-Ne-Moe (The Choice is Yours to Pull)
+a: Enjoy Yourself
+a: Even Though You\'re Gone
+a: Everybody
+a: Everybody Is a Star
+a: Get It Together
+a: Give It Up
+a: Give Love on Christmas Day
+a: Goin\' Back to Indiana
+a: Goin\' Places
+a: Good Times
+a: Hallelujah Day
+a: Have Yourself a Merry Little Christmas
+a: Heartbreak Hotel
+a: Heaven Knows I Love You, Girl
+a: Honey Chile
+a: Honey Love
+a: How Funky Is Your Chicken
+a: Hum Along and Dance
+a: I Ain\'t Gonna Eat My Heart Out Anymore
+a: I Am Love
+a: I Can Only Give You Love
+a: I Can\'t Quit Your Love
+a: I Found a Love
+a: I Found That Girl
+a: I Hear a Symphony
+a: (I Know) I\'m Losing You
+a: I Like You the Way You Are (Don\'t Change Your Love On Me)
+a: I Saw Mommy Kissing Santa Claus
+a: I Wanna Be Where You Are
+a: I Want to Take You Higher
+a: I Want You Back
+a: I Was Made to Love Her
+a: I Will Find a Way
+a: If I Don\'t Love You This Way
+a: If I Have to Move a Mountain
+a: If You\'d Only Believe
+a: I\'ll Be There
+a: I\'ll Bet You
+a: I\'m Glad It Rained
+a: I\'m So Happy
+a: It All Begins and Ends With Love
+a: It\'s Great to Be Here
+a: It\'s Too Late to Change the Time
+a: It\'s Your Thing
+a: Jam Session
+a: Jam Session
+a: Jamie
+a: Jingle Bells
+a: Joyful Jukebox Music
+a: Jump for Joy
+a: Just a Little Misunderstanding
+a: Just Because I Love You
+a: Keep Her
+a: Keep on Dancing
+a: Santa Claus Is Coming to Town
+a: Saturday Night at the Movies
+a: Shake Your Body (Down to the Ground)
+a: She
+a: She\'s a Rhythm Child
+a: She\'s Good
+a: Show You the Way to Go
+a: Skywriter
+a: Some Girls Want Me for Their Lover
+a: Someday at Christmas
+a: Soul Jerk
+a: Stand!
+a: Standing in the Shadows of Love
+a: State of Shock
+a: Stormy Monday
+a: Strength of One Man
+a: Style of Life
+a: Sugar Daddy
+a: Superstition
+a: Teenage Symphony
+a: That\'s What You Get (for Being Polite)
+a: The Christmas Song
+a: The Day Basketball Was Saved
+a: The Eternal Light
+a: The Hurt
+a: The Life of the Party
+a: The Little Drummer Boy
+a: The Love I Saw in You Was Just a Mirage
+a: The Love You Save
+a: The Mirrors of My Mind
+a: The Tracks of My Tears
+a: The Wall
+a: The Young Folks
+a: Things I Do for You
+a: Think Happy
+a: Time Explosion
+a: Time Out for the Burglar
+a: Time Waits for No One
+a: To Know
+a: Torture
+a: Touch
+a: True Love Can Be Beautiful
+a: Wait
+a: Walk Right Now
+a: We Can Change the World
+a: We Can Have Fun
+a: We Don\'t Have To Be Over 21 (to Fall in Love)
+a: We Wish You a Merry Christmas
+a: We\'re Gonna Change Our Style
+a: We\'re Gonna Have a Good Time
+a: We\'re Here to Entertain You
+a: (We\'ve Got) Blue Skies
+a: What You Don\'t Know
+a: Whatever You Got, I Want
+a: When I Look at You
+a: Who\'s Lovin\' You
+a: Window Shopping
+a: Wondering Who
+a: World of Sunshine
+a: A Place in the Sun
+a: After the Storm (The Sun Will Shine)
+a: Ain\'t No Mountain High Enough
+a: Ain\'t Too Proud to Beg
+a: Ave Maria
+a: Baby I Need Your Loving
+a: Back in My Arms Again
+a: Be My Girl
+a: Blowin\' in the Wind
+a: Can I Get a Witness
+a: Children\'s Christmas Song
+a: Christmas Everyday
+a: Come and Get It
+a: Do You Love Me
+a: Fingertips
+a: For Once in My Life
+a: God Rest Ye Merry Gentlemen
+a: Guess Who\'s Making Whoopee With Your Girlfriend
+a: Heaven Help Us All
+a: He\'s My Sunny Boy
+a: How Sweet It Is (To Be Loved by You)
+a: I Can\'t Help Myself (Sugar Pie Honey Bunch)
+a: I Got a Feeling
+a: I Got the Feelin\'
+a: I Heard It Through the Grapevine
+a: I Want You To Come Home For Christmas
+a: (If I Can\'t) Nobody Can
+a: If You Really Love Me
+a: If You Want Heaven
+a: I\'ll Turn To Stone
+a: It\'s Christmas Time
+a: It\'s the Same Old Song
+a: I\'ve Gotta Be Me
+a: Jackson Man
+a: Joy to the World
+a: Keep off the Grass
+a: Kentucky Road
+a: Lavender Blue
+a: (Loneliness Made Me Realize) It\'s You That I Need
+a: Love Call
+a: Love Feels Like Fire
+a: Love Go Away
+a: Loving You Is Sweeter Than Ever
+a: Miss Lucky Day
+a: My Favorite Things
+a: Neither One of Us (Wants to Be the First to Say Goodbye)
+a: No News Is Good News
+a: Nona
+a: Ooh Baby Baby
+a: Power
+a: Purple Snowflakes
+a: Quicksand
+a: Sad Souvenirs
+a: Shake Me, Wake Me (When It\'s Over)
+a: She Say \'Want\'
+a: Signed, Sealed, Delivered I\'m Yours
+a: Silent Night
+a: Silver Bells
+a: Since I Lost My Baby
+a: Since You\'ve Been Gone
+a: Slipped Away
+a: Still In Love With You
+a: Take My Heart
+a: That Girl
+a: That\'s How Love Is
+a: That\'s What Christmas Means to Me
+a: To Sir, with Love
+a: Twinkle, Twinkle Little Me
+a: Uptight (Everything\'s Alright)
+a: What Does It Take (To Win Your Love)
+a: Where Did Our Love Go
+a: Where Do I Stand
+a: White Christmas
+a: Would Ya? Would Ya?
+a: Yester-Me, Yester-You, Yesterday
+a: You Can\'t Hurry Love
+a: You\'re My Everything
+a: You\'re the Only One
+<End settings>

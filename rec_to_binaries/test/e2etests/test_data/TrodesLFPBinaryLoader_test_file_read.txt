@@ -1,0 +1,14 @@
+<Start settings>
+a:1
+data:2
+Original_file:test_Original_file
+Trode_ID:test_Trode_ID
+Trode_channel:test_Trode_channel
+Clock rate:test_Clock rate
+Voltage_scaling:test_Voltage_scaling
+Decimation:test_Decimation
+First_timestamp:test_First_timestamp
+Reference:test_Reference
+Low_pass_filter:test_Low_pass_filter
+Fields:test_Fields
+<End settings>

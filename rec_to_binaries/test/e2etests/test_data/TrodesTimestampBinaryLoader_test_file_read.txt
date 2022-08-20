@@ -1,0 +1,10 @@
+<Start settings>
+a:1
+data:2
+Byte_order:test_Byte_order
+Original_file:test_Original_file
+Clock rate:test_Clock rate
+Decimation:test_Decimation
+Time_offset:test_Time_offset
+Fields:test_Fields
+<End settings>

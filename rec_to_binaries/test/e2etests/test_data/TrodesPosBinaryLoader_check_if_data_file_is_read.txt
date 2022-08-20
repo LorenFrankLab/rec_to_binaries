@@ -1,0 +1,8 @@
+<Start settings>
+a:1
+data:2
+threshold:test_threshold
+dark:test_dark
+clockrate:test_clockrate
+field_str:test_Fields
+<End settings>
