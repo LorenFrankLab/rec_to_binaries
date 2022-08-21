@@ -1332,7 +1332,6 @@ class ExtractRawTrodesData:
                 # sort files
                 epoch_raw_file = sorted(
                     epoch_raw_file, key=lambda x: find_rec_part_number(x[1]))
-                epoch_raw_file.insert(0, epoch_raw_file.pop())
 
                 file_parser = epoch_raw_file[0][0]
                 file_paths = [file[1] for file in epoch_raw_file]
