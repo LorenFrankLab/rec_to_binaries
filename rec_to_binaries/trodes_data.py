@@ -400,7 +400,7 @@ class TrodesAnimalInfo:
             ['dir_index', 'path']
         partial_extracted_paths = pd.DataFrame(
             columns=partial_extracted_columns)
-        for dir_index, directory in directory_entries_df['directory'].iteritems():
+        for dir_index, directory in directory_entries_df['directory'].items():
             file_list = TrodesAnimalInfo._get_extracted_file_list(
                 directory, ExtractedFileParser=ExtractedFileParser)
             directory_path_fields = []
