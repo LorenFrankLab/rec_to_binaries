@@ -1,0 +1,36 @@
+name: Project Tests
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    strategy:
+      matrix:
+        python-version: ["3.6"]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          miniconda-version: "latest"
+          activate-environment: rec_to_binaries
+          environment-file: environment.yml
+      - name: Install rec-to-binaries
+        shell: bash -l {0}
+        run: |
+          pip install rec_to_binaries
+      - name: Make dependencies editable
+        shell: bash -l {0}
+        run: |
+          pip install -e .
+      - name: Run e2eTests
+        shell: bash -l {0}
+        run: |
+          python -m pytest rec_to_binaries/test/e2etests/
