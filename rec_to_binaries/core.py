@@ -212,8 +212,14 @@ def extract_trodes_rec_file(data_dir,
             fairly sporadic, we can recover the correspondence between trodestime
             and system (wall) time.'''
         preprocessing_dir = animal_info.get_preprocessing_dir()
-        filenames = glob.glob(os.path.join(
+        if dates is None:
+            filenames = glob.glob(os.path.join(
             preprocessing_dir, '**', '*.continuoustime.dat'), recursive=True)
+        else:
+            filenames = []
+            for date in dates:
+                filenames.extend(glob.glob(os.path.join(
+                    preprocessing_dir, date,'**', '*.continuoustime.dat')))
         for file in filenames:
             fix_timestamp_lag(file)
 
